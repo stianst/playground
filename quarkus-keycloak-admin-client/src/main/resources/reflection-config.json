@@ -7,7 +7,23 @@
   "allDeclaredFields" : true,
   "allPublicFields" : true
 },{
-  "name": "org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder",
+  "name": "org.apache.commons.logging.impl.LogFactoryImpl",
+  "allDeclaredConstructors" : true,
+  "allPublicConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allPublicMethods" : true,
+  "allDeclaredFields" : true,
+  "allPublicFields" : true
+},{
+  "name": "org.apache.commons.logging.LogFactory",
+  "allDeclaredConstructors" : true,
+  "allPublicConstructors" : true,
+  "allDeclaredMethods" : true,
+  "allPublicMethods" : true,
+  "allDeclaredFields" : true,
+  "allPublicFields" : true
+},{
+  "name": "java.lang.String",
   "allDeclaredConstructors" : true,
   "allPublicConstructors" : true,
   "allDeclaredMethods" : true,
