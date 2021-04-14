@@ -8,7 +8,7 @@ while (true); do
 
 		mkdir -p debug-info
 
-		PID=`jps -v | grep sso-7.4-$NODE | cut -f 1 -d ' '`
+		PID=`jps -v | grep kc-$NODE | cut -f 1 -d ' '`
 
 		curl -s http://localhost:8180/auth/realms/cache/stats > debug-info/$DATE--cache-stats-$NODE
 		jstack $PID > debug-info/$DATE--threads-$NODE

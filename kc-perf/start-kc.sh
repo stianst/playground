@@ -14,6 +14,4 @@ echo "Instance: $1"
 echo "---------------------------------------------------------"
 echo ""
 
-#rh-sso-7.4-$1/bin/standalone.sh -b 0.0.0.0 --server-config=standalone-ha.xml -Djboss.node.name=fedora$1 -Djboss.socket.binding.port-offset=$100 -Dkeycloak.profile.feature.authorization=disabled -Dwildfly.statistics-enabled=true
-
-rh-sso-7.4-$1/bin/standalone.sh -b 0.0.0.0 --server-config=standalone-ha.xml -Djboss.node.name=fedora$1 -Djboss.socket.binding.port-offset=$100 -Dwildfly.statistics-enabled=true
+kc-$1/bin/standalone.sh -b 0.0.0.0 --server-config=standalone-ha.xml -Djboss.node.name=fedora$1 -Djboss.socket.binding.port-offset=$100 -Dkeycloak.profile.feature.authorization=disabled -Dwildfly.statistics-enabled=true
