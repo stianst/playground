@@ -17,7 +17,9 @@ jobs:
           echo "one"
   two:
     runs-on: ubuntu-latest
-    if: ( ${{ secrets.TEST != '' }} != '' }} ) 
+    env:
+      KEY: ${{ secrets.TEST }}
+    if: ( ${{ env.KEY != '' }} != '' }} ) 
     steps:
       - uses: actions/checkout@v3
 
