@@ -17,7 +17,7 @@ jobs:
           echo "one"
   two:
     runs-on: ubuntu-latest
-    if: ( 1 == 1 ) && ( ${{ secrets.TEST != '' }} != '' }} ) 
+    if: ( ${{ secrets.TEST != '' }} != '' }} ) 
     steps:
       - uses: actions/checkout@v3
 
