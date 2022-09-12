@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       KEY: ${{ secrets.TEST }}
-    if: ( ${{ env.KEY != '' }} != '' }} ) 
+    if: ${{ env.SECRET_KEY != 0 }}
     steps:
       - uses: actions/checkout@v3
 
