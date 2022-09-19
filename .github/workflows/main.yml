@@ -15,6 +15,7 @@ jobs:
 
       - id: one
         run: |
+          cat .github/myenv
           echo "::set-output name=foo::bar"
           echo "::notice ::Hello world"
   two:
