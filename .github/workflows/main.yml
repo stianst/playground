@@ -22,4 +22,4 @@ jobs:
     steps:
       - id: two
         run: |
-          echo "${{ needs.env.outouts.foo }}"
+          echo "${{ needs.env.outputs.foo }}"
