@@ -15,8 +15,8 @@ outputs:
     value: ${{ steps.load-env.outputs.quay-org }}
 
 runs:
-  using: "composite"
   steps:
+    - use: actions/checkout@v3
     - id: load-env
       run: cat .github/env/${{ github.repository_owner }} | grep '=' | sed 's/=/::/g' | xargs -I {} echo "::set-output name={}"
       shell: bash
