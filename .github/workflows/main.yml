@@ -7,7 +7,7 @@ on:
 
 jobs:
   env:
-    uses: .github/actions/env@main
+    uses: ./.github/actions/env
 
   two:
     runs-on: ubuntu-latest
