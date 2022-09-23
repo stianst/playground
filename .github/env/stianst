@@ -1,0 +1,6 @@
+gh-org=keycloak-rel-testing
+
+mvn-releases-url=https://maven.pkg.github.com/keycloak-rel-testing/maven
+mvn-snapshots-url=https://maven.pkg.github.com/keycloak-rel-testing/maven
+
+quay-org=keycloaktesting

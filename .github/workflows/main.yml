@@ -7,21 +7,12 @@ on:
 
 jobs:
   env:
-    runs-on: ubuntu-latest
-    outputs:
-      foo: ${{ steps.one.outputs.foo }}
-    steps:
-      - uses: actions/checkout@v3
+    uses: .github/actions/env.yml
 
-      - id: one
-        run: |
-          cat .github/myenv
-          echo "::set-output name=foo::bar"
-          echo "::notice ::Hello world"
   two:
     runs-on: ubuntu-latest
     needs: [env]
     steps:
       - id: two
         run: |
-          echo "${{ needs.env.outputs.foo }}"
+          echo "${{ needs.env.outputs.gh-org }}"
