@@ -15,6 +15,7 @@ outputs:
     value: ${{ steps.load-env.outputs.quay-org }}
 
 runs:
+  using: "composite"
   steps:
     - use: actions/checkout@v3
     - id: load-env
