@@ -8,6 +8,9 @@ on:
 jobs:
   env:
     uses: ./.github/workflows/x-env.yml
+    with:
+      version: "999-SNAPSHOT"
+      summary: true
 
   two:
     runs-on: ubuntu-latest

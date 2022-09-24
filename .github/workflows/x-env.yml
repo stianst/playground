@@ -2,6 +2,17 @@ name: Reusable workflow
 
 on:
   workflow_call:
+    inputs:
+      summary:
+        description: "Print summary"
+        default: false
+        type: boolean
+        required: false
+      version:
+        description: "Version to be released"
+        default: ""
+        type: string
+        required: false
     outputs:
       gh-org:
         description: "GitHub Organization"
@@ -28,3 +39,7 @@ jobs:
       - id: load-env
         run: |
           cat .github/env/${{ github.repository_owner }} | grep '=' | sed 's/=/::/g' | xargs -I {} echo "::set-output name={}"
+      - id: summary
+        if: ${{ inputs.summary }}
+        run: |
+          echo "Version: ${{ inputs.version }}
