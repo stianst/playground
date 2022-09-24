@@ -42,4 +42,7 @@ jobs:
       - id: summary
         if: ${{ inputs.summary }}
         run: |
+          echo "# Release details" >> $GITHUB_STEP_SUMMARY
           echo "Version: ${{ inputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "# Environment details" >> $GITHUB_STEP_SUMMARY
+          echo "GitHub Organization: ${{ steps.load-env.outputs.gh-org }}" >> $GITHUB_STEP_SUMMARY
