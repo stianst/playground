@@ -24,6 +24,7 @@ jobs:
       mvn-url: ${{ steps.load-env.outputs.mvn-releases-url }}
       quay-org: ${{ steps.load-env.outputs.quay-org }}
     steps:
+      - uses: actions/checkout@v3
       - id: load-env
         run: |
           cat .github/env/${{ github.repository_owner }} | grep '=' | sed 's/=/::/g' | xargs -I {} echo "::set-output name={}"
