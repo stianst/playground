@@ -7,7 +7,7 @@ on:
 
 jobs:
   env:
-    uses: ./.github/actions/env
+    uses: ./.github/workflows/x-env.yml
 
   two:
     runs-on: ubuntu-latest
