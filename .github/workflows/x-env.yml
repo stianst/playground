@@ -42,4 +42,4 @@ jobs:
       - id: summary
         if: ${{ inputs.summary }}
         run: |
-          echo "Version: ${{ inputs.version }} >> $GITHUB_STEP_SUMMARY
+          echo "Version: ${{ inputs.version }}" >> $GITHUB_STEP_SUMMARY
