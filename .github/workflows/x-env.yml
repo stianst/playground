@@ -45,6 +45,8 @@ jobs:
           echo "|Release details|                     |" >> $GITHUB_STEP_SUMMARY
           echo "|---------------|---------------------|" >> $GITHUB_STEP_SUMMARY
           echo "|Version        |${{ inputs.version }}|" >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
           
           echo "|Environment details|                                    |" >> $GITHUB_STEP_SUMMARY
           echo "|-------------------|------------------------------------|" >> $GITHUB_STEP_SUMMARY
