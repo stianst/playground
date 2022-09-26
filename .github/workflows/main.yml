@@ -16,8 +16,7 @@ jobs:
     uses: ./.github/workflows/x-containers.yml
     needs: [env]
     with:
-      version: "999-SNAPSHOT"
-      summary: true
+      version: 20.0.0
       gh-org: ${{ needs.env.outputs.gh-org }}
       quay-org: ${{ needs.env.outputs.quay-org }}
       tag: 20.0.0
