@@ -1,0 +1,44 @@
+name: X Keycloak Container
+
+on:
+  workflow_call:
+    inputs:
+      gh-org:
+        required: true
+        type: string
+      quay-org:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      tag:
+        required: true
+        type: string
+    outputs:
+      tags:
+        value: ${{ jobs.release.outputs.container-tags }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    outputs:
+      tags: ${{ steps.meta.outputs.tags }}
+
+    steps:
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1.2.0
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1.6.0
+
+      - name: Container metadata
+        id: meta
+        uses: docker/metadata-action@v3.6.2
+        with:
+          images: quay.io/${{ inputs.quay-org }}/keycloak
+          tags: |
+            type=raw,value=nightly,enable=${{ inputs.tag == 'nightly' }}
+            type=semver,pattern={{version}},value=${{ inputs.tag }},enable=${{ inputs.tag != 'nightly' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag }},enable=${{ inputs.tag != 'nightly' }}

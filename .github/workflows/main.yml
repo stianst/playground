@@ -12,10 +12,19 @@ jobs:
       version: "999-SNAPSHOT"
       summary: true
 
+  container:
+    uses: ./.github/workflows/x-containers.yml
+    needs: [env]
+    with:
+      version: "999-SNAPSHOT"
+      summary: true
+      quay-org: ${{ needs.env.outputs.quay-org }}
+
   two:
     runs-on: ubuntu-latest
-    needs: [env]
+    needs: [env, container]
     steps:
       - id: two
         run: |
           echo "${{ needs.env.outputs.gh-org }}"
+          echo "${{ needs.container.outputs.tags }}"
