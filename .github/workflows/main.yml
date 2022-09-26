@@ -20,6 +20,7 @@ jobs:
       summary: true
       gh-org: ${{ needs.env.outputs.gh-org }}
       quay-org: ${{ needs.env.outputs.quay-org }}
+      tag: 20.0.0
 
   two:
     runs-on: ubuntu-latest
