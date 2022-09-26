@@ -27,6 +27,6 @@ jobs:
           echo "${{ needs.env.outputs.gh-org }}" >> $GITHUB_STEP_SUMMARY
           
           echo "## Containers" >> $GITHUB_STEP_SUMMARY
-          for i in "${{ needs.container.outputs.tags }}"; do
+          for i in "${${{ needs.container.outputs.tags }}}"; do
             echo "* $i" >> $GITHUB_STEP_SUMMARY
           done
