@@ -24,5 +24,9 @@ jobs:
     steps:
       - id: two
         run: |
-          echo "${{ needs.env.outputs.gh-org }}"
-          echo "${{ needs.container.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ needs.env.outputs.gh-org }}" >> $GITHUB_STEP_SUMMARY
+          
+          echo "## Containers" >> $GITHUB_STEP_SUMMARY
+          for i in "${{ needs.container.outputs.tags }}"; do
+            echo "* $i" >> $GITHUB_STEP_SUMMARY
+          done
