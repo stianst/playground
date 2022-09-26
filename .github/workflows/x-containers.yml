@@ -17,14 +17,14 @@ on:
         type: string
     outputs:
       tags:
-        value: test1
+        value: ${{ jobs.release.outputs.tags }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
 
     outputs:
-      tags: test2
+      tags: ${{ steps.meta.outputs.tags }}
 
     steps:
       - name: Setup QEMU
