@@ -28,7 +28,8 @@ jobs:
           
           echo "## Containers" >> $GITHUB_STEP_SUMMARY
           
+          echo "${{ needs.container.outputs.tags }}" | awk -I 
           TAGS="${{ needs.container.outputs.tags }}"
-          for i in "${$TAGS}}"; do
+          for i in $TAGS; do
             echo "* $i" >> $GITHUB_STEP_SUMMARY
           done
