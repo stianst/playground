@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      tags: ${{ steps.meta.outputs.tags }}
+      tags: test
 
     steps:
       - name: Setup QEMU

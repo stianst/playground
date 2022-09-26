@@ -8,9 +8,6 @@ on:
 jobs:
   env:
     uses: ./.github/workflows/x-env.yml
-    with:
-      version: "999-SNAPSHOT"
-      summary: true
 
   container:
     uses: ./.github/workflows/x-containers.yml
@@ -28,4 +25,4 @@ jobs:
       - id: two
         run: |
           echo "${{ needs.env.outputs.gh-org }}"
-          echo "${{ needs.container.outputs.tags }}"
+          echo "${{ needs.container.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
