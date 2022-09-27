@@ -3,7 +3,7 @@ name: Test
 
 on:
 
-  push:
+    workflow_dispatch:
 
 jobs:
   show-inputs:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          echo "Workflow branch: ${{ github.ref }}  " >> $GITHUB_STEP_SUMMARY
+          echo "Workflow branch: ${{ github.ref_name }}  " >> $GITHUB_STEP_SUMMARY
           
   env:
     uses: ./.github/workflows/x-env.yml
