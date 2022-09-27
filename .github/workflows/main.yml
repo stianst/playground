@@ -6,6 +6,13 @@ on:
   push:
 
 jobs:
+  show-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          echo "Workflow branch: ${{ github.ref }}  " >> $GITHUB_STEP_SUMMARY
+          
   env:
     uses: ./.github/workflows/x-env.yml
 
