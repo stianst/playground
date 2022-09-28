@@ -42,3 +42,8 @@ jobs:
             type=raw,value=nightly,enable=${{ inputs.tag == 'nightly' }}
             type=semver,pattern={{version}},value=${{ inputs.tag }},enable=${{ inputs.tag != 'nightly' }}
             type=semver,pattern={{major}}.{{minor}},value=${{ inputs.tag }},enable=${{ inputs.tag != 'nightly' }}
+            
+      - run: |
+          TAGS=${{ steps.meta.output.tags }}
+          TAGS="$TAGS `echo $TAGS | sed 's/quay.io/docker.io'"
+          echo $TAGS
