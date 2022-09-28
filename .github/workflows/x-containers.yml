@@ -45,7 +45,7 @@ jobs:
             
       - id: meta2
         run: |
-          TAGS=${{ steps.meta.outputs.tags }}
+          TAGS="${{ steps.meta.outputs.tags }}"
           TAGS="$TAGS `echo $TAGS | sed 's/quay.io/docker.io/g'`"
           echo $TAGS
           echo "::set-output name=tags::$TAGS"
