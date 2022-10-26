@@ -7,10 +7,12 @@
     <groupId>playground.stianst.github.io</groupId>
     <artifactId>parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>kc-ext/stupid-cache-stats</module>
         <module>kc-tools/logs</module>
+        <module>extensions</module>
     </modules>
 
 </project>
