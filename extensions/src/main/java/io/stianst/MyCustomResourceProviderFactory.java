@@ -21,6 +21,7 @@ public class MyCustomResourceProviderFactory implements RealmResourceProviderFac
 
     @Override
     public void init(Config.Scope config) {
+        System.out.println("Init!");
     }
 
     @Override
