@@ -10,15 +10,26 @@ jobs:
     steps:
       - run: | 
           echo 'MATRIX<<EOF' >> $GITHUB_ENV
-          echo '{ "include": [ { "server": "quarkus", "tests": "LoginTest" }, { "server": "quarkus", "tests": "LoginTest" } ] }' >> $GITHUB_ENV
+          echo '[ { "server": "quarkus", "tests": "LoginTest" }, { "server": "quarkus", "tests": "LoginTest" } ]' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
-      
+
+  echo:
+    needs: define-matrix
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo
+      run: |
+        echo "${{ needs.define-matrix.outputs.matrix }}"
+
   greet:
     needs: define-matrix
     strategy:
-      matrix: ${{ fromJson(needs.define-matrix.outputs.matrix) }}          
+      matrix: 
+        include: ${{ fromJson(needs.define-matrix.outputs.matrix) }}          
   
     runs-on: ubuntu-latest
 
