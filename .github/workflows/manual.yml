@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: | 
-          echo git diff --name-only HEAD^
+          echo "Changes:"
+          git diff --name-only HEAD^
+          echo ""
           
           echo 'MATRIX<<EOF' >> $GITHUB_ENV
           echo '[' >> $GITHUB_ENV
