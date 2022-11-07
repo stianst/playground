@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: | 
+          echo git diff --name-only HEAD^
+          
           echo 'MATRIX<<EOF' >> $GITHUB_ENV
           echo '[' >> $GITHUB_ENV
           echo '{ "server": "quarkus", "tests": "LoginTest" }' >> $GITHUB_ENV
