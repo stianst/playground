@@ -13,14 +13,14 @@ jobs:
       - run: | 
           if [ ${{ github.event_name }} == 'pull_request' ]; then
             echo "Changes:"
-            git diff --name-only HEAD^
+            git diff --name-only main
             echo ""
           fi
           
           echo 'MATRIX<<EOF' >> $GITHUB_ENV
           echo '[' >> $GITHUB_ENV
           echo '{ "server": "quarkus", "tests": "LoginTest" }' >> $GITHUB_ENV
-          if [ ${{ github.event_name }} != 'pull_request' ] || ( git diff --name-only HEAD^ | grep  -q '^undertow/' ); then
+          if [ ${{ github.event_name }} != 'pull_request' ] || ( git diff --name-only main | grep  -q '^undertow/' ); then
             echo ', { "server": "undertow", "tests": "LogoutTest" }' >> $GITHUB_ENV
           fi
           echo ']' >> $GITHUB_ENV
