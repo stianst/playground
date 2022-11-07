@@ -11,9 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: | 
-          echo "Changes:"
-          git diff --name-only HEAD^
-          echo ""
+          if [ ${{ github.event_name }} == 'pull_request' ]; then
+            echo "Changes:"
+            git diff --name-only HEAD^
+            echo ""
+          fi
           
           echo 'MATRIX<<EOF' >> $GITHUB_ENV
           echo '[' >> $GITHUB_ENV
