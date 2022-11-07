@@ -1,0 +1,23 @@
+name: Matrix Test
+
+on:
+  push:
+    
+
+jobs:
+  greet:
+    strategy:
+      matrix:
+        include:
+          - server: quarkus
+            tests: LoginTest
+          - server: quarkus
+            tests: UserTest
+          
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo
+      run: |
+        echo "${{ matrix.server }} ${{ matrix.tests }}"
