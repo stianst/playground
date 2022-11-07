@@ -14,7 +14,6 @@ public class MyCustomResourceProvider implements RealmResourceProvider {
     private KeycloakSession session;
 
     public MyCustomResourceProvider(KeycloakSession session) {
-        System.out.println("Hello!");
         this.session = session;
     }
 
@@ -27,13 +26,16 @@ public class MyCustomResourceProvider implements RealmResourceProvider {
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)
     public String sayHello() throws IOException {
+        System.out.println("Hello!");
         return "Hello " + SimpleHttp.doGet("http://localhost:8080/realms/master/custom/name", session).asString();
     }
 
     @GET
     @Path("/name")
     @Produces(MediaType.TEXT_PLAIN)
-    public String getName() {
+    public String getName() throws InterruptedException {
+        Thread.sleep(1000);
+        System.out.println("Bob!");
         return "Bob";
     }
 

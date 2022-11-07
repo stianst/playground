@@ -9,10 +9,16 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+    </properties>
+
     <modules>
         <module>kc-ext/stupid-cache-stats</module>
         <module>kc-tools/logs</module>
         <module>extensions</module>
+        <module>testsuites</module>
     </modules>
 
 </project>
