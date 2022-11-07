@@ -10,7 +10,12 @@ jobs:
     steps:
       - run: | 
           echo 'MATRIX<<EOF' >> $GITHUB_ENV
-          echo '[ { "server": "quarkus", "tests": "LoginTest" }, { "server": "undertow", "tests": "LogoutTest" } ]' >> $GITHUB_ENV
+          echo '['
+          echo '{ "server": "quarkus", "tests": "LoginTest" }'
+          if ( git diff --name-only HEAD^ | grep  -q '^undertow/' ); then
+            echo ', { "server": "undertow", "tests": "LogoutTest" }'
+          fi
+          echo ']' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
     outputs:
       matrix: ${{ env.MATRIX }}
