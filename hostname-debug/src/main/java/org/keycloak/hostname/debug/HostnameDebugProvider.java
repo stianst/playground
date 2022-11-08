@@ -1,6 +1,7 @@
 package org.keycloak.hostname.debug;
 
 import org.keycloak.models.KeycloakSession;
+import org.keycloak.quarkus.runtime.Environment;
 import org.keycloak.services.Urls;
 import org.keycloak.services.resource.RealmResourceProvider;
 import org.keycloak.services.resources.Cors;
@@ -12,10 +13,12 @@ import org.keycloak.urls.UrlType;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,9 +62,33 @@ public class HostnameDebugProvider implements RealmResourceProvider {
         attributes.put("backendTestUrl", backendTestUrl);
         attributes.put("adminTestUrl", adminTestUrl);
 
+        attributes.put("serverMode", Environment.isDevMode() ? "dev [start-dev]" : "production [start]");
+
         attributes.put("config", config);
+        attributes.put("proxyHeaders", getProxyHeaders());
 
         return provider.processTemplate(attributes, "hostname-debug.ftl", session.theme().getTheme("base", Theme.Type.LOGIN));
+    }
+
+    private Map<String, String> getProxyHeaders() {
+        String proxy = config.get("proxy");
+        if (proxy == null || proxy.equals("none") || proxy.equals("false")) {
+            return Collections.EMPTY_MAP;
+        }
+
+        Map<String, String> proxyHeaders = new HashMap<>();
+        HttpHeaders requestHeaders = session.getContext().getRequestHeaders();
+        addProxyHeader("X-Forwarded-For", proxyHeaders, requestHeaders);
+        addProxyHeader("X-Forwarded-Proto", proxyHeaders, requestHeaders);
+        addProxyHeader("X-Forwarded-Port", proxyHeaders, requestHeaders);
+        return proxyHeaders;
+    }
+
+    private void addProxyHeader(String header, Map<String, String> proxyHeaders, HttpHeaders requestHeaders) {
+        String value = requestHeaders.getHeaderString(header);
+        if (value != null && !value.isEmpty()) {
+            proxyHeaders.put(header, value);
+        }
     }
 
     @GET

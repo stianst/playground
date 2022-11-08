@@ -51,6 +51,11 @@
     <td>&nbsp;</td>
 </tr>
 
+
+<tr>
+    <td>Server mode</td>
+    <td>${serverMode}</td>
+</tr>
 <tr>
     <td>Realm</td>
     <td>${realm}</td>
@@ -73,6 +78,20 @@
     <td>${value}</td>
 </tr>
 </#list>
+
+<#if proxyHeaders?has_content>
+    <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+
+    <#list proxyHeaders as key, value>
+    <tr>
+        <td>${key}</td>
+        <td>${value}</td>
+    </tr>
+    </#list>
+</#if>
 
 <script>
     function testUrl(url, responseId) {
