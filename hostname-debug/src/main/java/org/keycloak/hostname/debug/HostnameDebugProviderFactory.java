@@ -19,6 +19,7 @@ public class HostnameDebugProviderFactory implements RealmResourceProviderFactor
             "hostname-admin-url",
             "hostname-strict",
             "hostname-strict-backchannel",
+            "hostname-strict-https",
             "hostname-path",
             "hostname-port",
             "proxy",
