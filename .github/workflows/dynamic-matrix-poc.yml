@@ -1,0 +1,54 @@
+name: Dynamic Matrix Test
+
+on:
+  push:
+    branches: main
+  pull_request:
+
+jobs:
+  define-matrix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+      - run: | 
+          if [ ${{ github.event_name }} == 'pull_request' ]; then
+            echo "Changes:"
+            git diff --name-only HEAD^
+            echo ""
+          fi
+          
+          echo 'MATRIX<<EOF' >> $GITHUB_ENV
+          echo '[' >> $GITHUB_ENV
+          echo '{ "server": "quarkus", "tests": "LoginTest" }' >> $GITHUB_ENV
+          if [ ${{ github.event_name }} != 'pull_request' ] || ( git diff --name-only HEAD^ | grep  -q '^undertow/' ); then
+            echo ', { "server": "undertow", "tests": "LogoutTest" }' >> $GITHUB_ENV
+          fi
+          echo ']' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+    outputs:
+      matrix: ${{ env.MATRIX }}
+
+  echo:
+    needs: define-matrix
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo
+      run: |
+        echo "${{ needs.define-matrix.outputs.matrix }}"
+
+  greet:
+    needs: define-matrix
+    strategy:
+      matrix: 
+        include: ${{ fromJson(needs.define-matrix.outputs.matrix) }}          
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Echo
+      run: |
+        echo "${{ matrix.server }} ${{ matrix.tests }}"

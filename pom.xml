@@ -15,10 +15,10 @@
     </properties>
 
     <modules>
-        <module>kc-ext/stupid-cache-stats</module>
+        <module>kc-ext/cache-statistics</module>
+        <module>kc-ext/hostname-debug</module>
         <module>kc-tools/logs</module>
-        <module>hostname-debug</module>
-        <module>testsuites</module>
+        <module>junit-testsuite-poc</module>
     </modules>
 
 </project>
