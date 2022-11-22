@@ -39,6 +39,9 @@ while getopts "d:f:t:p:r:?" arg; do
         f)
             FROM=$OPTARG
             ;;
+        t)
+            TO=$OPTARG
+            ;;
         p)
             PR=$OPTARG
             ;;
@@ -50,6 +53,7 @@ while getopts "d:f:t:p:r:?" arg; do
             echo "  -r <repo>      Repository (default keycloak/keycloak)"
             echo "  -d <days>      Number of days to fetch (default 7)"
             echo "  -f <date>      Fetch PRs merged from date (YYYY-MM-DD)"
+            echo "  -t <date>      Fetch PRs merged to date (YYYY-MM-DD)"
             echo "  -p <num>       Show statistics for a single PR"
             exit 1
             ;;
@@ -61,7 +65,9 @@ if [ "$FROM" == "" ]; then
   TO=`date +%Y-%m-%d`
   FROM=`date -d "-$DAYS days" +%Y-%m-%d`
 else
-  TO=`date -d "$FROM +$DAYS days" +%Y-%m-%d`
+  if [ "$TO" == "" ]; then
+    TO=`date -d "$FROM +$DAYS days" +%Y-%m-%d`
+  fi
 fi
 
 pr_wait () {
@@ -105,7 +111,7 @@ else
     echo "Fetching PRs merged from $FROM to $TO"
     echo ""
     echo -e "PR\tTitle\tLogin\tTime"
-    for i in `pr_list`; do
-        pr_wait $i
-    done
+    #for i in `pr_list`; do
+    #    pr_wait $i
+    #done
 fi
