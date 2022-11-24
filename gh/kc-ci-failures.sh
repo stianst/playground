@@ -122,7 +122,7 @@ elif [ "$WORKFLOW" != "" ]; then
 elif [ "$HEADINGS" = true ]; then 
     failures
 elif [ "$UNIQ" = true ]; then
-    failures | sort | uniq -c | sort -r
+    failures | sort | uniq -c | sort -r -n
 else
     failures | sort
 fi

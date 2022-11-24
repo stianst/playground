@@ -101,7 +101,7 @@ pr_list () {
   # Only count PRs that are merged, as we know failed tests have been re-run if applicable. We're also discounting PRs
   # from external contributors as we want to focus on waiting time for ourselves initially, and some PRs from the
   # community require manual approving of the run first.
-  gh api -X GET search/issues -F q="repo:$REPO is:pr is:merged closed:$FROM..$TO" -q '.items.[] | select(.author_association == "MEMBER") | .number'
+  gh api -X GET search/issues --paginate -F q="repo:$REPO is:pr is:merged closed:$FROM..$TO" -q '.items.[] | select(.author_association == "MEMBER") | .number'
 }
 
 if [ "$PR" != "" ]; then
@@ -111,7 +111,7 @@ else
     echo "Fetching PRs merged from $FROM to $TO"
     echo ""
     echo -e "PR\tTitle\tLogin\tTime"
-    #for i in `pr_list`; do
-    #    pr_wait $i
-    #done
+    for i in `pr_list`; do
+        pr_wait $i
+    done
 fi
