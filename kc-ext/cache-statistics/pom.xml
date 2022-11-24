@@ -22,7 +22,7 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-model-infinispan</artifactId>
-            <version>11.0.3</version>
+            <version>14.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
