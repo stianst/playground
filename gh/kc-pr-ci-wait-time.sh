@@ -97,6 +97,41 @@ pr_wait () {
       "$TOTAL_TIME"
 }
 
+pr_debug () {
+    PR=$1    
+    
+    PULL=`gh api repos/$REPO/pulls/$PR`
+    
+    PULL_CREATED=`echo $PULL | jq -r '.created_at'`
+    HEAD_SHA=`echo $PULL | jq -r '.head.sha'`
+    
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+    echo "Pull"
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+    echo "Created:      $PULL_CREATED"
+    echo "Head sha:     $HEAD_SHA"
+    
+    CHECK_SUITES=`gh api repos/$REPO/commits/$HEAD_SHA/check-suites`
+
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+    echo "Check suites"
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+
+    HEADER="Status\tConclusion\tCreated at\tUpdated at"
+    CHECK_SUITES=`gh api repos/$REPO/commits/$HEAD_SHA/check-suites  | jq -r '.check_suites[] | [.status, .conclusion, .created_at, .updated_at] | @tsv'`
+    echo -e "$HEADER\n$CHECK_SUITES" | column -s $'\t' -t
+
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+    echo "Check runs"
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+
+    HEADER="Name\tStatus\tConclusion\tStarted at\tCompleted at"
+    CHECK_RUNS=`gh api repos/$REPO/commits/$HEAD_SHA/check-runs | jq -r '.check_runs[] | [.name, .status, .conclusion, .started_at, .completed_at] | @tsv'`
+    echo -e "$HEADER\n$CHECK_RUNS" | column -s $'\t' -t
+
+    echo "--------------------------------------------------------------------------------------------------------------------------"
+}
+
 pr_list () {
   # Only count PRs that are merged, as we know failed tests have been re-run if applicable. We're also discounting PRs
   # from external contributors as we want to focus on waiting time for ourselves initially, and some PRs from the
@@ -105,8 +140,7 @@ pr_list () {
 }
 
 if [ "$PR" != "" ]; then
-    echo -e "PR\tTitle\tLogin\tTime"
-    pr_wait $PR
+    pr_debug $PR
 else
     echo "Fetching PRs merged from $FROM to $TO"
     echo ""

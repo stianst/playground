@@ -1,7 +1,8 @@
 #!/bin/bash
 
 DAYS=1
-while getopts "hud:t:w:?" arg; do
+EVENTS=schedule
+while getopts "hud:f:t:x:w:e:?" arg; do
     case $arg in
         h)
             HEADINGS=true
@@ -12,19 +13,31 @@ while getopts "hud:t:w:?" arg; do
         d)
             DAYS=$OPTARG
             ;;
+        f)
+            FROM=$OPTARG
+            ;;
         t)
+            TO=$OPTARG
+            ;;
+        x)
             TEST=$OPTARG
             ;;
         w)
             WORKFLOW=$OPTARG
+            ;;
+        e)
+            EVENTS=$OPTARG
             ;;
         *)
             echo "options:"
             echo "  -h             Show headings"
             echo "  -u             Summary of results with number of occurrences (only works without headings)"
             echo "  -d <days>      Number of days to fetch (default 1)"
-            echo "  -t <test>      Display details of a specific test"
-            echo "  -w <workflow>  Display details of a specific workflow" 
+            echo "  -f <date>      From date (YYYY-MM-DD)"
+            echo "  -t <date>      To date (YYYY-MM-DD)"
+            echo "  -x <test>      Display details of a specific test"
+            echo "  -w <workflow>  Display details of a specific workflow"
+            echo "  -e <events>    Comma separated list of events"
             exit 1
             ;;
     esac
@@ -33,9 +46,19 @@ done
 DIR=`dirname $0 | xargs readlink -f`
 LOGS=$DIR/gh-logs
 
-FROM_DATE=`date +%Y-%m-%d -d "$DAYS day ago"`
+DAYS=$((DAYS-1))
+if [ "$FROM" == "" ]; then
+  TO=`date +%Y-%m-%d`
+  FROM=`date -d "-$DAYS days" +%Y-%m-%d`
+else
+  if [ "$TO" == "" ]; then
+    TO=`date -d "$FROM +$DAYS days" +%Y-%m-%d`
+  fi
+fi
 
-FAILURES=`gh api -X GET repos/keycloak/keycloak/actions/workflows/ci.yml/runs -f status=failure -f event=schedule -f created=">$FROM_DATE" --jq .workflow_runs[].id`
+echo "From $FROM to $TO"
+
+FAILURES=`gh api -X GET repos/keycloak/keycloak/actions/workflows/ci.yml/runs -f status=failure -f event=$EVENTS -f created=$FROM..$TO --jq .workflow_runs[].id`
 
 test_details() {
     echo "============================================================================================================================================"
@@ -46,7 +69,7 @@ test_details() {
         ERROR=`cat $LOGFILE | grep "\[ERROR]   $TEST"`
         if [ "$ERROR" != "" ]; then
             echo "https://github.com/keycloak/keycloak/actions/runs/$RUN"
-            echo "$LOGFILE"
+#            echo "$LOGFILE"
             echo ""
             echo "$ERROR"
             echo "--------------------------------------------------------------------------------------------------------------------------------------------"
@@ -77,6 +100,11 @@ rewrite () {
     | sed 's/There are test failures.//g' \
     | sed 's/://g' \
     | sed 's/.*Could not transfer artifact.*Connection timed out.*/Connection timed out transferring artifacts/g'
+}
+
+rewrite_test () {
+    cat \
+    | sed 's/[A-Za-z0-9]* » Runtime Arquillian initialization has already been attempted, but failed. See previous exceptions for cause/Runtime Arquillian initialization has already been attempted, but failed/g'
 }
 
 failures () {
@@ -110,7 +138,7 @@ failures () {
             fi
             
             cat $LOGFILE | grep "^$JOB" | grep -o 'Failed to execute goal.*' | rewrite | xargs -I {} echo " [BUILD] {}"
-            cat $LOGFILE | grep "^$JOB" | grep -o '\[ERROR]   [A-Za-z0-9]*Test.*' | sed 's/\[ERROR]   / [TESTS] /g' | cut -d ':' -f 1
+            cat $LOGFILE | grep "^$JOB" | grep -o '\[ERROR]   [A-Za-z0-9]*Test.*' | sed 's/\[ERROR]   / [TESTS] /g' | cut -d ':' -f 1 | rewrite_test
         done
     done
 }
