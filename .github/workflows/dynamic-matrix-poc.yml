@@ -3,7 +3,6 @@ name: Dynamic Matrix Test
 on:
   push:
     branches: main
-  pull_request:
 
 jobs:
   define-matrix:
