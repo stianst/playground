@@ -13,5 +13,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 11
+          cache: 'maven'
       - run:
           mvn install -Dsurefire.rerunFailingTestsCount=100 -f junit-testsuite-poc/pom.xml
