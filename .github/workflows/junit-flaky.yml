@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  define-matrix:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,3 +16,6 @@ jobs:
           cache: 'maven'
       - run:
           mvn install -Dsurefire.rerunFailingTestsCount=100 -f junit-testsuite-poc/pom.xml
+      - uses: ./.github/actions/report-flaky-test
+        env:
+          GH_TOKEN: ${{ github.token }}
