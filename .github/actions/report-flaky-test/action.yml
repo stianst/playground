@@ -25,7 +25,12 @@ runs:
                 gh issue create -t "$TITLE" -b "$BODY" -l "bug,flaky-test" | grep 'https://github.com' >> $GITHUB_STEP_SUMMARY
               else
                 gh issue comment $ISSUE -b "$BODY" >> $GITHUB_STEP_SUMMARY
-              fi        
+              fi
+        
+              PR="${{ github.event.pull_request.number }}"
+              if [ "$PR" != "" ]; then
+                gh pr edit $PR --add-label flaky-test
+              fi
 
               echo "$BODY" >> $GITHUB_STEP_SUMMARY
             fi
