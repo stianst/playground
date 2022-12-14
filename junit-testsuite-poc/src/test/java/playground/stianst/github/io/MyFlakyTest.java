@@ -12,7 +12,7 @@ public class MyFlakyTest {
     public void flaky() {
         Random random = new Random();
         int i = random.nextInt(10);
-        assertTrue(i < 7);
+        assertTrue(i < 9);
     }
 
 }
