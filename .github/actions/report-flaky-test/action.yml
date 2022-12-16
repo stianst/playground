@@ -24,7 +24,7 @@ runs:
               ISSUES_LINK="https://github.com/${{ github.repository }}/issues/"
         
               if [ "$ISSUE" == "" ]; then
-                ISSUE=`gh issue create -t "$TITLE" -b "$BODY" -l "kind/bug,area/ci,flaky-test" | grep $ISSUES_LINK | sed "s|$ISSUES_LINK||"
+                ISSUE=`gh issue create -t "$TITLE" -b "$BODY" -l "kind/bug,area/ci,flaky-test" | grep $ISSUES_LINK | sed "s|$ISSUES_LINK||"`
               else
                 gh issue comment "$ISSUE" -b "$BODY" >> $GITHUB_STEP_SUMMARY
               fi    
