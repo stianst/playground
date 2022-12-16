@@ -6,32 +6,33 @@ runs:
   steps:
     - id: flaky-tests
       name: Find flaky tests
+      if: github.repository == 'stianst/keycloak'
       shell: bash
       run: |
         for dir in `find -type d -name surefire-reports`; do
           for i in `ls $dir/*.txt`; do
             if ( grep '<<< FAILURE!' $i &>/dev/null ); then
-              TEST=`echo $i | sed 's/.txt//g' | sed 's/.*\.//g'`
-              LOG=`cat $i`
+              TEST="`echo $i | sed 's/.txt//g' | sed 's/.*\.//g'`"
+              LOG="`cat $i`"
         
               RUN="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               TITLE="Flaky test: $TEST"
               BODY="$RUN"$'\n'"\`\`\`"$'\n'"$LOG"$'\n'"\`\`\`"
-              ISSUE=`gh issue list --search "$TITLE in:title" --json number --jq .[].number`
-              
+              ISSUE="`gh issue list --search "$TITLE in:title" --json number --jq .[].number`"
+        
               echo "# $TITLE" >> $GITHUB_STEP_SUMMARY
-
               if [ "$ISSUE" == "" ]; then
-                gh issue create -t "$TITLE" -b "$BODY" -l "bug,flaky-test" | grep 'https://github.com' >> $GITHUB_STEP_SUMMARY
+                gh issue create -t "$TITLE" -b "$BODY" -l "kind/bug,area/ci,flaky-test" | grep 'https://github.com' >> $GITHUB_STEP_SUMMARY
               else
-                gh issue comment $ISSUE -b "$BODY" >> $GITHUB_STEP_SUMMARY
+                gh issue comment "$ISSUE" -b "$BODY" >> $GITHUB_STEP_SUMMARY
               fi
+
+              gh api -X POST "repos/stianst/keycloak/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
         
               PR="${{ github.event.pull_request.number }}"
               if [ "$PR" != "" ]; then
-                gh pr edit $PR --add-label flaky-test
+                gh pr edit "$PR" --add-label "flaky-test"
               fi
-
               echo "$BODY" >> $GITHUB_STEP_SUMMARY
             fi
           done
