@@ -33,7 +33,6 @@ runs:
 
               gh api -X POST "repos/$REPO/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
         
-              PR="${{ github.event.pull_request.number }}"
               if [ "$PR" != "" ]; then
                 gh pr edit "$PR" --add-label "flaky-test"
               fi
