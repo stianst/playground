@@ -30,8 +30,6 @@ runs:
               else
                 LINK="$(gh issue comment "$ISSUE" -b "$BODY")"
               fi    
-
-              gh api -X POST "repos/$REPO/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
         
               if [ "$PR" != "" ]; then
                 gh pr edit "$PR" --add-label "flaky-test"
