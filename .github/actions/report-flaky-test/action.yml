@@ -38,9 +38,9 @@ runs:
               
               echo "## $TITLE" >> $GITHUB_STEP_SUMMARY
               echo "$ISSUES_LINK/$ISSUE" >> $GITHUB_STEP_SUMMARY
-              echo "```" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
               echo "$LOG" >> $GITHUB_STEP_SUMMARY
-              echo "```" >> $GITHUB_STEP_SUMMARY
+              echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
             fi
           done
         done
