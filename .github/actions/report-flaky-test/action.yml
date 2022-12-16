@@ -14,38 +14,33 @@ runs:
         for dir in `find -type d -name surefire-reports`; do
           for i in `ls $dir/*.txt`; do
             if ( grep '<<< FAILURE!' $i &>/dev/null ); then
-              echo "Found flake in $i"
-              
               TEST="`echo $i | sed 's/.txt//g' | sed 's/.*\.//g'`"
               LOG="`cat $i`"
               
-              echo "Test: $TEST"
-              echo "Log: $LOG"
-        
               RUN="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               TITLE="Flaky test: $TEST"
               BODY="$RUN"$'\n'"\`\`\`"$'\n'"$LOG"$'\n'"\`\`\`"
               ISSUE="`gh issue list --search "$TITLE in:title" --json number --jq .[].number`"
-              
-              echo "Issue: $ISSUE"
+              ISSUES_LINK="https://github.com/${{ github.repository }}/issues/"
         
-              echo "# $TITLE" >> $GITHUB_STEP_SUMMARY
               if [ "$ISSUE" == "" ]; then
-                echo "Creating issue"
-                gh issue create -t "$TITLE" -b "$BODY" -l "kind/bug,area/ci,flaky-test" | grep 'https://github.com' >> $GITHUB_STEP_SUMMARY
+                ISSUE=`gh issue create -t "$TITLE" -b "$BODY" -l "kind/bug,area/ci,flaky-test" | grep $ISSUES_LINK | sed "s|$ISSUES_LINK||"
               else
-                echo "Commenting on issue $ISSUE"
                 gh issue comment "$ISSUE" -b "$BODY" >> $GITHUB_STEP_SUMMARY
-
-                echo "Adding reaction to issue $ISSUE"
-                gh api -X POST "repos/stianst/keycloak/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
               fi    
+
+              gh api -X POST "repos/${{ github.repository }}/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
         
               PR="${{ github.event.pull_request.number }}"
               if [ "$PR" != "" ]; then
                 gh pr edit "$PR" --add-label "flaky-test"
               fi
-              echo "$BODY" >> $GITHUB_STEP_SUMMARY
+              
+              echo "## $TITLE" >> $GITHUB_STEP_SUMMARY
+              echo "$ISSUES_LINK/$ISSUE" >> $GITHUB_STEP_SUMMARY
+              echo "```" >> $GITHUB_STEP_SUMMARY
+              echo "$LOG" >> $GITHUB_STEP_SUMMARY
+              echo "```" >> $GITHUB_STEP_SUMMARY
             fi
           done
         done
