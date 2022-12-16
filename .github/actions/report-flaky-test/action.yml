@@ -6,7 +6,7 @@ runs:
   steps:
     - id: flaky-tests
       name: Find flaky tests
-      if: github.repository == 'stianst/keycloak'
+      if: github.repository == 'stianst/playground'
       shell: bash
       run: |
         echo 'Checking for flakes'
