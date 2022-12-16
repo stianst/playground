@@ -9,25 +9,37 @@ runs:
       if: github.repository == 'stianst/keycloak'
       shell: bash
       run: |
+        echo 'Checking for flakes'
+        
         for dir in `find -type d -name surefire-reports`; do
           for i in `ls $dir/*.txt`; do
             if ( grep '<<< FAILURE!' $i &>/dev/null ); then
+              echo "Found flake in $i"
+              
               TEST="`echo $i | sed 's/.txt//g' | sed 's/.*\.//g'`"
               LOG="`cat $i`"
+              
+              echo "Test: $TEST"
+              echo "Log: $LOG"
         
               RUN="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
               TITLE="Flaky test: $TEST"
               BODY="$RUN"$'\n'"\`\`\`"$'\n'"$LOG"$'\n'"\`\`\`"
               ISSUE="`gh issue list --search "$TITLE in:title" --json number --jq .[].number`"
+              
+              echo "Issue: $ISSUE"
         
               echo "# $TITLE" >> $GITHUB_STEP_SUMMARY
               if [ "$ISSUE" == "" ]; then
+                echo "Creating issue"
                 gh issue create -t "$TITLE" -b "$BODY" -l "kind/bug,area/ci,flaky-test" | grep 'https://github.com' >> $GITHUB_STEP_SUMMARY
               else
+                echo "Commenting on issue $ISSUE"
                 gh issue comment "$ISSUE" -b "$BODY" >> $GITHUB_STEP_SUMMARY
-              fi
 
-              gh api -X POST "repos/stianst/keycloak/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
+                echo "Adding reaction to issue $ISSUE"
+                gh api -X POST "repos/stianst/keycloak/issues/$ISSUE/reactions" --input - <<< '{"content":"+1"}'
+              fi    
         
               PR="${{ github.event.pull_request.number }}"
               if [ "$PR" != "" ]; then
