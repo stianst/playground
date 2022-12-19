@@ -1,4 +1,4 @@
-name: JUnit Flaky detection
+name: Keycloak CI
 
 on:
   pull_request:
