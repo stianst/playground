@@ -24,6 +24,9 @@ runs:
         done
         
         if [ "$FLAKES" != "" ]; then
+          echo "Found flakes in:"
+          echo "$FLAKES"
+        
           echo "flakes<<EOF" >> $GITHUB_OUTPUT
           echo "$FLAKES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -32,5 +35,5 @@ runs:
     - uses: actions/upload-artifact@v3
       with:
         name: flaky-tests
-        path: ${{ steps.flaky-tests.flakes }}
+        path: ${{ steps.flaky-tests.outputs.flakes }}
         if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
