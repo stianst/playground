@@ -2,6 +2,7 @@ name: JUnit Flaky detection
 
 on:
   pull_request:
+  push:
   workflow_dispatch:
 
 jobs:
