@@ -34,6 +34,7 @@ runs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: flaky-tests
+        name: flaky-tests-${{ github.job }}
+        if: ${{ steps.flaky-tests.outputs.flakes }}
         path: ${{ steps.flaky-tests.outputs.flakes }}
-        if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+        if-no-files-found: error
