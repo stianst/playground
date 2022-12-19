@@ -33,8 +33,8 @@ runs:
         fi
 
     - uses: actions/upload-artifact@v3
+      if: ${{ steps.flaky-tests.outputs.flakes }}
       with:
         name: flaky-tests-${{ github.job }}
-        if: ${{ steps.flaky-tests.outputs.flakes }}
         path: ${{ steps.flaky-tests.outputs.flakes }}
         if-no-files-found: error
