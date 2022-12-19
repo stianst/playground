@@ -6,7 +6,7 @@ import java.util.Random;
 
 import static org.junit.Assert.assertTrue;
 
-public class MyFlakyTest {
+public class MyOtherVeryFlakyTest {
 
     @Test
     public void flaky() {
