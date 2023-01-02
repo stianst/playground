@@ -24,9 +24,11 @@ jobs:
       - uses: ./.github/actions/report-flaky-test
         env:
           GH_TOKEN: ${{ github.token }}
+        with:
+          job-name: Base IT
 
   unit-tests:
-    name: Base IT
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -40,3 +42,5 @@ jobs:
       - uses: ./.github/actions/report-flaky-test
         env:
           GH_TOKEN: ${{ github.token }}
+        with:
+          job-name: Unit Tests
