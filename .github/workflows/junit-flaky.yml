@@ -24,3 +24,19 @@ jobs:
       - uses: ./.github/actions/report-flaky-test
         env:
           GH_TOKEN: ${{ github.token }}
+
+  unit-tests:
+    name: Base IT
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+          cache: 'maven'
+      - run:
+          mvn install -Dsurefire.rerunFailingTestsCount=100 -f junit-testsuite-poc/pom.xml
+      - uses: ./.github/actions/report-flaky-test
+        env:
+          GH_TOKEN: ${{ github.token }}
