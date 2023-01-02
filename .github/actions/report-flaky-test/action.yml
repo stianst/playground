@@ -33,6 +33,6 @@ runs:
     - uses: actions/upload-artifact@v3
       if: ${{ steps.flaky-tests.outputs.flakes }}
       with:
-        name: flaky-tests-${{ github.job }}
+        name: flaky-tests-${{ github.job }}-${{ join(matrix.*, '-') }}
         path: ${{ steps.flaky-tests.outputs.flakes }}
         if-no-files-found: error
