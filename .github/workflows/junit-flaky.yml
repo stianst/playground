@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
+  base-integration-tests:
+    name: Base IT
     runs-on: ubuntu-latest
     strategy:
       matrix:
