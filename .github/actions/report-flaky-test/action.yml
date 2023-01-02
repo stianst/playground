@@ -25,7 +25,7 @@ runs:
           echo "EOF" >> $GITHUB_OUTPUT
         fi
         
-        echo "${{ matrix }}"
+        echo "${{ join(matrix.*, ' - ') }} / ${{ github.event_name }}"
         echo ""
         echo "PR: ${{github.event.number}}"
         echo "JOB: ${{github.job}}"
