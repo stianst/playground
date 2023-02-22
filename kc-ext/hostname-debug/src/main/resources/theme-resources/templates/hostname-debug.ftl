@@ -11,6 +11,10 @@
         border-collapse: collapse;
     }
 
+    th {
+        text-align: left;
+    }
+
     th, td {
         padding: 8px 15px;
         font-size: 14px;
@@ -26,7 +30,7 @@
 
 <table>
 <tr>
-    <th>Name</th>
+    <th>URL</th>
     <th>Value</th>
 </tr>
 
@@ -37,6 +41,7 @@
 <tr>
     <td>Frontend</td>
     <td>${frontendUrl} [<span id="frontendStatus"></span>]</td>
+</tr>
 <tr>
     <td>Backend</td>
     <td>${backendUrl} [<span id="backendStatus"></span>]</td>
@@ -47,10 +52,9 @@
 </tr>
 
 <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <th>Runtime</th>
+    <th>Value</th>
 </tr>
-
 
 <tr>
     <td>Server mode</td>
@@ -68,8 +72,8 @@
 </#if>
 
 <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <th>Configuration property</th>
+    <th>Value</th>
 </tr>
 
 <#list config as key, value>
@@ -79,13 +83,13 @@
 </tr>
 </#list>
 
-<#if proxyHeaders?has_content>
+<#if headers?has_content>
     <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <th>Header</th>
+        <th>Value</th>
     </tr>
 
-    <#list proxyHeaders as key, value>
+    <#list headers as key, value>
     <tr>
         <td>${key}</td>
         <td>${value}</td>
