@@ -1,2 +1,4 @@
 FROM docker.io/nginx
-COPY default.conf /etc/nginx/conf.d/default.conf
+
+ARG conf_file
+COPY $conf_file /etc/nginx/conf.d/default.conf
