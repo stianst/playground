@@ -65,7 +65,7 @@ Create some namespaces we'll use to test access with:
 
 # Testing things
 
-## Passing `--token`
+## Using `--token` option
 
 Create a separate config entry for `kubectl` to test accessing `minikube` with an ID token:
 
@@ -95,3 +95,32 @@ kubectl get pods --token=$(./token.sh id) -n test-group
 ```
 
 > If you remove the group from the user through the Keycloak admin console the above should fail
+
+## Using OIDC Authenticator
+
+Create a separate config entry for `kubectl` to test accessing `minikube` with the OIDC Authenticator:
+
+```
+./kubectl-context-oidc.sh
+```
+
+The OIDC Authenticator doesn't support any OIDC Flows, but rather it supports configuring a refresh token retrieved
+elsewhere. It will then refresh the ID token as needed and include it automatically when `kubectl` is used.
+
+Now, try to list pods in the `test-no-access` namespace, which should fail:
+```
+kubectl get pods -n test-no-access
+```
+
+Now, try to list pods in the `test-user` namespace, which should fail:
+```
+kubectl get pods -n test-user
+```
+
+Now, try to list pods in the `test-group` namespace, which should fail:
+```
+kubectl get pods -n test-group
+```
+
+> If you remove the group from the user through the Keycloak admin console the above should fail. For the changes to
+> affect you need to wait until the current ID token expires (defaults to 5 minutes)
