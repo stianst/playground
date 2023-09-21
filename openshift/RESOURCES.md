@@ -3,3 +3,6 @@
 
 * [OpenShift - Configuring internal OAuth](https://docs.openshift.com/container-platform/4.13/authentication/configuring-internal-oauth.html#customizing-the-oauth-server-url_configuring-internal-oauth)
 * [OpenShift 3 PoC](https://github.com/keycloak/openshift-integration)
+
+
+* https://minikube.sigs.k8s.io/docs/tutorials/openid_connect_auth/

@@ -1,0 +1,9 @@
+kubectl config set-credentials st \
+   --auth-provider=oidc \
+   --auth-provider-arg=idp-issuer-url=https://living-bluebird-credible.ngrok-free.app/realms/kube \
+   --auth-provider-arg=client-id=kubectl \
+   --auth-provider-arg=client-secret=Z7xBtgLiLBdAVnQsApQWUhRyvLSRj2lb \
+   --auth-provider-arg=refresh-token=eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJkNTEwYzdmMy0zMzAwLTQzZjUtYTZmOS05MTVkZmI4MzQ2MDIifQ.eyJleHAiOjE2OTUyODE4MTAsImlhdCI6MTY5NTI4MDAxMCwianRpIjoiYjlhY2NlNDktYWMxMC00MjY3LThmMWYtNzEwNDdiYzkyZDkzIiwiaXNzIjoiaHR0cHM6Ly9saXZpbmctYmx1ZWJpcmQtY3JlZGlibGUubmdyb2stZnJlZS5hcHAvcmVhbG1zL2t1YmUiLCJhdWQiOiJodHRwczovL2xpdmluZy1ibHVlYmlyZC1jcmVkaWJsZS5uZ3Jvay1mcmVlLmFwcC9yZWFsbXMva3ViZSIsInN1YiI6ImNkZjZlNjQ4LWFlNDctNGEzYi04YjRjLTYxOTQzZjQzYTE1ZCIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJrdWJlY3RsIiwic2Vzc2lvbl9zdGF0ZSI6ImIxOTBmNGZkLWU5N2UtNDBlNi1iODcwLWI1ZTU2YjUxN2E1MSIsInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJzaWQiOiJiMTkwZjRmZC1lOTdlLTQwZTYtYjg3MC1iNWU1NmI1MTdhNTEifQ.0PJxkVQNatSGRD2UIxo1K1QhAMSRek99bJPk2X97d7c \
+   --auth-provider-arg=id-token=''
+
+kubectl config set-context kubernetes-local-oidc --cluster=minikube --user st
