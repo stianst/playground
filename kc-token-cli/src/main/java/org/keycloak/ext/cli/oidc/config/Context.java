@@ -33,7 +33,7 @@ public class Context {
     private String idToken;
 
     @JsonProperty("store-tokens")
-    private boolean storeTokens;
+    private Boolean storeTokens;
 
     public String getName() {
         return name;
@@ -94,11 +94,11 @@ public class Context {
         this.userPassword = userPassword;
     }
 
-    public boolean isStoreTokens() {
+    public Boolean isStoreTokens() {
         return storeTokens;
     }
 
-    public void setStoreTokens(boolean storeTokens) {
+    public void setStoreTokens(Boolean storeTokens) {
         this.storeTokens = storeTokens;
     }
 

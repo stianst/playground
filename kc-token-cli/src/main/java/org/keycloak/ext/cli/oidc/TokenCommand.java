@@ -64,7 +64,7 @@ public class TokenCommand implements Runnable {
             tokenResponse = openIDClient.token();
         }
 
-        if (context.isStoreTokens()) {
+        if (context.isStoreTokens() == null || context.isStoreTokens()) {
             context.setRefreshToken(tokenResponse.getRefreshToken());
             context.setIdToken(tokenResponse.getIdToken());
             context.setAccessToken(tokenResponse.getAccessToken());

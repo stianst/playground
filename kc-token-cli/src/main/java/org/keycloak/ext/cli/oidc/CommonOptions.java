@@ -22,7 +22,7 @@ public abstract class CommonOptions {
     @CommandLine.Option(names = {"--user-password"}, description = "User password for resource-owner flow")
     String password;
 
-    @CommandLine.Option(names = {"--store-tokens"}, description = "Store tokens", defaultValue = "true")
-    boolean storeTokens;
+    @CommandLine.Option(names = {"--store-tokens"}, description = "Store tokens")
+    String storeTokens;
 
 }

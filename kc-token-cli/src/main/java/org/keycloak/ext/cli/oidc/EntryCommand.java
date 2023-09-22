@@ -7,6 +7,7 @@ import picocli.CommandLine;
 @CommandLine.Command(mixinStandardHelpOptions = true, subcommands = {
         TokenCommand.class,
         ContextSetCommand.class,
+        ContextUpdateCommand.class,
         ContextUseCommand.class,
         ContextCurrentCommand.class,
         ContextViewCommand.class,
