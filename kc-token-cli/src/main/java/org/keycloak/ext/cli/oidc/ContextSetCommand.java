@@ -10,6 +10,14 @@ public class ContextSetCommand extends AbstractContextUpdater implements Runnabl
     @CommandLine.Option(names = {"--name"}, description = "Context name", required = true)
     String name;
 
+    public static void main(String[] args) {
+        ContextSetCommand c = new ContextSetCommand();
+        c.name = "test";
+        c.clientId = "myclient";
+        c.storeTokens = "true";
+        c.run();
+    }
+
     @Override
     public void run() {
         Context context = new Context();

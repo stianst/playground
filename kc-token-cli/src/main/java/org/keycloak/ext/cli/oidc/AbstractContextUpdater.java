@@ -36,6 +36,11 @@ public class AbstractContextUpdater extends CommonOptions {
                 context.setStoreTokens(null);
             }
         }
+        if (context.isStoreTokens() != null && !context.isStoreTokens()) {
+            context.setRefreshToken(null);
+            context.setAccessToken(null);
+            context.setIdToken(null);
+        }
     }
 
     private String convertToNull(String s) {

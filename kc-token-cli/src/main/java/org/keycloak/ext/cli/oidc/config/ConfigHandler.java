@@ -3,7 +3,6 @@ package org.keycloak.ext.cli.oidc.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.keycloak.ext.cli.oidc.Output;
-import org.keycloak.ext.cli.oidc.oidc.OpenIDFlow;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +25,8 @@ public class ConfigHandler {
     private Config config;
 
     private ConfigHandler() {
-        File homeDir = new File("/home/st/.kc");
+        File userHome = new File(System.getProperty("user.home"));
+        File homeDir = new File(userHome,".kc");
         if (!homeDir.isDirectory()) {
             homeDir.mkdir();
         }
@@ -58,6 +58,11 @@ public class ConfigHandler {
     public ConfigHandler save() {
         try {
             config.getContexts().sort(Comparator.comparing(Context::getName));
+
+            if (config.getCurrent() == null && config.getContexts().size() == 1) {
+                config.setCurrent(config.getContexts().get(0).getName());
+            }
+
             objectMapper.writeValue(configFile, config);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -74,13 +79,12 @@ public class ConfigHandler {
     }
 
     public ConfigHandler set(Context context) {
+        String current = config.getCurrent();
+
         delete(context.getName());
         config.getContexts().add(context);
 
-        if (config.getContexts().size() == 1) {
-            config.setCurrent(config.getContexts().get(0).getName());
-        }
-
+        config.setCurrent(current);
         return this;
     }
 
