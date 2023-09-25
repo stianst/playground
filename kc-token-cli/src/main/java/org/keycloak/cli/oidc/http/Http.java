@@ -54,7 +54,7 @@ public class Http implements AutoCloseable {
     }
 
     public Http authorization(String username, String password) {
-        authorization = "Basic" + Base64.getEncoder().encode((username + ":" + password).getBytes(StandardCharsets.UTF_8));
+        authorization = "Basic " + new String(Base64.getEncoder().encode((username + ":" + password).getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
         return this;
     }
 
@@ -68,6 +68,10 @@ public class Http implements AutoCloseable {
 
     private InputStream connect() throws IOException {
         createConnection();
+        if (authorization != null) {
+            System.out.println("authorization: " + authorization);
+            connection.setRequestProperty("Authorization", authorization);
+        }
         sendBodyIfAvailable();
         return connection.getInputStream();
     }
@@ -98,9 +102,6 @@ public class Http implements AutoCloseable {
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", contentType.toString());
-            if (authorization != null) {
-                connection.setRequestProperty("Authorization", authorization);
-            }
 
             byte[] body = encodeParams(bodyParams).getBytes(StandardCharsets.UTF_8);
             connection.setRequestProperty("Content-Length", Integer.toString(body.length));
