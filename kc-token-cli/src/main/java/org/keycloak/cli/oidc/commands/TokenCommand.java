@@ -4,6 +4,7 @@ import org.keycloak.cli.oidc.config.ConfigException;
 import org.keycloak.cli.oidc.config.Context;
 import org.keycloak.cli.oidc.oidc.OpenIDClient;
 import org.keycloak.cli.oidc.oidc.exceptions.OpenIDException;
+import org.keycloak.cli.oidc.oidc.representations.JWT;
 import org.keycloak.cli.oidc.oidc.representations.TokenResponse;
 import org.keycloak.cli.oidc.Output;
 import org.keycloak.cli.oidc.config.ConfigHandler;
@@ -83,8 +84,8 @@ public class TokenCommand implements Runnable {
         if (token == null) {
             return false;
         }
-        HashMap<String, String> claims = TokenParser.parse(token).getClaims();
-        long exp = TimeUnit.SECONDS.toMillis(Long.valueOf(claims.get("exp")));
+        JWT jwt = TokenParser.parse(token).getJWT();
+        long exp = TimeUnit.SECONDS.toMillis(Long.valueOf(jwt.getExp()));
         return exp > System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(30);
     }
 

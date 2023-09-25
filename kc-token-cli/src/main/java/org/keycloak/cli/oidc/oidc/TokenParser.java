@@ -1,22 +1,20 @@
 package org.keycloak.cli.oidc.oidc;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.keycloak.cli.oidc.oidc.representations.JWT;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.HashMap;
 
 public class TokenParser {
 
     private ObjectMapper objectMapper = new ObjectMapper();
-    private HashMap<String, String> claims;
+    private JWT jwt;
 
     private TokenParser(String token) {
         String[] split = token.split("\\.");
-        TypeReference<HashMap<String, String>> typeRef = new TypeReference<>() {};
         try {
-            claims = new ObjectMapper().readValue(Base64.getDecoder().decode(split[1]), typeRef);
+            jwt = new ObjectMapper().readValue(Base64.getDecoder().decode(split[1]), JWT.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -26,13 +24,13 @@ public class TokenParser {
         return new TokenParser(token);
     }
 
-    public HashMap<String, String> getClaims() {
-        return claims;
+    public JWT getJWT() {
+        return jwt;
     }
 
     public String decoded() {
         try {
-            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(claims);
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jwt);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
