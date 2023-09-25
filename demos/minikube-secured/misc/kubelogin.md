@@ -4,7 +4,7 @@ https://github.com/int128/kubelogin
 - name: oidc
   user:
   exec:
-  apiVersion: client.authentication.k8s.io/v1beta1
+  apiVersion: client.authentication.k8s.io/v1
   args:
   - oidc
   - get-token

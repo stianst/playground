@@ -107,19 +107,17 @@ public class ConfigHandler {
         return null;
     }
 
-    public void printCurrentContext() throws ConfigException {
+    public void printCurrentContext(boolean brief) throws ConfigException {
         try {
-            Output.println(objectMapper.writeValueAsString(getContext(config.getCurrent())));
+            Context context = copy(getContext(config.getCurrent()), brief);
+            Output.println(objectMapper.writeValueAsString(context));
         } catch (IOException e) {
             throw new ConfigException("Failed to serialize config");
         }
     }
 
     public void printContext(String name, boolean brief) throws ConfigException {
-        Context context = getContext(name);
-        if (brief) {
-            context = briefCopy(context);
-        }
+        Context context = copy(getContext(name), brief);
         try {
             Output.println(objectMapper.writeValueAsString(context));
         } catch (IOException e) {
@@ -128,10 +126,7 @@ public class ConfigHandler {
     }
 
     public void printContexts(boolean brief) throws ConfigException {
-        Config config = this.config;
-        if (brief) {
-            config = briefCopy(config);
-        }
+        Config config = copy(this.config, brief);
         try {
             Output.println(objectMapper.writeValueAsString(config));
         } catch (IOException e) {
@@ -139,20 +134,26 @@ public class ConfigHandler {
         }
     }
 
-    private Config briefCopy(Config config) {
+    private Config copy(Config config, boolean brief) {
         Config copy = new Config();
         copy.setCurrent(config.getCurrent());
         for (Context c : config.getContexts()) {
-            copy.getContexts().add(briefCopy(c));
+            copy.getContexts().add(copy(c, brief));
         }
         return copy;
     }
 
-    private Context briefCopy(Context context) {
+    private Context copy(Context context, boolean brief) {
         Context copy = new Context();
         copy.setName(context.getName());
         copy.setIssuer(context.getIssuer());
         copy.setFlow(context.getFlow());
+        if (!brief) {
+            copy.setClientId(context.getClientId());
+            copy.setClientSecret(context.getClientSecret().replaceAll(".", "*"));
+            copy.setUsername(context.getUsername());
+            copy.setUserPassword(context.getUserPassword().replaceAll(".", "*"));
+        }
         return copy;
     }
 

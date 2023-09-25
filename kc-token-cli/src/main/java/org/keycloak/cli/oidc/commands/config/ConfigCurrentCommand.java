@@ -8,10 +8,13 @@ import picocli.CommandLine;
 @CommandLine.Command(name = "current")
 public class ConfigCurrentCommand implements Runnable {
 
+    @CommandLine.Option(names = {"--brief"}, description = "Show brief output")
+    boolean brief;
+
     @Override
     public void run() {
         try {
-            ConfigHandler.get().printCurrentContext();
+            ConfigHandler.get().printCurrentContext(brief);
         } catch (ConfigException e) {
             Error.onError(e);
         }
