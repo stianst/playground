@@ -1,7 +1,9 @@
 package org.keycloak.cli.oidc.commands;
 
+import org.keycloak.cli.oidc.config.ConfigException;
 import org.keycloak.cli.oidc.config.Context;
 import org.keycloak.cli.oidc.oidc.OpenIDClient;
+import org.keycloak.cli.oidc.oidc.exceptions.OpenIDException;
 import org.keycloak.cli.oidc.oidc.representations.TokenResponse;
 import org.keycloak.cli.oidc.Output;
 import org.keycloak.cli.oidc.config.ConfigHandler;
@@ -25,16 +27,20 @@ public class TokenCommand implements Runnable {
 
     @Override
     public void run() {
-        String token = getToken();
-        if (decode) {
-            String decoded = TokenParser.parse(token).decoded();
-            Output.println(decoded);
-        } else {
-            Output.println(token);
+        try {
+            String token = getToken();
+            if (decode) {
+                String decoded = TokenParser.parse(token).decoded();
+                Output.println(decoded);
+            } else {
+                Output.println(token);
+            }
+        } catch (Exception e) {
+            Error.onError(e);
         }
     }
 
-    public String getToken() {
+    public String getToken() throws OpenIDException, ConfigException {
         ConfigHandler configHandler = ConfigHandler.get();
         Context context = contextName != null ? configHandler.getContext(contextName) : configHandler.getCurrentContext();
         OpenIDClient openIDClient = OpenIDClient.create(context);

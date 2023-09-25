@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -57,33 +58,21 @@ public class Http implements AutoCloseable {
         return this;
     }
 
-    public String asString() {
-        try {
-            return new String(connect().readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public String asString() throws IOException {
+        return new String(connect().readAllBytes(), StandardCharsets.UTF_8);
     }
 
-    public <T> T asObject(Class<T> clazz) {
-        try {
-            return new ObjectMapper().readValue(connect(), clazz);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public <T> T asObject(Class<T> clazz) throws IOException {
+        return new ObjectMapper().readValue(connect(), clazz);
     }
 
-    private InputStream connect() {
+    private InputStream connect() throws IOException {
         createConnection();
         sendBodyIfAvailable();
-        try {
-            return connection.getInputStream();
-        } catch (IOException e) {
-            return connection.getErrorStream();
-        }
+        return connection.getInputStream();
     }
 
-    private void createConnection() {
+    private void createConnection() throws IOException {
         String url;
         if (queryParams.isEmpty()) {
             url = endpoint;
@@ -94,38 +83,30 @@ public class Http implements AutoCloseable {
             url = sb.toString();
         }
 
-        try {
-            connection = (HttpURLConnection) new URL(url).openConnection();
-            if (accept != null) {
-                connection.setRequestProperty("Accept", accept.toString());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        connection = (HttpURLConnection) new URL(url).openConnection();
+        if (accept != null) {
+            connection.setRequestProperty("Accept", accept.toString());
         }
     }
 
-    private void sendBodyIfAvailable() {
+    private void sendBodyIfAvailable() throws IOException {
         if (contentType == null) {
             return;
         }
 
-        try {
-            if (contentType.equals(MimeType.FORM)) {
-                connection.setDoOutput(true);
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", contentType.toString());
-                if (authorization != null) {
-                    connection.setRequestProperty("Authorization", authorization);
-                }
-
-                byte[] body = encodeParams(bodyParams).getBytes(StandardCharsets.UTF_8);
-                connection.setRequestProperty("Content-Length", Integer.toString(body.length));
-                try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-                    wr.write(body);
-                }
+        if (contentType.equals(MimeType.FORM)) {
+            connection.setDoOutput(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", contentType.toString());
+            if (authorization != null) {
+                connection.setRequestProperty("Authorization", authorization);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            byte[] body = encodeParams(bodyParams).getBytes(StandardCharsets.UTF_8);
+            connection.setRequestProperty("Content-Length", Integer.toString(body.length));
+            try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                wr.write(body);
+            }
         }
     }
 

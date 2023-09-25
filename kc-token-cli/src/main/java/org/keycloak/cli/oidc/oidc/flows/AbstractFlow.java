@@ -2,6 +2,7 @@ package org.keycloak.cli.oidc.oidc.flows;
 
 import org.keycloak.cli.oidc.config.Context;
 import org.keycloak.cli.oidc.http.Http;
+import org.keycloak.cli.oidc.oidc.exceptions.OpenIDException;
 import org.keycloak.cli.oidc.oidc.representations.TokenResponse;
 import org.keycloak.cli.oidc.oidc.representations.WellKnown;
 
@@ -15,7 +16,7 @@ public abstract class AbstractFlow {
         this.wellKnown = wellKnown;
     }
 
-    public abstract TokenResponse execute();
+    public abstract TokenResponse execute() throws OpenIDException;
 
     protected Http clientRequest(String endpoint) {
         Http http = Http.create(endpoint);

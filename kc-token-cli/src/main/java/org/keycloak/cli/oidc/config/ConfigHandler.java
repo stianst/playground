@@ -11,20 +11,13 @@ import java.util.Iterator;
 
 public class ConfigHandler {
 
-    public static void main(String[] args) throws IOException {
-        ConfigHandler configHandler = new ConfigHandler();
-
-        configHandler.getContext("resource-owner");
-
-    }
-
     private static ConfigHandler configHandler;
 
     private File configFile;
     private ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
     private Config config;
 
-    private ConfigHandler() {
+    private ConfigHandler() throws ConfigException {
         File userHome = new File(System.getProperty("user.home"));
         File homeDir = new File(userHome,".kc");
         if (!homeDir.isDirectory()) {
@@ -34,14 +27,14 @@ public class ConfigHandler {
         load();
     }
 
-    public static ConfigHandler get() {
+    public static ConfigHandler get() throws ConfigException {
         if (configHandler == null) {
             configHandler = new ConfigHandler();
         }
         return configHandler;
     }
 
-    private void load() {
+    private void load() throws ConfigException {
         try {
             if (configFile.isFile()) {
                 config = objectMapper.readValue(configFile, Config.class);
@@ -51,11 +44,11 @@ public class ConfigHandler {
                 config = new Config();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigException("Failed to load config", e);
         }
     }
 
-    public ConfigHandler save() {
+    public ConfigHandler save() throws ConfigException {
         try {
             config.getContexts().sort(Comparator.comparing(Context::getName));
 
@@ -65,14 +58,14 @@ public class ConfigHandler {
 
             objectMapper.writeValue(configFile, config);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigException("Failed to save config", e);
         }
         return this;
     }
 
-    public ConfigHandler setCurrent(String name) {
+    public ConfigHandler setCurrent(String name) throws ConfigException {
         if (getContext(name) == null) {
-            throw new RuntimeException("Context not found");
+            throw new ConfigException("Context not found");
         }
         config.setCurrent(name);
         return this;
@@ -114,15 +107,15 @@ public class ConfigHandler {
         return null;
     }
 
-    public void printCurrentContext() {
+    public void printCurrentContext() throws ConfigException {
         try {
             Output.println(objectMapper.writeValueAsString(getContext(config.getCurrent())));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigException("Failed to serialize config");
         }
     }
 
-    public void printContext(String name, boolean brief) {
+    public void printContext(String name, boolean brief) throws ConfigException {
         Context context = getContext(name);
         if (brief) {
             context = briefCopy(context);
@@ -130,11 +123,11 @@ public class ConfigHandler {
         try {
             Output.println(objectMapper.writeValueAsString(context));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigException("Failed to serialize config");
         }
     }
 
-    public void printContexts(boolean brief) {
+    public void printContexts(boolean brief) throws ConfigException {
         Config config = this.config;
         if (brief) {
             config = briefCopy(config);
@@ -142,7 +135,7 @@ public class ConfigHandler {
         try {
             Output.println(objectMapper.writeValueAsString(config));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ConfigException("Failed to serialize config");
         }
     }
 

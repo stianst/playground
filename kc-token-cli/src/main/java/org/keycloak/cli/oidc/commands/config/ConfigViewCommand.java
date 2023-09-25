@@ -1,5 +1,7 @@
 package org.keycloak.cli.oidc.commands.config;
 
+import org.keycloak.cli.oidc.commands.Error;
+import org.keycloak.cli.oidc.config.ConfigException;
 import org.keycloak.cli.oidc.config.ConfigHandler;
 import picocli.CommandLine;
 
@@ -14,10 +16,14 @@ public class ConfigViewCommand implements Runnable {
 
     @Override
     public void run() {
-        if (context != null) {
-            ConfigHandler.get().printContext(context, brief);
-        } else {
-            ConfigHandler.get().printContexts(brief);
+        try {
+            if (context != null) {
+                ConfigHandler.get().printContext(context, brief);
+            } else {
+                ConfigHandler.get().printContexts(brief);
+            }
+        } catch (ConfigException e) {
+            Error.onError(e);
         }
     }
 

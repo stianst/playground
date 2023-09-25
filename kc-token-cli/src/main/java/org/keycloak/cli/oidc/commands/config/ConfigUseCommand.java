@@ -1,5 +1,7 @@
 package org.keycloak.cli.oidc.commands.config;
 
+import org.keycloak.cli.oidc.commands.Error;
+import org.keycloak.cli.oidc.config.ConfigException;
 import org.keycloak.cli.oidc.config.ConfigHandler;
 import picocli.CommandLine;
 
@@ -11,7 +13,11 @@ public class ConfigUseCommand implements Runnable {
 
     @Override
     public void run() {
-        ConfigHandler.get().setCurrent(context).save();
+        try {
+            ConfigHandler.get().setCurrent(context).save();
+        } catch (ConfigException e) {
+            Error.onError(e);
+        }
     }
 
 }

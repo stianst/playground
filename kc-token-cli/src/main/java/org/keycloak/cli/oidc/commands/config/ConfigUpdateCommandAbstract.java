@@ -1,5 +1,7 @@
 package org.keycloak.cli.oidc.commands.config;
 
+import org.keycloak.cli.oidc.commands.Error;
+import org.keycloak.cli.oidc.config.ConfigException;
 import org.keycloak.cli.oidc.config.Context;
 import org.keycloak.cli.oidc.config.ConfigHandler;
 import picocli.CommandLine;
@@ -12,12 +14,16 @@ public class ConfigUpdateCommandAbstract extends AbstractConfigUpdaterCommandAbs
 
     @Override
     public void run() {
-        ConfigHandler configHandler = ConfigHandler.get();
+        try {
+            ConfigHandler configHandler = ConfigHandler.get();
 
-        Context context = ConfigHandler.get().getContext(this.context);
-        update(context);
+            Context context = ConfigHandler.get().getContext(this.context);
+            update(context);
 
-        configHandler.set(context).save();
+            configHandler.set(context).save();
+        } catch (ConfigException e) {
+            Error.onError(e);
+        }
     }
 
 }
