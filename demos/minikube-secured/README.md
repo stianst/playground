@@ -84,12 +84,12 @@ Now, try to list pods in the `test-no-access` namespace, which should fail:
 kubectl get pods --token=$(./token.sh id) -n test-no-access
 ```
 
-Now, try to list pods in the `test-user` namespace, which should fail:
+Now, try to list pods in the `test-user` namespace:
 ```
 kubectl get pods --token=$(./token.sh id) -n test-user
 ```
 
-Now, try to list pods in the `test-group` namespace, which should fail:
+Now, try to list pods in the `test-group` namespace:
 ```
 kubectl get pods --token=$(./token.sh id) -n test-group
 ```
@@ -112,15 +112,28 @@ Now, try to list pods in the `test-no-access` namespace, which should fail:
 kubectl get pods -n test-no-access
 ```
 
-Now, try to list pods in the `test-user` namespace, which should fail:
+Now, try to list pods in the `test-user` namespace:
 ```
 kubectl get pods -n test-user
 ```
 
-Now, try to list pods in the `test-group` namespace, which should fail:
+Now, try to list pods in the `test-group` namespace:
 ```
 kubectl get pods -n test-group
 ```
 
 > If you remove the group from the user through the Keycloak admin console the above should fail. For the changes to
 > affect you need to wait until the current ID token expires (defaults to 5 minutes)
+
+## Using `kc-oidc`
+
+Run the following to create a config context for `kc-oidc` and a corresponding one for `kubectl`:
+
+```
+./kubectl-context-kc-oidc.sh
+```
+
+Now, try to list pods in the `test-user` namespace:
+```
+kubectl get pods --token=$(kc-oidc token --type id) -n test-user
+```

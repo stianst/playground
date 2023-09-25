@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -19,6 +18,7 @@ public class Http implements AutoCloseable {
 
     private String endpoint;
     private HttpURLConnection connection;
+    private String userAgent = "kc-http/1.0";
     private String authorization;
     private MimeType accept;
     private MimeType contentType;
@@ -53,6 +53,11 @@ public class Http implements AutoCloseable {
         return this;
     }
 
+    public Http userAgent(String userAgent) {
+        this.userAgent = userAgent;
+        return this;
+    }
+
     public Http authorization(String username, String password) {
         authorization = "Basic " + new String(Base64.getEncoder().encode((username + ":" + password).getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
         return this;
@@ -68,8 +73,8 @@ public class Http implements AutoCloseable {
 
     private InputStream connect() throws IOException {
         createConnection();
+        connection.setRequestProperty("User-Agent", userAgent);
         if (authorization != null) {
-            System.out.println("authorization: " + authorization);
             connection.setRequestProperty("Authorization", authorization);
         }
         sendBodyIfAvailable();

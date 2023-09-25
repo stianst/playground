@@ -19,7 +19,7 @@ public abstract class AbstractFlow {
     public abstract TokenResponse execute() throws OpenIDException;
 
     protected Http clientRequest(String endpoint) {
-        Http http = Http.create(endpoint);
+        Http http = Http.create(endpoint).userAgent("kc-oidc/1.0");
         if (configuration.getClientSecret() != null) {
             http.authorization(configuration.getClientId(), configuration.getClientSecret());
         } else {

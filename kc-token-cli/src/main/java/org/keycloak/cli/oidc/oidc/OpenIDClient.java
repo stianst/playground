@@ -16,6 +16,13 @@ import java.io.IOException;
 
 public class OpenIDClient {
 
+
+    public static void main(String[] args) throws IOException, OpenIDException {
+        Context context = new Context();
+        context.setIssuer("https://living-bluebird-credible.ngrok-free.app/realms/myrealm");
+        new OpenIDClient(context);
+    }
+
     private Context configuration;
     private WellKnown wellKnown;
 
@@ -24,6 +31,7 @@ public class OpenIDClient {
 
         try {
             wellKnown = Http.create(configuration.getIssuer() + "/.well-known/openid-configuration")
+                    .userAgent("kc-oidc/1.0")
                     .accept(MimeType.JSON)
                     .asObject(WellKnown.class);
         } catch (IOException e) {
