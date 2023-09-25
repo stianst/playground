@@ -58,7 +58,10 @@ public class TokenCommand implements Runnable {
         if (!refresh) {
             String refreshToken = context.getRefreshToken();
             if (isValid(refreshToken)) {
-                tokenResponse = openIDClient.refresh(refreshToken);
+                try {
+                    tokenResponse = openIDClient.refresh(refreshToken);
+                } catch (OpenIDException e) {
+                }
             }
         }
 
