@@ -5,6 +5,7 @@ import org.keycloak.cli.oidc.http.Http;
 import org.keycloak.cli.oidc.http.MimeType;
 import org.keycloak.cli.oidc.oidc.exceptions.OpenIDException;
 import org.keycloak.cli.oidc.oidc.flows.AbstractFlow;
+import org.keycloak.cli.oidc.oidc.flows.ClientCredentialFlow;
 import org.keycloak.cli.oidc.oidc.flows.DeviceFlow;
 import org.keycloak.cli.oidc.oidc.flows.RefreshFlow;
 import org.keycloak.cli.oidc.oidc.flows.ResourceOwnerFlow;
@@ -42,6 +43,9 @@ public class OpenIDClient {
                 break;
             case DEVICE:
                 flow = new DeviceFlow(configuration, wellKnown);
+                break;
+            case CLIENT_CREDENTIAL:
+                flow = new ClientCredentialFlow(configuration, wellKnown);
                 break;
             default:
                 throw new RuntimeException("Unknown flow");

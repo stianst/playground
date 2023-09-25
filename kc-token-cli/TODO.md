@@ -2,7 +2,6 @@
 * Testing
 * AuthZ code flow support
 * Client credential grant support
-* Error handling
 * Rename `kc-oidc-runner` to `kc-oidc`
 * Produce fatjar?
 * Windows/Mac dist?!

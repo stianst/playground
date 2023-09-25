@@ -9,6 +9,8 @@ public enum OpenIDFlow {
     @JsonProperty("resource-owner")
     RESOURCE_OWNER,
     @JsonProperty("device")
-    DEVICE
+    DEVICE,
+    @JsonProperty("client-credential")
+    CLIENT_CREDENTIAL
 
 }
