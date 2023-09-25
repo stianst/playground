@@ -3,3 +3,4 @@
 * https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 * https://kubernetes.io/docs/reference/access-authn-authz/authentication/#client-go-credential-plugins
 * https://github.com/int128/kubelogin
+* https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/541-external-credential-providers/README.md

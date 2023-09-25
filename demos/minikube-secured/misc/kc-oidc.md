@@ -4,3 +4,26 @@ kubectl config set-credentials --username kccli --exec-api-version=client.authen
 
 kubectl config set-context kccli --cluster=minikube --user kccli
 kubectl config use-context kccli
+
+
+
+```
+- name: kccli
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1
+      args:
+      - kc
+      - kubectl
+      command: kubectl
+      env: null
+      interactiveMode: IfAvailable
+      provideClusterInfo: false
+```
+
+```
+- context:
+    cluster: minikube
+    user: kccli
+  name: kccli
+```
