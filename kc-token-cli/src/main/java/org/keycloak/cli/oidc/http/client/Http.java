@@ -1,6 +1,7 @@
-package org.keycloak.cli.oidc.http;
+package org.keycloak.cli.oidc.http.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.keycloak.cli.oidc.http.MimeType;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

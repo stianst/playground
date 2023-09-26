@@ -1,18 +1,18 @@
 package org.keycloak.cli.oidc.oidc.flows;
 
 import org.keycloak.cli.oidc.config.Context;
-import org.keycloak.cli.oidc.http.Http;
+import org.keycloak.cli.oidc.http.client.Http;
 import org.keycloak.cli.oidc.oidc.exceptions.OpenIDException;
 import org.keycloak.cli.oidc.oidc.representations.TokenResponse;
 import org.keycloak.cli.oidc.oidc.representations.WellKnown;
 
 public abstract class AbstractFlow {
 
-    protected Context configuration;
+    protected Context context;
     protected WellKnown wellKnown;
 
-    public AbstractFlow(Context configuration, WellKnown wellKnown) {
-        this.configuration = configuration;
+    public AbstractFlow(Context context, WellKnown wellKnown) {
+        this.context = context;
         this.wellKnown = wellKnown;
     }
 
@@ -20,10 +20,10 @@ public abstract class AbstractFlow {
 
     protected Http clientRequest(String endpoint) {
         Http http = Http.create(endpoint).userAgent("kc-oidc/1.0");
-        if (configuration.getClientSecret() != null) {
-            http.authorization(configuration.getClientId(), configuration.getClientSecret());
+        if (context.getClientSecret() != null) {
+            http.authorization(context.getClientId(), context.getClientSecret());
         } else {
-            http.body("client_id", configuration.getClientId());
+            http.body("client_id", context.getClientId());
         }
         return http;
     }

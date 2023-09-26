@@ -7,3 +7,4 @@
 * Move to separate repo and do some GH releases?
 * Better validation of options
 * Allow showing possible flows
+* JavaDoc

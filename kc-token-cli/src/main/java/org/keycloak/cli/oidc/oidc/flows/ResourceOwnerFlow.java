@@ -22,8 +22,8 @@ public class ResourceOwnerFlow extends AbstractFlow {
                     .contentType(MimeType.FORM)
                     .body("grant_type", "password")
                     .body("scope", "openid")
-                    .body("username", configuration.getUsername())
-                    .body("password", configuration.getUserPassword())
+                    .body("username", context.getUsername())
+                    .body("password", context.getUserPassword())
                     .asObject(TokenResponse.class);
         } catch (IOException e) {
             throw new TokenRequestFailure(e);

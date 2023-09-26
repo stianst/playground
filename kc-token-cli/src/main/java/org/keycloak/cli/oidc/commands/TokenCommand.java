@@ -1,15 +1,14 @@
 package org.keycloak.cli.oidc.commands;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.keycloak.cli.oidc.Output;
+import org.keycloak.cli.oidc.User;
 import org.keycloak.cli.oidc.config.ConfigException;
 import org.keycloak.cli.oidc.config.ConfigHandler;
 import org.keycloak.cli.oidc.config.Context;
 import org.keycloak.cli.oidc.kubectl.ExecCredentialRepresentation;
-import org.keycloak.cli.oidc.oidc.OpenIDClient;
+import org.keycloak.cli.oidc.oidc.TokenManager;
 import org.keycloak.cli.oidc.oidc.TokenParser;
 import org.keycloak.cli.oidc.oidc.exceptions.OpenIDException;
-import org.keycloak.cli.oidc.oidc.representations.JWT;
 import picocli.CommandLine;
 
 @CommandLine.Command(name = "token")
@@ -40,19 +39,20 @@ public class TokenCommand implements Runnable {
             String token = getToken(tokenType);
 
             if (kubectl) {
-                JWT jwt = TokenParser.parse(token).getJWT();
-
                 ExecCredentialRepresentation execCredential = new ExecCredentialRepresentation();
                 execCredential.getStatus().setToken(token);
+
+                // TODO Maybe set expiration time, not sure, as we're caching tokens anyways
+                // TODO JWT jwt = TokenParser.parse(token).getJWT();
                 // TODO execCredential.getStatus().setExpirationTimestamp();
 
                 ObjectMapper objectMapper = new ObjectMapper();
-                System.out.println(objectMapper.writeValueAsString(execCredential));
+                User.cli().print(objectMapper.writeValueAsString(execCredential));
             } else if (decode) {
                 String decoded = TokenParser.parse(token).decoded();
-                Output.println(decoded);
+                User.cli().print(decoded);
             } else {
-                Output.println(token);
+                User.cli().print(token);
             }
         } catch (Exception e) {
             Error.onError(e);
@@ -62,8 +62,8 @@ public class TokenCommand implements Runnable {
     private String getToken(String tokenType) throws OpenIDException, ConfigException {
         ConfigHandler configHandler = ConfigHandler.get();
         Context context = contextName != null ? configHandler.getContext(contextName) : configHandler.getCurrentContext();
-        OpenIDClient openIDClient = OpenIDClient.create(configHandler, context);
-        return openIDClient.getToken(tokenType, offline);
+        TokenManager tokenManager = new TokenManager(context, configHandler);
+        return tokenManager.getToken(tokenType, offline);
     }
 
 }

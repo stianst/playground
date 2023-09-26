@@ -2,7 +2,7 @@ package org.keycloak.cli.oidc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.keycloak.cli.oidc.Output;
+import org.keycloak.cli.oidc.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -110,7 +110,7 @@ public class ConfigHandler {
     public void printCurrentContext(boolean brief) throws ConfigException {
         try {
             Context context = copy(getContext(config.getCurrent()), brief);
-            Output.println(objectMapper.writeValueAsString(context));
+            User.cli().print(objectMapper.writeValueAsString(context));
         } catch (IOException e) {
             throw new ConfigException("Failed to serialize config");
         }
@@ -119,7 +119,7 @@ public class ConfigHandler {
     public void printContext(String name, boolean brief) throws ConfigException {
         Context context = copy(getContext(name), brief);
         try {
-            Output.println(objectMapper.writeValueAsString(context));
+            User.cli().print(objectMapper.writeValueAsString(context));
         } catch (IOException e) {
             throw new ConfigException("Failed to serialize config");
         }
@@ -128,7 +128,7 @@ public class ConfigHandler {
     public void printContexts(boolean brief) throws ConfigException {
         Config config = copy(this.config, brief);
         try {
-            Output.println(objectMapper.writeValueAsString(config));
+            User.cli().print(objectMapper.writeValueAsString(config));
         } catch (IOException e) {
             throw new ConfigException("Failed to serialize config");
         }

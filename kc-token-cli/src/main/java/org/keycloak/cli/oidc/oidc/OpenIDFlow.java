@@ -6,6 +6,8 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @RegisterForReflection
 public enum OpenIDFlow {
 
+    @JsonProperty("authorization-code")
+    AUTHORIZATION_CODE,
     @JsonProperty("resource-owner")
     RESOURCE_OWNER,
     @JsonProperty("device")
