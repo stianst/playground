@@ -19,7 +19,6 @@
         <module>kc-ext/hostname-debug</module>
         <module>kc-tools/logs</module>
         <module>kc-tools/basic-perf</module>
-        <module>kc-token-cli</module>
         <module>junit-testsuite-poc</module>
     </modules>
 

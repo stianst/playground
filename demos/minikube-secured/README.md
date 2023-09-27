@@ -42,6 +42,7 @@ REALM_NAME=myrealm
 CLIENT_ID=myclient
 CLIENT_SECRET=<some random secret>
 USER_NAME=myuser
+USER_EMAIL=myuser@localhost.localdomain
 USER_PASSWORD=<some random password>
 GROUP_NAME=mygroup
 ```
