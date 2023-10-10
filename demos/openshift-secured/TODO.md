@@ -4,3 +4,4 @@
 * `console` client is using wildcard for redirect-uri which is far from ideal
 * Logout from OpenShift console is not forwarded
 * Unsure if OpenShift console uses ID tokens / access tokens, or cookies when invoking api server
+* Not sure if OpenShift console is uncluded `openid` scope
