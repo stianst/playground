@@ -8,8 +8,8 @@ valid certificate.
 ## Prerequisites
 
 * [Keycloak](https://www.keycloak.org/getting-started/getting-started-zip)
-* [minikube](https://minikube.sigs.k8s.io/docs/start/)
-* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+* [OpenShift Local](https://developers.redhat.com/products/openshift-local/overview)
+* [OpenShift CLI](https://docs.openshift.com/container-platform/4.13/cli_reference/openshift_cli/getting-started-cli.html)
 * [ngrok](https://dashboard.ngrok.com/get-started/setup)
 * [Keycloak OIDC CLI](https://github.com/stianst/keycloak-oidc-cli)
 
@@ -52,16 +52,28 @@ After it has started create the realm, clients, etc. needed to secure `minikube`
 ```
 
 
-# Start minikube
+# Start OpenShift Local
 
 Start minikube with:
 ```
-./minikube-start.sh
+./openshift-start.sh
 ```
+
+Next, configure the cluster to use Keycloak for authentication:
+```
+./openshift-configure.sh
+```
+
+Wait for a few minutes, then wait for the configuration to roll out with:
+```
+watch oc get co kube-apiserver
+```
+
+This takes quite a while (10 minutes or so).
 
 Create some namespaces we'll use to test access with:
 ```
-./minikube-namespaces-create.sh
+./openshift-namespaces-create.sh
 ```
 
 
@@ -74,51 +86,43 @@ Create two configuration context for kc-oidc with:
 
 Then get a token for the user with:
 ```
-kc-oidc token --context=minikube-demo-user --decode
+kc-oidc token --context=openshift-demo-user --decode
 ```
 
 Compare with the token for the kube admin with:
 ```
-kc-oidc token --context=minikube-demo-admin --decode
+kc-oidc token --context=openshift-demo-admin --decode
 ```
+
 
 # Testing things
 
 ## Using `--token` option
 
-`kubectl` seems to ignore the `--token` option with the default configuration context created for `minikube`. To 
-prevent this create a separate context with:
-
-```
-./kubectl-context-token.sh
-```
-
-You can switch back to the default context with:
-```
-kubectl config use-context minikube
-```
-
 First try to list pods in namespace with no access:
 ```
-kubectl get pods --token=$(kc-oidc token --context=minikube-demo-user) --namespace test-no-access
+oc get pods --token=$(kc-oidc token --context=openshift-demo-user) --namespace test-no-access
 ```
 
 Then list pods with access based on user:
 ```
-kubectl get pods --token=$(kc-oidc token --context=minikube-demo-user) --namespace test-user
+oc get pods --token=$(kc-oidc token --context=openshift-demo-user) --namespace test-user
 ```
 
 Then list pods with access based on group:
 ```
-kubectl get pods --token=$(kc-oidc token --context=minikube-demo-user) --namespace test-group
+oc get pods --token=$(kc-oidc token --context=openshift-demo-user) --namespace test-group
 ```
 
 Finally, you can try the kube admin user:
 ```
-kubectl get namespaces --token=$(kc-oidc token --context=minikube-demo-admin)
+oc get namespaces --token=$(kc-oidc token --context=openshift-demo-admin)
 ```
 
+
 # Using `kc-oidc` as a `kubectl` plugin
+
+** kc-oidc hasn't been tested with `oc`, only `kubectl`, so this may or may not work **
 
 See [documentation for kc-oidc](https://github.com/stianst/keycloak-oidc-cli#kubernetes-command-line-tool-kubectl) on
 how to configure `kc-oidc` as a authentication plugin for `kubectl`. After you've done this you can try the examples in
