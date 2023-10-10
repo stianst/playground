@@ -5,54 +5,52 @@ setup around connecting `minikube` to Keycloak [ngrok](https://ngrok.com/) is le
 valid certificate.
 
 
-## Setup `ngrok`
+## Prerequisites
 
-Register with [ngrok](https://ngrok.com/) and follow the steps to [get started](https://dashboard.ngrok.com/get-started/setup).
+* [Keycloak](https://www.keycloak.org/getting-started/getting-started-zip)
+* [minikube](https://minikube.sigs.k8s.io/docs/start/)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+* [ngrok](https://dashboard.ngrok.com/get-started/setup)
+* [Keycloak OIDC CLI](https://github.com/stianst/keycloak-oidc-cli)
 
-Find the free domain provided in the [ngrok dashboard](https://dashboard.ngrok.com/cloud-edge/domains)
 
-Edit `conf/env` and add the following line:
+## Create environment file
+
+The demo uses `conf/env` as a configuration file, this file can be created by running:
+
 ```
-KEYCLOAK_DOMAIN=<ngrok domain name>
+./create-env.sh <Keycloak home> <ngrok domain>
 ```
 
-Start `ngrok` with:
+Where `<Keycloak home>` should be the full path of where you have Keycloak installed, and `<ngrok domain>` should point 
+to your free ngrok domain (available from the [ngrok dashboard](https://dashboard.ngrok.com/cloud-edge/domains)).
+
+
+## Start `ngrok`
+
+Start ngrok 
 ```
 ./ngrok-start.sh
 ```
 
+# Start Keycloak
 
-# Setup Keycloak
-
-Edit `conf/env` and add the following lines:
+First, start the ngrok tunnel:
 ```
-KEYCLOAK_HOME=<path to Keycloak installation>
-KEYCLOAK_ADMIN=admin
-KEYCLOAK_ADMIN_PASSWORD=<some random password>
+./ngrok-start.sh
 ```
 
-Start Keycloak with:
+In a separate terminal, start Keycloak:
 ```
 ./keycloak-start.sh
 ```
 
-Edit `conf/env` and add the following lines:
-```
-REALM_NAME=myrealm
-CLIENT_ID=myclient
-CLIENT_SECRET=<some random secret>
-USER_NAME=myuser
-USER_EMAIL=myuser@localhost.localdomain
-USER_PASSWORD=<some random password>
-GROUP_NAME=mygroup
-```
-
 After it has started create the realm, clients, etc. needed to secure `minikube` with:
 ```
-./realm-create.sh
+./keycloak-realm-create.sh
 ```
 
-# Setup minikube
+# Start minikube
 
 Start minikube with:
 ```
@@ -61,80 +59,68 @@ Start minikube with:
 
 Create some namespaces we'll use to test access with:
 ```
-./namespaces-create.sh
+./minikube-namespaces-create.sh
+```
+
+# Add configuration context for kc-oidc
+
+Create two configuration context for kc-oidc with:
+```
+./kc-oidc-configure.sh
+```
+
+Then get a token for the user with:
+```
+kc-oidc token --context=minikube-demo-user --decode
+```
+
+Compare with the token for the kube admin with:
+```
+kc-oidc token --context=minikube-demo-admin --decode
 ```
 
 # Testing things
 
 ## Using `--token` option
 
-Create a separate config entry for `kubectl` to test accessing `minikube` with an ID token:
+`kubectl` seems to ignore the `--token` option with the default configuration context created for `minikube`. To 
+prevent this create a separate context with:
 
 ```
 ./kubectl-context-token.sh
 ```
 
-This creates a few different namespaces, with the following RBAC:
-
-* `test-no-access`: User shouldn't have access to do anything
-* `test-user`: User with specific email ($USER_EMAIL) can view pods
-* `test-group`: User with specific group ($GROUP_NAME) can view pods
-
-Now, try to list pods in the `test-no-access` namespace, which should fail:
+You can switch back to the default context with:
 ```
-kubectl get pods --token=$(./token.sh id) -n test-no-access
+kubectl config use-context minikube
 ```
 
-Now, try to list pods in the `test-user` namespace:
+First try to list pods in namespace with no access:
 ```
-kubectl get pods --token=$(./token.sh id) -n test-user
-```
-
-Now, try to list pods in the `test-group` namespace:
-```
-kubectl get pods --token=$(./token.sh id) -n test-group
+kubectl get pods --token=$(kc-oidc token --context=minikube-demo-user) --namespace test-no-access
 ```
 
-> If you remove the group from the user through the Keycloak admin console the above should fail
-
-## Using OIDC Authenticator
-
-Create a separate config entry for `kubectl` to test accessing `minikube` with the OIDC Authenticator:
-
+Then list pods with access based on user:
 ```
-./kubectl-context-oidc.sh
+kubectl get pods --token=$(kc-oidc token --context=minikube-demo-user) --namespace test-user
 ```
 
-The OIDC Authenticator doesn't support any OIDC Flows, but rather it supports configuring a refresh token retrieved
-elsewhere. It will then refresh the ID token as needed and include it automatically when `kubectl` is used.
-
-Now, try to list pods in the `test-no-access` namespace, which should fail:
+Then list pods with access based on group:
 ```
-kubectl get pods -n test-no-access
+kubectl get pods --token=$(kc-oidc token --context=minikube-demo-user) --namespace test-group
 ```
 
-Now, try to list pods in the `test-user` namespace:
+Finally, you can try the kube admin user:
 ```
-kubectl get pods -n test-user
-```
-
-Now, try to list pods in the `test-group` namespace:
-```
-kubectl get pods -n test-group
+kubectl get namespaces --token=$(kc-oidc token --context=minikube-demo-admin)
 ```
 
-> If you remove the group from the user through the Keycloak admin console the above should fail. For the changes to
-> affect you need to wait until the current ID token expires (defaults to 5 minutes)
+# Using `kc-oidc` as a `kubectl` plugin
 
-## Using `kc-oidc`
-
-Run the following to create a config context for `kc-oidc` and a corresponding one for `kubectl`:
+See [documentation for kc-oidc](https://github.com/stianst/keycloak-oidc-cli#kubernetes-command-line-tool-kubectl) on
+how to configure `kc-oidc` as a authentication plugin for `kubectl`. After you've done this you can try the examples in
+the previous section, but without the need to use `--token=$(kc-oidc ...)` to pass the tokens. For example 
 
 ```
-./kubectl-context-kc-oidc.sh
-```
-
-Now, try to list pods in the `test-user` namespace:
-```
-kubectl get pods --token=$(kc-oidc token --type id) -n test-user
+kubectl get pods --namespace test-user
 ```

@@ -1,6 +1,6 @@
-* https://minikube.sigs.k8s.io/docs/tutorials/openid_connect_auth/
-* https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuring-the-api-server
-* https://kubernetes.io/docs/reference/access-authn-authz/rbac/
-* https://kubernetes.io/docs/reference/access-authn-authz/authentication/#client-go-credential-plugins
-* https://github.com/int128/kubelogin
-* https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/541-external-credential-providers/README.md
+* [minikube documentation: OpenID Connect Authentication](https://minikube.sigs.k8s.io/docs/tutorials/openid_connect_auth/)
+* [Kubernetes documentation: Configuring the API Server with OpenID Connect Tokens](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#configuring-the-api-server)
+* [Kubernetes documentation: Using RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+* [Kubernetes documentation: client-go credential plugins](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#client-go-credential-plugins)
+* [Kubernetes KEP: KEP-541: External credential providers](https://github.com/kubernetes/enhancements/tree/master/keps/sig-auth/541-external-credential-providers)
+* [Kubernetes KEP: KEP-3331: Structured Authentication Config](https://github.com/kubernetes/enhancements/tree/master/keps/sig-auth/3331-structured-authentication-configuration)
