@@ -87,3 +87,58 @@ echo "---------------------------------------"
 }
 EOF
 echo ""
+
+echo "Creating user:full client scope"
+echo "-------------------------------"
+./kcadm.sh create client-scopes -s name=user:full -s protocol=openid-connect -r openshift-demo
+echo ""
+
+echo "Creating console client for OpenShift console"
+echo "---------------------------------------"
+./kcadm.sh create clients -r $REALM_NAME -f - << EOF
+{
+  "clientId": "console",
+  "protocol": "openid-connect",
+  "enabled": true,
+  "publicClient": true,
+  "directAccessGrantsEnabled": true,
+  "standardFlowEnabled": true,
+  "fullScopeAllowed": false,
+  "attributes": {
+    "oauth2.device.authorization.grant.enabled": true
+  },
+  "defaultClientScopes": [
+    "user:full",
+    "email"
+  ],
+  "redirectUris": [
+    "*"
+  ],
+  "protocolMappers": [
+    {
+      "protocol": "openid-connect",
+      "protocolMapper": "oidc-audience-mapper",
+      "name": "aud",
+      "config": {
+        "included.client.audience": "$OPENSHIFT_CLIENT_ID",
+        "id.token.claim": "true",
+        "access.token.claim": "true"
+      }
+    },
+    {
+      "protocol": "openid-connect",
+      "protocolMapper": "oidc-group-membership-mapper",
+      "name": "groups",
+      "config":
+      {
+        "claim.name": "groups",
+        "full.path": "false",
+        "id.token.claim": "true",
+        "access.token.claim":"true",
+        "userinfo.token.claim":"true"
+      }
+    }
+  ]
+}
+EOF
+echo ""
