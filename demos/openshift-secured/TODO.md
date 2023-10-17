@@ -7,3 +7,4 @@
 * Not sure if OpenShift console is uncluded `openid` scope
 * Scoping tokens with oauth scopes (i.e. scope=mycluster:get-pods)
 * Some more support for handling different claims
+* Using `kc-oidc` as a plugin with `oc` or `kubectl` requires setting `exec.interactiveMode` manually. Doesn't seem to be possible through `set-credentials` or `set`
