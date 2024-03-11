@@ -1,0 +1,6 @@
+*.key
+*.crt
+*.pem
+*.csr
+*.srl
+*-truststore
