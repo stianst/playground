@@ -17,6 +17,7 @@
     <modules>
         <module>kc-ext/cache-statistics</module>
         <module>kc-ext/hostname-debug</module>
+        <module>kc-ext/theme-preview</module>
         <module>kc-tools/logs</module>
         <module>kc-tools/basic-perf</module>
         <module>junit-testsuite-poc</module>
