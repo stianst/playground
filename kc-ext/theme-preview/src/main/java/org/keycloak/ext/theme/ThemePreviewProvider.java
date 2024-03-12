@@ -13,7 +13,6 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.services.resource.RealmResourceProvider;
 
-import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Optional;
@@ -22,9 +21,11 @@ import java.util.function.Function;
 public class ThemePreviewProvider implements RealmResourceProvider {
 
     private List<Page> pages = List.of(
-            new Page("login", "Login with username and password", LoginFormsProvider::createLoginUsernamePassword),
-            new Page("login-config-totp", "Configure OTP", l -> l.createResponse(UserModel.RequiredAction.CONFIGURE_TOTP)),
-            new Page("login-update-password", "Update password", l -> l.createResponse(UserModel.RequiredAction.UPDATE_PASSWORD))
+            new Page("login", "Login - username and password", LoginFormsProvider::createLoginUsernamePassword),
+            new Page("login-username", "Login - username", LoginFormsProvider::createLoginUsername),
+            new Page("login-otp", "Login - OTP", LoginFormsProvider::createLoginTotp),
+            new Page("login-config-totp", "Action - OTP", l -> l.createResponse(UserModel.RequiredAction.CONFIGURE_TOTP)),
+            new Page("login-update-password", "Action - Update password", l -> l.createResponse(UserModel.RequiredAction.UPDATE_PASSWORD))
     );
 
     private KeycloakSession session;

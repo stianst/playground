@@ -4,6 +4,7 @@ import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialModel;
 import org.keycloak.models.SubjectCredentialManager;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -45,7 +46,7 @@ public class DummySubjectCredentialManager implements SubjectCredentialManager {
 
     @Override
     public Stream<CredentialModel> getStoredCredentialsByTypeStream(String s) {
-        return null;
+        return new LinkedList<CredentialModel>().stream();
     }
 
     @Override
