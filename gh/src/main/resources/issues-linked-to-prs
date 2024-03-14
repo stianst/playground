@@ -1,0 +1,34 @@
+{
+  search(query:"repo:@REPO@ is:pr is:open linked:issue", type:ISSUE, @PAGE@) {
+    edges {
+      node {
+        ... on PullRequest {
+          number
+          state
+          closingIssuesReferences(first:50) {
+            edges {
+              node {
+                number
+                title
+                labels(first:50) {
+                  edges {
+                    node {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    pageInfo {
+            endCursor
+            startCursor
+            hasNextPage
+            hasPreviousPage
+          }
+
+  }
+}
