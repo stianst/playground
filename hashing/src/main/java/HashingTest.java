@@ -16,12 +16,15 @@ public class HashingTest {
 
         String password = "asfdsadfsadf3498hraisduf";
 
-        List<Hash> hashes = List.of(new Pbkdf2_SHA1_27K(), new Pbkdf2_SHA512_210K(), new SCrypt(), new BCrypt(), new Argon2_12MB(), new Argon2_7MB());
+        List<Hash> hashes = List.of(new Pbkdf2_SHA1_27K(), new Pbkdf2_SHA512_210K(), new SCrypt(), new BCrypt(), new Argon2_12MB(), new Argon2_7MB(), new MD5());
 
 
         System.out.println(String.format("%1$-25s", "Algorithm") +
                 String.format("%1$-12s", "Total (ms)") +
                 String.format("%1$-12s", "Per-hash (ms)"));
+
+        System.out.println("Processors: " + Runtime.getRuntime().availableProcessors());
+        System.out.println();
 
         for (Hash hash : hashes) {
             ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
