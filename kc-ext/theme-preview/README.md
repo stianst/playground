@@ -17,8 +17,8 @@ the realm configuration through a proxy.
 At the moment it is only possible to alter realm configuration that returns Boolean or String 
 parameters, and take no arguments.
 
-For example to enable user registration add `?registrationAllowed=true`, or to change the realm
-display name set `?displayNameHtml=My realm`.
+For example to enable user registration add `?realm.registrationAllowed=true`, or to change the realm
+display name set `?realm.displayNameHtml=My realm`.
 
 To view everything that can be altered take a look at [RealmModel.java](https://github.com/keycloak/keycloak/blob/main/server-spi/src/main/java/org/keycloak/models/RealmModel.java).
 Anything that returns a boolean or a String and takes no arguments can be override. The query parameter name is

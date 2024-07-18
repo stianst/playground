@@ -1,10 +1,6 @@
 package org.keycloak.ext.theme;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.forms.login.LoginFormsProvider;
@@ -24,8 +20,11 @@ public class ThemePreviewProvider implements RealmResourceProvider {
             new Page("login", "Login - username and password", LoginFormsProvider::createLoginUsernamePassword),
             new Page("login-username", "Login - username", LoginFormsProvider::createLoginUsername),
             new Page("login-otp", "Login - OTP", LoginFormsProvider::createLoginTotp),
+            new Page("login-recovery-codes", "Login - recovery codes", LoginFormsProvider::createLoginRecoveryAuthnCode),
+            new Page("login-config-recover-codes", "Action - recovery codes", l -> l.createResponse(UserModel.RequiredAction.CONFIGURE_RECOVERY_AUTHN_CODES)),
             new Page("login-config-totp", "Action - OTP", l -> l.createResponse(UserModel.RequiredAction.CONFIGURE_TOTP)),
-            new Page("login-update-password", "Action - Update password", l -> l.createResponse(UserModel.RequiredAction.UPDATE_PASSWORD))
+            new Page("login-update-password", "Action - Update password", l -> l.createResponse(UserModel.RequiredAction.UPDATE_PASSWORD)),
+            new Page("login-register", "Action - Register", LoginFormsProvider::createRegistration)
     );
 
     private KeycloakSession session;
@@ -48,7 +47,7 @@ public class ThemePreviewProvider implements RealmResourceProvider {
         sb.append("<ul>\n");
 
         for (Page p : pages) {
-            sb.append("<li><a href=\"" + p.template + "\">" + p.description + "</a></li>\n");
+            sb.append("<li><a href=\"%s\">%s</a></li>\n".formatted(p.template, p.description));
         }
 
         sb.append("</ul>\n");
