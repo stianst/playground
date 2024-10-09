@@ -1,5 +1,3 @@
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
-
 import java.nio.charset.StandardCharsets;
 
 public class SCrypt implements Hash {

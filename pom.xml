@@ -19,6 +19,7 @@
         <module>gh</module>
         <module>kc-ext/cache-statistics</module>
         <module>kc-ext/theme-preview</module>
+        <module>kc-ext/spiffe-authenticator</module>
         <module>kc-tools/logs</module>
         <module>kc-tools/basic-perf</module>
         <module>junit-testsuite-poc</module>
