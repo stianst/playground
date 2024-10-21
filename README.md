@@ -1,6 +1,6 @@
 # Test
 
 
-[my variable]
+[14]
 
-[my variable]: Something something
+[14]: Something something
