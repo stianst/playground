@@ -1,0 +1,28 @@
+Add the following from https://www.bouncycastle.org/download/bouncy-castle-java-fips/#latest to `$KC_HOME/providers/`:
+```
+bc-fips-2.0.0.jar
+bcpkix-fips-2.0.7.jar
+bctls-fips-2.0.19.jar
+bcutil-fips-2.0.3.jar
+```
+
+Download Java from `https://adoptium.net/` and update `conf/security/java.security` file to have the following providers:
+
+```
+security.provider.1=org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider
+security.provider.2=org.bouncycastle.jsse.provider.BouncyCastleJsseProvider fips:BCFIPS
+security.provider.3=sun.security.provider.Sun 
+```
+
+Note: Without `sun.security.provider.Sun` Keycloak doesn't start
+
+Generate a self-signed certificate for Keycloak:
+```
+cd $KC_HOME/conf
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3650 -nodes -subj "/CN=localhost"
+```
+
+Start Keycloak with:
+```
+bin/kc.sh start --features=fips --https-certificate-file=conf/cert.pem --https-certificate-key-file=conf/key.pem --hostname-strict=false
+```
