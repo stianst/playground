@@ -8,7 +8,7 @@ on:
 
 jobs:
   cpu:
-    runs-on: ${{ DEFAULT_LINUX_RUNNER }}
+    runs-on: ${{ vars.DEFAULT_LINUX_RUNNER || 'ubuntu-latest' }}
 
     steps:
     - name: lscpu
