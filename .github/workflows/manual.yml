@@ -8,7 +8,7 @@ on:
 
 jobs:
   cpu:
-    runs-on: ${{ env.DEFAULT_LINUX_RUNNER }}
+    runs-on: ${{ vars.DEFAULT_LINUX_RUNNER }}
 
     steps:
     - name: lscpu
