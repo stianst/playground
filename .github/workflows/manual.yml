@@ -1,14 +1,14 @@
 name: Info
 
-#env:
-#  DEFAULT_LINUX_RUNNER: ${{ env.DEFAULT_LINUX_RUNNER && env.DEFAULT_LINUX_RUNNER || 'ubuntu-latest' }}
+env:
+  DEFAULT_LINUX_RUNNER: 'ubuntu-latest'
 
 on:
   workflow_dispatch:
 
 jobs:
   cpu:
-    runs-on: ${{ vars.DEFAULT_LINUX_RUNNER }}
+    runs-on: ${{ env.DEFAULT_LINUX_RUNNER }}
 
     steps:
     - name: lscpu
