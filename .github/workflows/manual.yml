@@ -1,7 +1,7 @@
 name: Info
 
-#env:
-  #defaultLinuxRunner: ${{ env.linux && env.link || 'ubuntu-latest' }}
+env:
+  DEFAULT_LINUX_RUNNER: ${{ env.DEFAULT_LINUX_RUNNER && env.DEFAULT_LINUX_RUNNER || 'ubuntu-latest' }}
 
 on:
   workflow_dispatch:
