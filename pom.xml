@@ -16,6 +16,7 @@
 
     <modules>
         <module>hashing</module>
+        <module>fips</module>
         <module>gh</module>
         <module>kc-ext/cache-statistics</module>
         <module>kc-ext/theme-preview</module>
@@ -23,6 +24,7 @@
         <module>kc-tools/logs</module>
         <module>kc-tools/basic-perf</module>
         <module>junit-testsuite-poc</module>
+        <module>test-logs-parser</module>
     </modules>
 
 </project>

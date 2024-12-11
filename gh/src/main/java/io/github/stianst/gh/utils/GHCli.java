@@ -22,8 +22,8 @@ public class GHCli {
         cmdarray.add("api");
         cmdarray.add("-X");
         cmdarray.add("GET");
-        cmdarray.add("--cache");
-        cmdarray.add("1h");
+//        cmdarray.add("--cache");
+//        cmdarray.add("1h");
         cmdarray.add(endpoint.startsWith("repos/") ? endpoint : ("repos/keycloak/keycloak/" + endpoint));
         cmdarray.addAll(Arrays.asList(args));
 

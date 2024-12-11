@@ -14,13 +14,17 @@ public class RunningJobs {
 
     public static void main(String[] args) throws IOException {
 
+        String repo = "cncf/keycloak-testing";
+//        String repo = "keycloak/keycloak";
+
+        GitHub gitHub = Client.getInstance().gitHub();
+
+        System.out.format("%-40s %-30s %-10s %-10s\n", "Date", "Runner", "Running", "Queued");
+
+        while (true) {
             Map<String, Integer> queued = new HashMap<>();
             Map<String, Integer> running = new HashMap<>();
 
-            String repo = "cncf/keycloak-testing";
-//        String repo = "keycloak/keycloak";
-
-            GitHub gitHub = Client.getInstance().gitHub();
             PagedIterable<GHWorkflowRun> list = gitHub.getRepository(repo).queryWorkflowRuns().created(">=2024-09-20").list();
             for (GHWorkflowRun r : list) {
                 if (r.getStatus().equals(GHWorkflowRun.Status.IN_PROGRESS) || r.getStatus().equals(GHWorkflowRun.Status.QUEUED)) {
@@ -48,17 +52,16 @@ public class RunningJobs {
             runners.addAll(queued.keySet());
             runners.addAll(running.keySet());
 
-            System.out.format("%-30s %-10s %-10s\n", "Runner", "Running", "Queued");
             for (String r : runners) {
-                System.out.format("%-30s %-10s %-10s\n", r, running.get(r), queued.get(r));
+                System.out.format("%-40s %-30s %-10s %-10s\n", new Date(), r, running.get(r), queued.get(r));
             }
-            System.out.println();
 
             try {
-                Thread.sleep(TimeUnit.MINUTES.toMillis(5));
+                Thread.sleep(TimeUnit.MINUTES.toMillis(1));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        }
     }
 
 }

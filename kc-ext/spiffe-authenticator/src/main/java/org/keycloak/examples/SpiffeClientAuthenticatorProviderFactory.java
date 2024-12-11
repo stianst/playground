@@ -14,11 +14,17 @@ import java.util.*;
 
 public class SpiffeClientAuthenticatorProviderFactory implements ClientAuthenticatorFactory {
 
-    AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
+    private static final String ID = "spiffe-jwt-svid";
+
+    private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
             AuthenticationExecutionModel.Requirement.REQUIRED,
             AuthenticationExecutionModel.Requirement.ALTERNATIVE,
             AuthenticationExecutionModel.Requirement.DISABLED};
 
+    @Override
+    public String getId() {
+        return ID;
+    }
 
     @Override
     public ClientAuthenticator create() {
@@ -27,7 +33,12 @@ public class SpiffeClientAuthenticatorProviderFactory implements ClientAuthentic
 
     @Override
     public String getDisplayType() {
-        return "spiffe-jwt-svid";
+        return "SPIFFE JWT-SVID authenticator";
+    }
+
+    @Override
+    public String getHelpText() {
+        return "SPIFFE JWT-SVID authenticator";
     }
 
     @Override
@@ -52,39 +63,26 @@ public class SpiffeClientAuthenticatorProviderFactory implements ClientAuthentic
 
     @Override
     public List<ProviderConfigProperty> getConfigPropertiesPerClient() {
-        return List.of(
-                new ProviderConfigProperty("sub", "Subject", "Subject", ProviderConfigProperty.STRING_TYPE, null),
-                new ProviderConfigProperty("aud", "Audience", "Audience", ProviderConfigProperty.STRING_TYPE, null),
-                new ProviderConfigProperty("jwks", "JWKs", "JWKs", ProviderConfigProperty.STRING_TYPE, null));
+        return SpiffeConfig.CONFIG;
     }
 
     @Override
     public Map<String, Object> getAdapterConfiguration(ClientModel clientModel) {
-        return Map.of();
+        return Collections.emptyMap();
     }
 
     @Override
     public Set<String> getProtocolAuthenticatorMethods(String loginProtocol) {
         if (loginProtocol.equals(OIDCLoginProtocol.LOGIN_PROTOCOL)) {
-            Set<String> results = new HashSet<>();
-            results.add("jwt-svid");
-            return results;
+            return Collections.singleton(ID);
         } else {
             return Collections.emptySet();
         }
     }
 
     @Override
-    public String getHelpText() {
-        return "JWT-SVID authenticator";
-    }
-
-    @Override
     public List<ProviderConfigProperty> getConfigProperties() {
-        return List.of(
-                new ProviderConfigProperty("sub", "Subject", "Subject", ProviderConfigProperty.STRING_TYPE, null),
-                new ProviderConfigProperty("aud", "Audience", "Audience", ProviderConfigProperty.STRING_TYPE, null),
-                new ProviderConfigProperty("jwks", "JWKs", "JWKs", ProviderConfigProperty.STRING_TYPE, null));
+        return SpiffeConfig.CONFIG;
     }
 
     @Override
@@ -94,21 +92,14 @@ public class SpiffeClientAuthenticatorProviderFactory implements ClientAuthentic
 
     @Override
     public void init(Config.Scope scope) {
-
     }
 
     @Override
     public void postInit(KeycloakSessionFactory keycloakSessionFactory) {
-
     }
 
     @Override
     public void close() {
-
     }
 
-    @Override
-    public String getId() {
-        return "spiffe-jwt-svid";
-    }
 }

@@ -19,14 +19,14 @@ public class WorkflowRunTime {
 
 
 //        List<GHWorkflowRuns> ghWorkflowRuns = ghCli.apiGet(GHWorkflowRuns.class, "repos/keycloak/keycloak/actions/workflows/ci.yml/runs", "--paginate", "-f", "status=" + status, "-f", "branch=" + branch, "-f", "created=" + created);
-        List<GHWorkflowRuns> ghWorkflowRuns = ghCli.apiGet(GHWorkflowRuns.class, "repos/keycloak/keycloak/actions/workflows/ci.yml/runs", "--paginate", "-f", "created=>=2024-09-01", "-f", "event=workflow_dispatch");
+        List<GHWorkflowRuns> ghWorkflowRuns = ghCli.apiGet(GHWorkflowRuns.class, "repos/cncf/keycloak-testing/actions/workflows/ci.yml/runs", "--paginate", "-f", "created=>=2024-09-01", "-f", "event=workflow_dispatch");
 
         List<GHWorkflowRun> list = ghWorkflowRuns.stream().flatMap(r -> r.workflowRuns().stream()).toList();
         System.out.println(list.size());
 
         for (GHWorkflowRun r : list) {
             long time = TimeUnit.MINUTES.convert(r.updatedAt().getTime() - r.createdAt().getTime(), TimeUnit.MILLISECONDS);
-            System.out.println(r.id() + " " + time);
+            System.out.println(r.headBranch() + " " + r.id() + " " + time);
         }
 
     }

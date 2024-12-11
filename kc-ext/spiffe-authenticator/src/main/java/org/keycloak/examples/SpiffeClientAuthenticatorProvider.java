@@ -11,7 +11,6 @@ import org.keycloak.models.ClientModel;
 import org.keycloak.representations.JsonWebToken;
 
 import java.net.URI;
-import java.util.Map;
 
 public class SpiffeClientAuthenticatorProvider implements ClientAuthenticator {
 
@@ -20,18 +19,14 @@ public class SpiffeClientAuthenticatorProvider implements ClientAuthenticator {
     @Override
     public void authenticateClient(ClientAuthenticationFlowContext context) {
         try {
-            Map<String, String> config = context.getAuthenticatorConfig().getConfig();
+            SpiffeConfig config = SpiffeConfig.parse(context.getAuthenticatorConfig().getConfig());
 
-            String aud = config.get("aud");
-            String sub = config.get("sub");
-            String jwks = config.get("jwks");
+            SpiffeAuthenticator authenticator = SpiffeAuthenticator.parse(context);
+            if (authenticator != null) {
 
-            LOGGER.info("aud: " + aud);
-            LOGGER.info("sub: " + sub);
-            LOGGER.info("jwks: " + jwks);
-
+            }
             MultivaluedMap<String, String> params = context.getHttpRequest().getDecodedFormParameters();
-            String clientAssertionType = params.getFirst("client_assertion_type");
+            String clientAssertionType = params.getFirst(SpiffeConstants.ASSERTION_TYPE);
 
             LOGGER.info("client_assertion_type: " + clientAssertionType);
 
