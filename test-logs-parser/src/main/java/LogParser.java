@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class LogParser {
 
     public static void main(String[] args) throws IOException {
         LogParser logParser = new LogParser();
-        logParser.parse(new File("/home/st/dev/playground/js-test-stability/clustering-logs"));
+        logParser.parse(new File(args[0]));
         logParser.printFailingTests();
     }
 
@@ -50,23 +49,6 @@ public class LogParser {
                     testEntry.add(runId);
                 }
             }
-
-//            for (String l = br.readLine(); l != null; l = br.readLine()) {
-//                if (l.startsWith("Admin UI E2E")) {
-//                    parseAdminUI(l);
-//                }
-//                l = stripColorCodes(l);
-//                if (l.contains("✖")) {
-//
-//
-//
-//                    Matcher matcher = testNamePattern.matcher(l);
-//                    if (matcher.find()) {
-//                        String testname = matcher.group(0);
-//                        failingTests.computeIfAbsent(testname, s -> new HashSet<>()).add(f.getName());
-//                    }
-//                }
-//            }
         }
     }
 
