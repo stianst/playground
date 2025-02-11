@@ -7,15 +7,20 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedIterable;
 
 import java.io.IOException;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class RunningJobs {
 
     public static void main(String[] args) throws IOException {
 
-        String repo = "cncf/keycloak-testing";
-//        String repo = "keycloak/keycloak";
+//        String repo = "cncf/keycloak-testing";
+        String repo = "keycloak/keycloak";
 
         GitHub gitHub = Client.getInstance().gitHub();
 
@@ -25,7 +30,7 @@ public class RunningJobs {
             Map<String, Integer> queued = new HashMap<>();
             Map<String, Integer> running = new HashMap<>();
 
-            PagedIterable<GHWorkflowRun> list = gitHub.getRepository(repo).queryWorkflowRuns().created(">=2024-09-20").list();
+            PagedIterable<GHWorkflowRun> list = gitHub.getRepository(repo).queryWorkflowRuns().created(LocalDate.now().toString()).list();
             for (GHWorkflowRun r : list) {
                 if (r.getStatus().equals(GHWorkflowRun.Status.IN_PROGRESS) || r.getStatus().equals(GHWorkflowRun.Status.QUEUED)) {
                     for (GHWorkflowJob j : r.listJobs()) {

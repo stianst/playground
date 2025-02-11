@@ -1,0 +1,412 @@
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0500097Z ##[group]Run actions/checkout@v4
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0501101Z with:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0501705Z   repository: stianst/keycloak
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0502432Z   token: ***
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0502875Z   ssh-strict: true
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0503463Z   ssh-user: git
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0503959Z   persist-credentials: true
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0504465Z   clean: true
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0505052Z   sparse-checkout-cone-mode: true
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0505597Z   fetch-depth: 1
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0506094Z   fetch-tags: false
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0506646Z   show-progress: true
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0507110Z   lfs: false
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0507586Z   submodules: false
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0508148Z   set-safe-directory: true
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0509023Z env:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0509679Z   MAVEN_ARGS: -B -nsu -Daether.connector.http.connectionMaxTtl=25
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0510519Z   SUREFIRE_RERUN_FAILING_COUNT: 0
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0511138Z   SUREFIRE_RETRY: -Dsurefire.rerunFailingTestsCount=0
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.0511819Z ##[endgroup]
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.2961183Z Syncing repository: stianst/keycloak
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.2963311Z ##[group]Getting Git version info
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.2964161Z Working directory is '/home/runner/work/keycloak/keycloak'
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.2965346Z [command]/usr/bin/git version
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3051806Z git version 2.47.1
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3080545Z ##[endgroup]
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3093987Z Temporarily overriding HOME='/home/runner/work/_temp/6f235491-026a-4f8a-b7a1-7707d78c861f' before making global git config changes
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3106432Z Adding repository directory to the temporary git global config as a safe directory
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3108172Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/keycloak/keycloak
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3141637Z Deleting the contents of '/home/runner/work/keycloak/keycloak'
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3145321Z ##[group]Initializing the repository
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3148954Z [command]/usr/bin/git init /home/runner/work/keycloak/keycloak
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3225231Z hint: Using 'master' as the name for the initial branch. This default branch name
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3226677Z hint: is subject to change. To configure the initial branch name to use in all
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3227834Z hint: of your new repositories, which will suppress this warning, call:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3228692Z hint:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3229565Z hint: 	git config --global init.defaultBranch <name>
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3230737Z hint:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3232036Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3233703Z hint: 'development'. The just-created branch can be renamed via this command:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3234983Z hint:
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3235760Z hint: 	git branch -m <name>
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3236669Z Initialized empty Git repository in /home/runner/work/keycloak/keycloak/.git/
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3245418Z [command]/usr/bin/git remote add origin https://github.com/stianst/keycloak
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3279049Z ##[endgroup]
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3280086Z ##[group]Disabling automatic garbage collection
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3283009Z [command]/usr/bin/git config --local gc.auto 0
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3311347Z ##[endgroup]
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3312256Z ##[group]Setting up auth
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3317460Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3347460Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3674251Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3703426Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3936739Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3973947Z ##[endgroup]
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3975677Z ##[group]Fetching the repository
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:32.3992766Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:45.3027635Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 502
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:45.3035894Z The process '/usr/bin/git' failed with exit code 128
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:45.3036409Z Waiting 10 seconds before trying again
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:15:55.3143236Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:16:09.6476649Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 502
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:16:09.6494047Z The process '/usr/bin/git' failed with exit code 128
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:16:09.6494735Z Waiting 14 seconds before trying again
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:16:23.6545463Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:16:48.7780725Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 503
+Base IT (1)	Run actions/checkout@v4	2025-01-14T00:16:48.7837697Z ##[error]The process '/usr/bin/git' failed with exit code 128
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1674017Z ##[group]Run actions/checkout@v4
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1675173Z with:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1675688Z   repository: stianst/keycloak
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1676411Z   token: ***
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1676999Z   ssh-strict: true
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1677512Z   ssh-user: git
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1677967Z   persist-credentials: true
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1678639Z   clean: true
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1679192Z   sparse-checkout-cone-mode: true
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1679723Z   fetch-depth: 1
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1680280Z   fetch-tags: false
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1680786Z   show-progress: true
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1681240Z   lfs: false
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1681778Z   submodules: false
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1682246Z   set-safe-directory: true
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1683028Z env:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1683781Z   MAVEN_ARGS: -B -nsu -Daether.connector.http.connectionMaxTtl=25
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1684545Z   SUREFIRE_RERUN_FAILING_COUNT: 0
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1685164Z   SUREFIRE_RETRY: -Dsurefire.rerunFailingTestsCount=0
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.1685926Z ##[endgroup]
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3760355Z Syncing repository: stianst/keycloak
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3762412Z ##[group]Getting Git version info
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3763313Z Working directory is '/home/runner/work/keycloak/keycloak'
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3764535Z [command]/usr/bin/git version
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3871411Z git version 2.47.1
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3898882Z ##[endgroup]
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3914663Z Temporarily overriding HOME='/home/runner/work/_temp/031b7a31-f336-4c6b-be58-c21de7501087' before making global git config changes
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3917382Z Adding repository directory to the temporary git global config as a safe directory
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3928362Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/keycloak/keycloak
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3967818Z Deleting the contents of '/home/runner/work/keycloak/keycloak'
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3970454Z ##[group]Initializing the repository
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.3975352Z [command]/usr/bin/git init /home/runner/work/keycloak/keycloak
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4064102Z hint: Using 'master' as the name for the initial branch. This default branch name
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4065707Z hint: is subject to change. To configure the initial branch name to use in all
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4067034Z hint: of your new repositories, which will suppress this warning, call:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4068073Z hint:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4069006Z hint: 	git config --global init.defaultBranch <name>
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4070463Z hint:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4071667Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4073781Z hint: 'development'. The just-created branch can be renamed via this command:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4075370Z hint:
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4076282Z hint: 	git branch -m <name>
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4077898Z Initialized empty Git repository in /home/runner/work/keycloak/keycloak/.git/
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4083957Z [command]/usr/bin/git remote add origin https://github.com/stianst/keycloak
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4122244Z ##[endgroup]
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4123851Z ##[group]Disabling automatic garbage collection
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4127518Z [command]/usr/bin/git config --local gc.auto 0
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4157327Z ##[endgroup]
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4158582Z ##[group]Setting up auth
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4163442Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4193545Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4544573Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4573617Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4800752Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4837523Z ##[endgroup]
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4838676Z ##[group]Fetching the repository
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:15:31.4845931Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:17:01.2872754Z remote: Internal Server Error
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:17:01.2900389Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:17:01.2907233Z The process '/usr/bin/git' failed with exit code 128
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:17:01.2907843Z Waiting 14 seconds before trying again
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:17:15.2954125Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:19:03.5160994Z remote: Internal Server Error
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:19:03.5163975Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:19:03.5180451Z The process '/usr/bin/git' failed with exit code 128
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:19:03.5181245Z Waiting 11 seconds before trying again
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:19:14.5203417Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:20:06.9410988Z remote: Internal Server Error
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:20:06.9412921Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (2)	Run actions/checkout@v4	2025-01-14T00:20:06.9463092Z ##[error]The process '/usr/bin/git' failed with exit code 128
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7098753Z ##[group]Run actions/checkout@v4
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7100457Z with:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7101284Z   repository: stianst/keycloak
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7102533Z   token: ***
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7103773Z   ssh-strict: true
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7104641Z   ssh-user: git
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7105477Z   persist-credentials: true
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7106635Z   clean: true
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7107527Z   sparse-checkout-cone-mode: true
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7108604Z   fetch-depth: 1
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7109673Z   fetch-tags: false
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7110614Z   show-progress: true
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7111508Z   lfs: false
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7112540Z   submodules: false
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7113400Z   set-safe-directory: true
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7114792Z env:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7116330Z   MAVEN_ARGS: -B -nsu -Daether.connector.http.connectionMaxTtl=25
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7117556Z   SUREFIRE_RERUN_FAILING_COUNT: 0
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7118627Z   SUREFIRE_RETRY: -Dsurefire.rerunFailingTestsCount=0
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.7119935Z ##[endgroup]
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8809550Z Syncing repository: stianst/keycloak
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8811546Z ##[group]Getting Git version info
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8812486Z Working directory is '/home/runner/work/keycloak/keycloak'
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8813666Z [command]/usr/bin/git version
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8898167Z git version 2.47.1
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8926392Z ##[endgroup]
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8941929Z Temporarily overriding HOME='/home/runner/work/_temp/cad54e8d-97ea-4e66-8825-fbe2e50e2925' before making global git config changes
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8944938Z Adding repository directory to the temporary git global config as a safe directory
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8954857Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/keycloak/keycloak
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8995471Z Deleting the contents of '/home/runner/work/keycloak/keycloak'
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.8999507Z ##[group]Initializing the repository
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9004042Z [command]/usr/bin/git init /home/runner/work/keycloak/keycloak
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9074394Z hint: Using 'master' as the name for the initial branch. This default branch name
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9075837Z hint: is subject to change. To configure the initial branch name to use in all
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9077233Z hint: of your new repositories, which will suppress this warning, call:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9078036Z hint:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9078569Z hint: 	git config --global init.defaultBranch <name>
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9079310Z hint:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9079966Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9080898Z hint: 'development'. The just-created branch can be renamed via this command:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9081743Z hint:
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9082223Z hint: 	git branch -m <name>
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9097189Z Initialized empty Git repository in /home/runner/work/keycloak/keycloak/.git/
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9112890Z [command]/usr/bin/git remote add origin https://github.com/stianst/keycloak
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9151483Z ##[endgroup]
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9152599Z ##[group]Disabling automatic garbage collection
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9157981Z [command]/usr/bin/git config --local gc.auto 0
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9190298Z ##[endgroup]
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9191954Z ##[group]Setting up auth
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9199032Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9230034Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9555315Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9591263Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9821446Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9861572Z ##[endgroup]
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9869746Z ##[group]Fetching the repository
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:15:37.9871199Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:16:57.7855171Z remote: Internal Server Error
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:16:57.7877103Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:16:57.7884174Z The process '/usr/bin/git' failed with exit code 128
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:16:57.7884775Z Waiting 17 seconds before trying again
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:17:14.7958917Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:18:53.3562602Z remote: Internal Server Error
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:18:53.3585207Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:18:53.3587273Z The process '/usr/bin/git' failed with exit code 128
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:18:53.3588108Z Waiting 10 seconds before trying again
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:19:03.3692060Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:19:23.7633076Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 503
+Base IT (3)	Run actions/checkout@v4	2025-01-14T00:19:23.7684493Z ##[error]The process '/usr/bin/git' failed with exit code 128
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3964762Z ##[group]Run actions/checkout@v4
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3965782Z with:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3966264Z   repository: stianst/keycloak
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3967087Z   token: ***
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3967565Z   ssh-strict: true
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3968036Z   ssh-user: git
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3968614Z   persist-credentials: true
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3969183Z   clean: true
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3969656Z   sparse-checkout-cone-mode: true
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3970297Z   fetch-depth: 1
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3970799Z   fetch-tags: false
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3971250Z   show-progress: true
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3971812Z   lfs: false
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3972290Z   submodules: false
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3972749Z   set-safe-directory: true
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3973600Z env:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3974272Z   MAVEN_ARGS: -B -nsu -Daether.connector.http.connectionMaxTtl=25
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3974984Z   SUREFIRE_RERUN_FAILING_COUNT: 0
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3975725Z   SUREFIRE_RETRY: -Dsurefire.rerunFailingTestsCount=0
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.3976407Z ##[endgroup]
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6184413Z Syncing repository: stianst/keycloak
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6186943Z ##[group]Getting Git version info
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6188151Z Working directory is '/home/runner/work/keycloak/keycloak'
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6189268Z [command]/usr/bin/git version
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6263894Z git version 2.47.1
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6293462Z ##[endgroup]
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6308186Z Temporarily overriding HOME='/home/runner/work/_temp/6b84bb06-a503-4880-b3f7-b428b00b139b' before making global git config changes
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6310874Z Adding repository directory to the temporary git global config as a safe directory
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6322824Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/keycloak/keycloak
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6361870Z Deleting the contents of '/home/runner/work/keycloak/keycloak'
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6365533Z ##[group]Initializing the repository
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6369230Z [command]/usr/bin/git init /home/runner/work/keycloak/keycloak
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6433982Z hint: Using 'master' as the name for the initial branch. This default branch name
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6435271Z hint: is subject to change. To configure the initial branch name to use in all
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6436277Z hint: of your new repositories, which will suppress this warning, call:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6436974Z hint:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6437630Z hint: 	git config --global init.defaultBranch <name>
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6438316Z hint:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6439035Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6440516Z hint: 'development'. The just-created branch can be renamed via this command:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6441805Z hint:
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6442553Z hint: 	git branch -m <name>
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6444104Z Initialized empty Git repository in /home/runner/work/keycloak/keycloak/.git/
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6451955Z [command]/usr/bin/git remote add origin https://github.com/stianst/keycloak
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6485370Z ##[endgroup]
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6486390Z ##[group]Disabling automatic garbage collection
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6489128Z [command]/usr/bin/git config --local gc.auto 0
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6519411Z ##[endgroup]
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6520290Z ##[group]Setting up auth
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6525369Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6556193Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6878104Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.6908273Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.7134815Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.7170341Z ##[endgroup]
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.7186932Z ##[group]Fetching the repository
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:15:39.7189201Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:17:06.6764299Z remote: Internal Server Error
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:17:06.6789021Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:17:06.6796357Z The process '/usr/bin/git' failed with exit code 128
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:17:06.6796913Z Waiting 12 seconds before trying again
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:17:18.6826059Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:18:32.4392662Z remote: Internal Server Error
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:18:32.4395228Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:18:32.4413345Z The process '/usr/bin/git' failed with exit code 128
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:18:32.4414172Z Waiting 17 seconds before trying again
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:18:49.4488423Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:20:10.5534036Z remote: Internal Server Error
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:20:10.5536616Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (4)	Run actions/checkout@v4	2025-01-14T00:20:10.5592339Z ##[error]The process '/usr/bin/git' failed with exit code 128
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4985856Z ##[group]Run actions/checkout@v4
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4986847Z with:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4987449Z   repository: stianst/keycloak
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4988201Z   token: ***
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4988673Z   ssh-strict: true
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4989244Z   ssh-user: git
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4989742Z   persist-credentials: true
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4990276Z   clean: true
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4990840Z   sparse-checkout-cone-mode: true
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4991445Z   fetch-depth: 1
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4991926Z   fetch-tags: false
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4992506Z   show-progress: true
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4993026Z   lfs: false
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4993481Z   submodules: false
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4994059Z   set-safe-directory: true
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4994857Z env:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4995518Z   MAVEN_ARGS: -B -nsu -Daether.connector.http.connectionMaxTtl=25
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4996350Z   SUREFIRE_RERUN_FAILING_COUNT: 0
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4997026Z   SUREFIRE_RETRY: -Dsurefire.rerunFailingTestsCount=0
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.4997705Z ##[endgroup]
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.6898734Z Syncing repository: stianst/keycloak
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.6900839Z ##[group]Getting Git version info
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.6901665Z Working directory is '/home/runner/work/keycloak/keycloak'
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.6902838Z [command]/usr/bin/git version
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.6962127Z git version 2.47.1
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.6989240Z ##[endgroup]
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7002912Z Temporarily overriding HOME='/home/runner/work/_temp/9e9990a0-fb0d-4436-b806-6627c940f1cd' before making global git config changes
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7015582Z Adding repository directory to the temporary git global config as a safe directory
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7017677Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/keycloak/keycloak
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7055626Z Deleting the contents of '/home/runner/work/keycloak/keycloak'
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7059442Z ##[group]Initializing the repository
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7065019Z [command]/usr/bin/git init /home/runner/work/keycloak/keycloak
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7131768Z hint: Using 'master' as the name for the initial branch. This default branch name
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7133317Z hint: is subject to change. To configure the initial branch name to use in all
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7134612Z hint: of your new repositories, which will suppress this warning, call:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7135725Z hint:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7136658Z hint: 	git config --global init.defaultBranch <name>
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7137894Z hint:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7139087Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7141055Z hint: 'development'. The just-created branch can be renamed via this command:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7142500Z hint:
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7143293Z hint: 	git branch -m <name>
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7144831Z Initialized empty Git repository in /home/runner/work/keycloak/keycloak/.git/
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7148813Z [command]/usr/bin/git remote add origin https://github.com/stianst/keycloak
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7181585Z ##[endgroup]
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7182669Z ##[group]Disabling automatic garbage collection
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7184982Z [command]/usr/bin/git config --local gc.auto 0
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7214535Z ##[endgroup]
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7215446Z ##[group]Setting up auth
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7220614Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7253101Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7545496Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7577021Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7810339Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7850460Z ##[endgroup]
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7851529Z ##[group]Fetching the repository
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:15:40.7868655Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:00.0858211Z remote: Internal Server Error
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:00.0883040Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:00.0891327Z The process '/usr/bin/git' failed with exit code 128
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:00.0892201Z Waiting 20 seconds before trying again
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:20.1001014Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:32.0748456Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 502
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:32.0767438Z The process '/usr/bin/git' failed with exit code 128
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:32.0768749Z Waiting 11 seconds before trying again
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:17:43.0788947Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:19:11.0841896Z remote: Internal Server Error
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:19:11.0843220Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 500
+Base IT (5)	Run actions/checkout@v4	2025-01-14T00:19:11.0890974Z ##[error]The process '/usr/bin/git' failed with exit code 128
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0113736Z ##[group]Run actions/checkout@v4
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0114696Z with:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0115275Z   repository: stianst/keycloak
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0116427Z   token: ***
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0116975Z   ssh-strict: true
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0117558Z   ssh-user: git
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0118071Z   persist-credentials: true
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0118577Z   clean: true
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0119183Z   sparse-checkout-cone-mode: true
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0119779Z   fetch-depth: 1
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0120225Z   fetch-tags: false
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0120791Z   show-progress: true
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0121302Z   lfs: false
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0121737Z   submodules: false
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0122297Z   set-safe-directory: true
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0123177Z env:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0123805Z   MAVEN_ARGS: -B -nsu -Daether.connector.http.connectionMaxTtl=25
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0124660Z   SUREFIRE_RERUN_FAILING_COUNT: 0
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0125340Z   SUREFIRE_RETRY: -Dsurefire.rerunFailingTestsCount=0
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.0125990Z ##[endgroup]
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2688453Z Syncing repository: stianst/keycloak
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2690533Z ##[group]Getting Git version info
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2692079Z Working directory is '/home/runner/work/keycloak/keycloak'
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2694091Z [command]/usr/bin/git version
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2780282Z git version 2.47.1
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2811665Z ##[endgroup]
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2827152Z Temporarily overriding HOME='/home/runner/work/_temp/c001dbd7-5ec0-475d-8d5a-156f95a0737b' before making global git config changes
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2830404Z Adding repository directory to the temporary git global config as a safe directory
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2842553Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/keycloak/keycloak
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2882098Z Deleting the contents of '/home/runner/work/keycloak/keycloak'
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2885604Z ##[group]Initializing the repository
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2889694Z [command]/usr/bin/git init /home/runner/work/keycloak/keycloak
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2966147Z hint: Using 'master' as the name for the initial branch. This default branch name
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2967349Z hint: is subject to change. To configure the initial branch name to use in all
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2968618Z hint: of your new repositories, which will suppress this warning, call:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2969618Z hint:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2970251Z hint: 	git config --global init.defaultBranch <name>
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2971087Z hint:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2971862Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2973353Z hint: 'development'. The just-created branch can be renamed via this command:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2974338Z hint:
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2974850Z hint: 	git branch -m <name>
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2975734Z Initialized empty Git repository in /home/runner/work/keycloak/keycloak/.git/
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.2983178Z [command]/usr/bin/git remote add origin https://github.com/stianst/keycloak
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3019850Z ##[endgroup]
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3021321Z ##[group]Disabling automatic garbage collection
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3024541Z [command]/usr/bin/git config --local gc.auto 0
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3055203Z ##[endgroup]
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3056745Z ##[group]Setting up auth
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3062597Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3094820Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3441499Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3473364Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3702832Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3739946Z ##[endgroup]
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3741352Z ##[group]Fetching the repository
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:15:40.3757337Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:02.3524859Z ##[error]fatal: the remote end hung up unexpectedly
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:02.3532904Z The process '/usr/bin/git' failed with exit code 128
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:02.3533510Z Waiting 10 seconds before trying again
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:12.3627575Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:18.4776793Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 503
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:18.4795804Z The process '/usr/bin/git' failed with exit code 128
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:18.4796816Z Waiting 16 seconds before trying again
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:34.4859726Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2462cdf23e0263bc7e9f99558042b5cf7c4273cc:refs/remotes/origin/main
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:46.3291129Z ##[error]fatal: unable to access 'https://github.com/stianst/keycloak/': The requested URL returned error: 502
+Base IT (6)	Run actions/checkout@v4	2025-01-14T00:16:46.3344886Z ##[error]The process '/usr/bin/git' failed with exit code 128

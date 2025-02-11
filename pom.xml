@@ -23,7 +23,7 @@
         <module>kc-ext/spiffe-authenticator</module>
         <module>kc-tools/logs</module>
         <module>kc-tools/basic-perf</module>
-        <module>junit-testsuite-poc</module>
+<!--        <module>junit-testsuite-poc</module>-->
         <module>test-logs-parser</module>
     </modules>
 
