@@ -16,7 +16,8 @@ public class LogParser {
     private final List<FailingTest> failingTests = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
-        File source = new File(args[0]);
+//        File source = new File(args[0]);
+        File source = new File("/home/st/dev/playground/test-logs-parser/logs");
         String repository = args.length > 1 ? args[1] : null;
 
         LogParser logParser = new LogParser();

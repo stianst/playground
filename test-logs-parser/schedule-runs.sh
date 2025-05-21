@@ -1,9 +1,10 @@
 #!/bin/bash -e
 
-BRANCH=$1
-WORKFLOW=$2
+USER=$1
+BRANCH=$2
+WORKFLOW=$3
 
-for i in $(seq 1 100); do 
+for i in $(seq 1 10); do
     echo $i 
-    gh workflow run -R stianst/keycloak -r $BRANCH $WORKFLOW
+    gh workflow run -R $USER/keycloak -r $BRANCH $WORKFLOW
 done
