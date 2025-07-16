@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class MarkdownReportTest {
+public class MarkdownReportGeneratorTest {
 
     @Test
     public void testMarkdownReport() {

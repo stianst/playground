@@ -15,9 +15,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.source>24</maven.compiler.source>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>jipher-jce</artifactId>
+            <version>10.35</version>
+        </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpg-jdk18on</artifactId>

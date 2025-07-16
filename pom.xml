@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <properties>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.source>24</maven.compiler.source>
     </properties>
 
     <modules>
@@ -25,6 +25,7 @@
         <module>kc-tools/basic-perf</module>
 <!--        <module>junit-testsuite-poc</module>-->
         <module>test-logs-parser</module>
+        <module>gpg-signing</module>
     </modules>
 
 </project>

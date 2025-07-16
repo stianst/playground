@@ -1,4 +1,4 @@
-#/bin/bash -e
+#!/bin/bash -e
 
 USER=$1
 WORKFLOW=$2

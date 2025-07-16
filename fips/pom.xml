@@ -15,6 +15,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>jipher-jce</artifactId>
+            <version>10.35</version>
+        </dependency>
+        <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bc-fips</artifactId>
             <version>2.0.0</version>

@@ -1,0 +1,16 @@
+keycloak/keycloak
+authelia/authelia
+ory/hydra
+goauthentik/authentik
+supertokens/supertokens-core
+apereo/cas
+apereo/cas
+casdoor/casdoor
+dexidp/dex
+zitadel/zitadel
+logto-io/logto
+IdentityServer/IdentityServer4
+wso2/product-is
+JanssenProject/jans
+GluuFederation/oxAuth
+Evolveum/midpoint

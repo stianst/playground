@@ -19,7 +19,7 @@ sq cert export --cert-userid=sqtest --output sq-pub.asc
 # BouncyCastle
 
 ```
-mvn exec:java -Dexec.mainClass=org.bouncycastle.openpgp.examples.EllipticCurveKeyPairGenerator -Dexec.arguments="-a,bctest@local,123245678"  -Dexec.workingDir=.
+mvn exec:java -Dexec.mainClass=org.bouncycastle.openpgp.examples.EllipticCurveKeyPairGenerator -Dexec.arguments="-a,stianst@gmail.com,stianst@gmail.com"  -Dexec.workingDir=.
 mv secret.asc bc-priv.asc
 mv pub.asc pc-pub.asc
 ```
