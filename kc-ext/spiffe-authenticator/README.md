@@ -27,3 +27,15 @@ Retrieve a JWT-SVID:
 Keys are saved to `target/tmp/spire/keys.json`
 
 SPIFFE ID is `spiffe://example.org/myclient`
+
+Start SPIRE OIDC Discovery Provider:
+
+```shell
+./start-spire-oidc.sh
+```
+
+Decode and verify token with `kct`:
+
+```shell
+./decode-jwt-svid.sh
+```
