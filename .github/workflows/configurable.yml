@@ -13,4 +13,4 @@ jobs:
 
     steps:
     - name: Echo
-      run: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
+      run: echo "${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}"
