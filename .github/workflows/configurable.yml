@@ -1,0 +1,16 @@
+name: Configurable runner
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ${{ env.RUNNER_LINUX || ubuntu-latest }}
+
+    steps:
+    - name: Echo
+      run: echo ${{ env.RUNNER_LINUX || ubuntu-latest }}
