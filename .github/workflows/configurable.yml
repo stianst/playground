@@ -9,8 +9,8 @@ on:
 jobs:
   build:
 
-    runs-on: ${{ env.RUNNER_LINUX || 'ubuntu-latest' }}
+    runs-on: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
 
     steps:
     - name: Echo
-      run: ${{ env.RUNNER_LINUX || 'ubuntu-latest' }}
+      run: ${{ vars.RUNNER_LINUX || 'ubuntu-latest' }}
