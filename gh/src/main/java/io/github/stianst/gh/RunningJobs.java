@@ -7,6 +7,8 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedIterable;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,14 +19,18 @@ import java.util.concurrent.TimeUnit;
 
 public class RunningJobs {
 
+    static DateFormat timeFormatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+//    static String repo = "keycloak/keycloak";
+    static String repo = "cncf/keycloak-testing";
+    static int wait = 1;
+
+    static String[] types = new String[] { "ubuntu-latest", "windows-latest" };
+
     public static void main(String[] args) throws IOException {
-
-//        String repo = "cncf/keycloak-testing";
-        String repo = "keycloak/keycloak";
-
         GitHub gitHub = Client.getInstance().gitHub();
 
-        System.out.format("%-40s %-30s %-10s %-10s\n", "Date", "Runner", "Running", "Queued");
+//        System.out.println("Time,Runner,Running,Queued");
+        System.out.format("%-20s %-30s %-10s %-10s\n", "Date", "Runner", "Running", "Queued");
 
         while (true) {
             Map<String, Integer> queued = new HashMap<>();
@@ -57,12 +63,14 @@ public class RunningJobs {
             runners.addAll(queued.keySet());
             runners.addAll(running.keySet());
 
+            Date date = new Date();
+
             for (String r : runners) {
-                System.out.format("%-40s %-30s %-10s %-10s\n", new Date(), r, running.get(r), queued.get(r));
+                System.out.format("%-20s %-30s %-10s %-10s\n", timeFormatter.format(date), r, running.get(r), queued.get(r));
             }
 
             try {
-                Thread.sleep(TimeUnit.MINUTES.toMillis(1));
+                Thread.sleep(TimeUnit.MINUTES.toMillis(wait));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
