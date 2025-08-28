@@ -47,13 +47,28 @@ kct decode $(./fetch-jwt-svid.sh) --jwks=http://localhost:8082/keys
 
 ## Configuring Keycloak
 
-You need to first have Keycloak with the experimental SPIFFE JWT SVID client authentication feature enabled (`./kc.sh start-dev --features=spiffe-jwt`).
+You need to first have Keycloak with the experimental External JWT client auth feature enabled (`./kc.sh start-dev --features=client-auth-idp`).
 
-As of writing this is available in https://github.com/stianst/keycloak/tree/spiffe-jwt-svids, but is expected to be available in nightly releases soon and in Keycloak 26.4.0.
+As of writing this is available in https://github.com/stianst/keycloak/tree/spiffe-jwt-svids-with-idp, but is expected to be available in nightly releases soon and in Keycloak 26.4.0.
 
 Optionally create a new realm:
 ```bash
 ./kcadm.sh create realms -s realm=spiffe -s enabled=true
+```
+
+```bash
+./kcadm.sh create identity-provider/instances -r spiffe -f - << EOF
+{
+  "alias": "spiffe",
+  "providerId": "oidc",
+  "hideOnLogin": true,
+  "config": {
+    "validateSignature": "true",
+    "jwksUrl": "http://localhost:8082/keys",
+    "useJwksUrl": "true"
+  }
+}
+EOF
 ```
 
 Then create a new client within the realm:
@@ -62,11 +77,9 @@ Then create a new client within the realm:
 {
   "clientId": "spiffe://example.org/myclient",
   "serviceAccountsEnabled": true,
-  "clientAuthenticatorType": "spiffe-jwt",
+  "clientAuthenticatorType": "idp-jwt",
   "attributes": {
-    "spiffeTrustDomain": "example.org",
-    "use.jwks.url": true,
-    "jwks.url": "http://localhost:8082/keys"
+    "jwt.credential.issuer": "spiffe"
   }
 }
 EOF
