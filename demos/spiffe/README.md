@@ -65,7 +65,8 @@ Optionally create a new realm:
   "config": {
     "validateSignature": "true",
     "jwksUrl": "http://localhost:8082/keys",
-    "useJwksUrl": "true"
+    "useJwksUrl": "true",
+    "supportsClientAssertions": "true"
   }
 }
 EOF
