@@ -47,7 +47,7 @@ kct decode $(./fetch-jwt-svid.sh) --jwks=http://localhost:8082/keys
 
 ## Configuring Keycloak
 
-You need to first have Keycloak with the experimental External JWT client auth feature enabled (`./kc.sh start-dev --features=client-auth-idp`).
+You need to first have Keycloak with the experimental External JWT client auth feature enabled (`./kc.sh start-dev --features=client-auth-federated`).
 
 As of writing this is available in https://github.com/stianst/keycloak/tree/spiffe-jwt-svids-with-idp, but is expected to be available in nightly releases soon and in Keycloak 26.4.0.
 
@@ -64,9 +64,11 @@ Optionally create a new realm:
   "hideOnLogin": true,
   "config": {
     "validateSignature": "true",
+    "issuer": "http://localhost:8082",
     "jwksUrl": "http://localhost:8082/keys",
     "useJwksUrl": "true",
-    "supportsClientAssertions": "true"
+    "supportsClientAssertions": "true",
+    "supportsClientAssertionReuse": "true"
   }
 }
 EOF
@@ -78,7 +80,7 @@ Then create a new client within the realm:
 {
   "clientId": "spiffe://example.org/myclient",
   "serviceAccountsEnabled": true,
-  "clientAuthenticatorType": "idp-jwt",
+  "clientAuthenticatorType": "federated-jwt",
   "attributes": {
     "jwt.credential.issuer": "spiffe"
   }
