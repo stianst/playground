@@ -24,18 +24,30 @@ Fetch a JWT SVID to verify things are working so far:
 ./fetch-jwt-svid.sh
 ```
 
-Verify the bundle endpoint is working with:
+## Staring the Spire OIDC Discovery Provider
+
+Start the Spire OIDC Discovery provider:
 ```shell
-curl --insecure https://localhost:8543
+./start-spire-oidc-discovery-provider.sh
+```
+
+Verify the JWKS endpoint is working with:
+```shell
+curl http://localhost:8082/keys
+```
+
+## Decoding and verifying the JWT SVID with `kct`
+
+[kct](https://github.com/stianst/keycloak-tokens-cli) can be used to decode the JWT SVID as well as verify the signature. This step is optional, but will allow you to see what claims are included.
+
+To decode  the JWT SVID run:
+```shell
+kct decode $(./fetch-jwt-svid.sh) --jwks=http://localhost:8082/keys
 ```
 
 ## Configuring Keycloak
 
-You need to first have Keycloak with the experimental External JWT client auth and SPIFFE features enabled, and disable
-trust manager for outgoing https requests to retrieve the SPIFFE bundle:
-```
-./kc.sh start-dev --features=client-auth-federated,spiffe --spi-connections-http-client--default--disable-trust-manager=true
-```
+You need to first have Keycloak with the experimental External JWT client auth feature enabled (`./kc.sh start-dev --features=client-auth-federated`).
 
 As of writing this is available in https://github.com/stianst/keycloak/tree/spiffe-jwt-svids-with-idp, but is expected to be available in nightly releases soon and in Keycloak 26.4.0.
 
@@ -48,11 +60,15 @@ Optionally create a new realm:
 ./kcadm.sh create identity-provider/instances -r spiffe -f - << EOF
 {
   "alias": "spiffe",
-  "providerId": "spiffe",
+  "providerId": "oidc",
   "hideOnLogin": true,
   "config": {
-    "trustDomain": "example.org",
-    "bundleEndpoint": "https://localhost:8543"
+    "validateSignature": "true",
+    "issuer": "http://localhost:8082",
+    "jwksUrl": "http://localhost:8082/keys",
+    "useJwksUrl": "true",
+    "supportsClientAssertions": "true",
+    "supportsClientAssertionReuse": "true"
   }
 }
 EOF
