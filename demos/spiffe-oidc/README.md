@@ -68,7 +68,8 @@ Optionally create a new realm:
     "jwksUrl": "http://localhost:8082/keys",
     "useJwksUrl": "true",
     "supportsClientAssertions": "true",
-    "supportsClientAssertionReuse": "true"
+    "supportsClientAssertionReuse": "true",
+    "showInAccountConsole": "NEVER"
   }
 }
 EOF

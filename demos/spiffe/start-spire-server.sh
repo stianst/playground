@@ -2,6 +2,7 @@
 
 SPIRE_VERSION='1.12.5'
 
+rm -rf tmp
 mkdir -p tmp && cd tmp
 
 if [ ! -d spire ]; then
