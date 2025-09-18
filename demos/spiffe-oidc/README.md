@@ -79,11 +79,12 @@ Then create a new client within the realm:
 ```bash
 ./kcadm.sh create clients -r spiffe  -f - << EOF
 {
-  "clientId": "spiffe://example.org/myclient",
+  "clientId": "myclient",
   "serviceAccountsEnabled": true,
   "clientAuthenticatorType": "federated-jwt",
   "attributes": {
-    "jwt.credential.issuer": "spiffe"
+    "jwt.credential.issuer": "spiffe",
+    "jwt.credential.sub": "spiffe://example.org/myclient",
   }
 }
 EOF
