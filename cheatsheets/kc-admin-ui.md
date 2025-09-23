@@ -6,7 +6,7 @@ pnpm --filter @keycloak/keycloak-admin-ui test:integration -- --project=chromium
 
 Run a single Admin UI test:
 ```
-pnpm --filter @keycloak/keycloak-admin-ui test:integration -- --project=chromium --ui spiffe.spec.ts
+pnpm --filter @keycloak/keycloak-admin-ui test:integration -- spiffe.spec.ts
 ```
 
 Playwright installation on Fedora (complains about missing deps, but doesn't matter):
