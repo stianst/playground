@@ -6,10 +6,12 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A
     participant C as Client
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
+    end
 
     C->>TS: Request assertion
     TS->>C: Assertion
@@ -24,10 +26,12 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A
     participant C as Client
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
+    end
 
     C->>TS: Request client assertion
     TS->>C: Client Assertion
@@ -70,11 +74,16 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A
     participant IDPA as External IdP
     participant TS as Token Service
     participant C as Client
+    end
+    box Domain B
     participant IDPB as Keycloak
     participant RS as REST API
+    end
+
     C<<->>IDPA: Login
     C->>TS: Exchange token
     TS->>C: Assertion
@@ -121,6 +130,7 @@ sequenceDiagram
     participant IDPB as Keycloak
     participant RS as REST API
     end
+
     C->>IDPA: Token exchange request, aud=keycloak
     IDPA->>C: Token response
     C->>IDPB: Token exchange request
