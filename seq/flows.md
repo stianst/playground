@@ -90,22 +90,18 @@ sequenceDiagram
 config:
     mirrorActors: false
 ---
-sequenceDiagram
     box Domain A
-    participant E as External IdP
     participant C as Client
-    end
-    box Domain B
-    participant KC as Keycloak
-    participant RS as REST API
-    end
+    participant IDP as IdP Authorization Server
+    participant RSA as Resource Application Authorization Server
+    participant RS as Resource Application Resource Server
 
-    C->>E: Login
-    E->>C: ID Token
-    C->>E: Exchange token
-    E->>C: ID-JAG
-    C->>KC: Token request, with ID-JAG
-    KC->>C: Token response
+    C->>IDP: Login
+    IDP->>C: ID Token
+    C->>RSA: Exchange token
+    RSA->>C: ID-JAG
+    C->>RSA: Token request, with ID-JAG
+    RSA->>C: Token response
     C->>RS: Request with token
 ```
 
