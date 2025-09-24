@@ -1,6 +1,5 @@
 ## Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants
 
-### Client action on behalf of user
 ```mermaid
 ---
 config:
@@ -11,6 +10,7 @@ sequenceDiagram
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
+
     C->>TS: Request assertion
     TS->>C: Assertion
     C->>KC: Token request, with assertion
@@ -18,7 +18,6 @@ sequenceDiagram
     C->>RS: Request with token
 ```
 
-### Client action on behalf of itself
 ```mermaid
 ---
 config:
@@ -29,13 +28,13 @@ sequenceDiagram
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
-    C->>TS: Request assertion
-    TS->>C: Assertion
-    C->>KC: Client credential request, with client_assertion
+
+    C->>TS: Request client assertion
+    TS->>C: Client Assertion
+    C->>KC: Client credential grant, with client assertion
     KC->>C: Token response
     C->>RS: Request with token
 ```
-
 
 ## OAuth Identity and Authorization Chaining Across Domains
 
@@ -45,10 +44,15 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A
     participant IDPA as External IdP
     participant C as Client
+    end
+    box Domain B
     participant IDPB as Keycloak
     participant RS as REST API
+    end
+
     C->>IDPA: Exchange token
     IDPA->>C: Assertion
     C->>IDPB: Token request, with assertion
