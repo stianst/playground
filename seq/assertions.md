@@ -1,6 +1,6 @@
 ```mermaid
 sequenceDiagram
-    participant RP as Application
+    participant C as Application
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
