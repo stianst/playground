@@ -18,6 +18,8 @@ sequenceDiagram
 ---
 config:
     mirrorActors: false
+    actorFontSize: 10
+    messageFontSize: 10
 ---
 sequenceDiagram
     participant IDPA as Identity Provider #A
