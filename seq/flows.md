@@ -79,6 +79,26 @@ sequenceDiagram
     C->>RS: Request with token
 ```
 
+## Identity Assertion Authorization Grant
+
+```mermaid
+---
+config:
+    mirrorActors: false
+---
+sequenceDiagram
+    participant IDPA as External IdP
+    participant C as Client
+    participant IDPB as Keycloak
+    participant RS as REST API
+    C->>IDPA: Login
+    IPDA->>C: ID Token
+    C->>TS: Exchange token
+    TS->>C: ID-JAG
+    C->>IDPB: Token request, with ID-JAG
+    IDPB->>C: Token response
+    C->>RS: Request with token
+
 ## Keycloak External to Internal Token Exchange
 
 ```mermaid
