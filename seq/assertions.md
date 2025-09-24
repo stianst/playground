@@ -1,6 +1,9 @@
 ## Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '18px'}}}%%
+---
+config:
+    mirrorActors: false
+---
 sequenceDiagram
     participant C as Application
     participant TS as Token Service
