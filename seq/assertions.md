@@ -55,3 +55,21 @@ sequenceDiagram
     IDPB->>C: Token response
     C->>RS: Request with token
 ```
+
+
+## Keycloak External to Internal Token Exchange
+
+```mermaid
+---
+config:
+    mirrorActors: false
+---
+sequenceDiagram
+    participant IDPA as Identity Provider #A
+    participant C as Client
+    participant IDPB as Identity Provider #B
+    participant RS as REST API
+    C->>IDPB: Token exchange request
+    IDPB->>C: Token response
+    C->>RS: Request with token
+```
