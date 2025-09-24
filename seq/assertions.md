@@ -1,5 +1,9 @@
 ## Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants
 ```mermaid
+---
+config:
+    mirrorActors: false
+---
 sequenceDiagram
     participant C as Application
     participant TS as Token Service
@@ -18,8 +22,6 @@ sequenceDiagram
 ---
 config:
     mirrorActors: false
-    actorFontSize: 10
-    messageFontSize: 10
 ---
 sequenceDiagram
     participant IDPA as Identity Provider #A
