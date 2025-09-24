@@ -37,7 +37,7 @@ sequenceDiagram
     participant G as Gateway
     participant RS as REST API
     participant KC as Keycloak
-    box
+    end
     C->>IA: Login
     C->>G: Request
     G->>RS: Request
