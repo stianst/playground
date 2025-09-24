@@ -87,16 +87,21 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
-    participant IDPA as External IdP
+    box Domain A
+    participant E as External IdP
     participant C as Client
-    participant IDPB as Keycloak
+    end
+    box Domain B
+    participant KC as Keycloak
     participant RS as REST API
-    C->>IDPA: Login
-    IPDA->>C: ID Token
-    C->>TS: Exchange token
-    TS->>C: ID-JAG
-    C->>IDPB: Token request, with ID-JAG
-    IDPB->>C: Token response
+    end
+
+    C->>E: Login
+    E->>C: ID Token
+    C->>E: Exchange token
+    E->>C: ID-JAG
+    C->>KC: Token request, with ID-JAG
+    KC->>C: Token response
     C->>RS: Request with token
 ```
 
