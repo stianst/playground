@@ -7,7 +7,7 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
-    participant C as Application
+    participant C as Client
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
@@ -25,7 +25,7 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
-    participant C as Application
+    participant C as Client
     participant TS as Token Service
     participant KC as Keycloak
     participant RS as REST API
