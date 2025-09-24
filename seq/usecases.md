@@ -12,7 +12,7 @@ sequenceDiagram
     participant Apple as Apple
     participant App as App
     end
-    box KC
+    box Blue KC
     participant RS as REST API
     participant KC as Keycloak
     end
