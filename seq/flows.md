@@ -98,6 +98,7 @@ sequenceDiagram
     C->>IDPB: Token request, with ID-JAG
     IDPB->>C: Token response
     C->>RS: Request with token
+```
 
 ## Keycloak External to Internal Token Exchange
 
