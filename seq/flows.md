@@ -90,7 +90,7 @@ sequenceDiagram
 config:
     mirrorActors: false
 ---
-    box Domain A
+sequenceDiagram
     participant C as Client
     participant IDP as IdP Authorization Server
     participant RSA as Resource Application Authorization Server
@@ -98,8 +98,6 @@ config:
 
     C->>IDP: Login
     IDP->>C: ID Token
-    C->>RSA: Exchange token
-    RSA->>C: ID-JAG
     C->>RSA: Token request, with ID-JAG
     RSA->>C: Token response
     C->>RS: Request with token
