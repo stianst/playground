@@ -23,6 +23,6 @@ sequenceDiagram
     C->>IDPA: Exchange token
     IDPA->>C: Assertion
     C->>IDPB: Token request, with assertion
-    KC->>C: Token response
+    IDPB->>C: Token response
     C->>RS: Request with token
 ```
