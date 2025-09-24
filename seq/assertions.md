@@ -7,7 +7,22 @@ sequenceDiagram
     participant RS as REST API
     C->>TS: Request assertion
     TS->>C: Assertion
-    C->>KC: Token request
+    C->>KC: Token request, with assertion
+    KC->>C: Token response
+    C->>RS: Request with token
+```
+
+## OAuth Identity and Authorization Chaining Across Domains
+
+```mermaid
+sequenceDiagram
+    participant IDPA as Identity Provider #A
+    participant C as Client
+    participant IDPB as Identity Provider #B
+    participant RS as REST API
+    C->>IDPA: Exchange token
+    IDPA->>C: Assertion
+    C->>IDPB: Token request, with assertion
     KC->>C: Token response
     C->>RS: Request with token
 ```
