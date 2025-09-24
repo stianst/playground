@@ -13,7 +13,6 @@ sequenceDiagram
     participant RS as REST API
     participant KC as Keycloak
     App->>Apple: Login
-    Apple->>App: Return tokens
     App->>RS: Request
     RS->>KC: Verify token
 ```
