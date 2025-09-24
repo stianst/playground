@@ -16,3 +16,22 @@ sequenceDiagram
     App->>RS: Request
     RS->>KC: Verify token
 ```
+
+## Gateway
+
+```mermaid
+---
+config:
+    mirrorActors: false
+---
+sequenceDiagram
+    participant IA as External IdP
+    participant C as Client
+    participant G as Gateway
+    participant RS as REST API
+    participant KC as Keycloak
+    C->>IA: Login
+    C->>G: Request
+    G->>RS: Request
+    RS->>KC: Verify token
+```
