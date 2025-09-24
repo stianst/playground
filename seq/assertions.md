@@ -70,7 +70,8 @@ sequenceDiagram
     participant IDPB as Keycloak
     participant RS as REST API
     C<<->>IDPA: Login
-    IDPA->>C: Assertion
+    C->>TS: Exchange token
+    TS->>C: Assertion
     C->>IDPB: Token request, with assertion
     IDPB->>C: Token response
     C->>RS: Request with token
