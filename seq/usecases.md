@@ -1,6 +1,6 @@
 # Use-Cases
 
-## Mobile logs in with AppleID
+## Mobile Sign in with AppleID
 
 ```mermaid
 ---
