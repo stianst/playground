@@ -45,9 +45,9 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
-    participant IDPA as Identity Provider #A
+    participant IDPA as External IdP
     participant C as Client
-    participant IDPB as Identity Provider #B
+    participant IDPB as Keycloak
     participant RS as REST API
     C->>IDPA: Exchange token
     IDPA->>C: Assertion
@@ -65,9 +65,9 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
-    participant IDPA as Identity Provider #A
+    participant IDPA as External IdP
     participant C as Client
-    participant IDPB as Identity Provider #B
+    participant IDPB as Keycloak
     participant RS as REST API
     C->>IDPB: Token exchange request
     IDPB->>C: Token response
