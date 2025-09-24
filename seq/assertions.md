@@ -15,6 +15,10 @@ sequenceDiagram
 ## OAuth Identity and Authorization Chaining Across Domains
 
 ```mermaid
+---
+config:
+    mirrorActors: false
+---
 sequenceDiagram
     participant IDPA as Identity Provider #A
     participant C as Client
