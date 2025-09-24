@@ -92,7 +92,7 @@ sequenceDiagram
     participant IDPB as Keycloak
     participant RS as REST API
     C->>IDPA: Token exchange request, aud=keycloak
-    IDPA->>: Token response
+    IDPA->>C: Token response
     C->>IDPB: Token exchange request
     IDPB->>C: Token response
     C->>RS: Request with token
