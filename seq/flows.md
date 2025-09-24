@@ -117,10 +117,14 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A
     participant IDPA as External IdP
     participant C as Client
+    end
+    box Domain B
     participant IDPB as Keycloak
     participant RS as REST API
+    end
     C->>IDPA: Token exchange request, aud=keycloak
     IDPA->>C: Token response
     C->>IDPB: Token exchange request
