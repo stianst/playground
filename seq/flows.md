@@ -91,10 +91,12 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A
     participant C as Client
     participant IDP as IdP Authorization Server
     participant RSA as SaaS Authorization Server
     participant RS as SaaS APIs
+    end
 
     C->>IDP: Login
     IDP->>C: ID Token
