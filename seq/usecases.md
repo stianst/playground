@@ -8,10 +8,14 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Apple
     participant Apple as Apple
     participant App as App
+    end
+    box KC
     participant RS as REST API
     participant KC as Keycloak
+    end
     App->>Apple: Login
     App->>RS: Request
     RS->>KC: Verify token
