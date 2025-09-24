@@ -1,7 +1,12 @@
 ```mermaid
 sequenceDiagram
-    participant Alice
-    participant Bob
-    Bob->>Alice: Hi Alice
-    Alice->>Bob: Hi Bob
+    participant RP as Application
+    participant TS as Token Service
+    participant KC as Keycloak
+    participant RS as REST API
+    C->>TS: Request assertion
+    TS->>C: Assertion
+    C->>KC: Token request
+    KC->>C: Token response
+    C->>RS: Request with token
 ```
