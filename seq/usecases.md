@@ -4,6 +4,10 @@
 
 Mobile app uses sign in with AppleID and wants to access REST APIs, without requiring a separate login.
 
+Notes:
+
+* By using sign in with AppleID the developer is provided with high quality SDKs that makes it easy to integrate with the application; additionally a more integrated experience is provided to end-users of the application
+
 ```mermaid
 ---
 config:
@@ -26,6 +30,10 @@ sequenceDiagram
 ## Gateway
 
 External applications uses a different IdP to internal REST APIs.
+
+Notes:
+
+* A company wants to keep external vs internal separated by using one IdP for external users and applications; and another IdP for internal users, applications and services. 
 
 ```mermaid
 ---
@@ -61,6 +69,8 @@ sequenceDiagram
     box Domain A
     participant A as Internal App
     participant IDP as Company IdP
+    end
+    box Domain B
     participant SAS as SaaS Authorization Server
     participant SA as SaaS App
     participant SRS as SaaS Resource Server
