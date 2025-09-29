@@ -58,11 +58,15 @@ config:
     mirrorActors: false
 ---
 sequenceDiagram
+    box Domain A - IdP A
     participant A as Internal App
     participant IDP as Company IdP
+    end
+    box Domain A - IdP B
     participant SAS as SaaS Authorization Server
     participant SA as SaaS App
     participant SRS as SaaS Resource Server
+    end
 
     Note over A,IDP: User logs in to Internal App
     A->>IDP: Login request
