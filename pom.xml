@@ -24,8 +24,9 @@
         <module>kc-tools/logs</module>
         <module>kc-tools/basic-perf</module>
 <!--        <module>junit-testsuite-poc</module>-->
-        <module>test-logs-parser</module>
+<!--        <module>test-logs-parser</module>-->
         <module>gpg-signing</module>
+        <module>signing</module>
     </modules>
 
 </project>
