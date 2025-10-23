@@ -15,6 +15,7 @@ public enum SignatureAlgorithms {
     ES384("SHA384withECDSA", "EC", new ECGenParameterSpec("secp384r1")),
     ES512("SHA512withECDSA", "EC", new ECGenParameterSpec("secp521r1")),
     FALCON_512("Falcon", "Falcon", FalconParameterSpec.falcon_512),
+    FALCON_1024("Falcon", "Falcon", FalconParameterSpec.falcon_1024),
     ML_DSA_44("ML-DSA-44", NamedParameterSpec.ML_DSA_44),
     ML_DSA_65("ML-DSA-65", NamedParameterSpec.ML_DSA_65),
     ML_DSA_87("ML-DSA-87", NamedParameterSpec.ML_DSA_87),
