@@ -5,7 +5,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.PEMEncoder;
 import java.security.Security;
 import java.security.Signature;
 import java.util.Base64;
@@ -14,12 +13,12 @@ public class SignatureTest {
 
     public static final String OUTPUT = "%-15s %-12s %-12s %-12s %-12s%n";
 
-    static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         Security.addProvider(new BouncyCastleProvider());
 
         String payload = new String(SignatureTest.class.getClassLoader().getResourceAsStream("payload").readAllBytes(), StandardCharsets.UTF_8);
         int countFast = 100;
-        int countSlow = 10;
+        int countSlow = 1;
 
         System.out.printf(OUTPUT, "Algorithm", "Size", "Size (url)", "Key Size", "Time (ms)");
         for (SignatureAlgorithms a : SignatureAlgorithms.values()) {
@@ -41,9 +40,7 @@ public class SignatureTest {
             long time =  System.currentTimeMillis() - start;
             String signatureEncoded = Base64.getUrlEncoder().encodeToString(signedBytes);
 
-            byte[] publicKeyEncoded = PEMEncoder.of().encode(keyPair.getPublic());
-
-            System.out.printf(OUTPUT, a.getName(), signedBytes.length, signatureEncoded.length(), publicKeyEncoded.length, (double) time / count);
+            System.out.printf(OUTPUT, a.getName(), signedBytes.length, signatureEncoded.length(), keyPair.getPublic().getEncoded().length, (double) time / count);
         }
 
     }
