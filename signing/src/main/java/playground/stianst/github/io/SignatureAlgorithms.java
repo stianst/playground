@@ -28,27 +28,17 @@ public enum SignatureAlgorithms {
     private final String algorithm;
     private final String keyPairAlgorithm;
     private final AlgorithmParameterSpec spec;
-    private final String provider;
 
     SignatureAlgorithms(String algorithm, AlgorithmParameterSpec spec) {
         this.algorithm = algorithm;
         this.keyPairAlgorithm = algorithm;
         this.spec = spec;
-        this.provider = null;
     }
 
     SignatureAlgorithms(String algorithm, String keyPairAlgorithm, AlgorithmParameterSpec spec) {
         this.algorithm = algorithm;
         this.keyPairAlgorithm = keyPairAlgorithm;
         this.spec = spec;
-        this.provider = null;
-    }
-
-    SignatureAlgorithms(String algorithm, String keyPairAlgorithm, AlgorithmParameterSpec spec, String provider) {
-        this.algorithm = algorithm;
-        this.keyPairAlgorithm = keyPairAlgorithm;
-        this.spec = spec;
-        this.provider = provider;
     }
 
     public String getName() {
@@ -65,9 +55,5 @@ public enum SignatureAlgorithms {
 
     public AlgorithmParameterSpec getSpec() {
         return spec;
-    }
-
-    public String getProvider() {
-        return provider;
     }
 }
