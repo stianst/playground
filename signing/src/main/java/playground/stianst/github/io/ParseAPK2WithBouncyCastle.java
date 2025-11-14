@@ -15,7 +15,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Map;
 
-public class ParseAPK2Test {
+public class ParseAPK2WithBouncyCastle {
 
     // Values from https://github.com/faceless2/json/blob/44aa505bd731cc4e7e56d046fa22c3c42d9cdafb/src/main/com/bfo/json/JWK.java#L1486-L1488
     // Should be possible to create these from NISTObjectIdentifiers.id_ml_dsa_44.getEncoded() once we figure out the start/end of the byte arrays

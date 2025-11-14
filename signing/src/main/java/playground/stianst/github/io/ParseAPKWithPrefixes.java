@@ -9,17 +9,14 @@ import java.security.PublicKey;
 import java.security.spec.EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
-import java.util.HexFormat;
 import java.util.Map;
 
-public class ParseAPKTest {
+public class ParseAPKWithPrefixes {
 
-    // Values from https://github.com/faceless2/json/blob/44aa505bd731cc4e7e56d046fa22c3c42d9cdafb/src/main/com/bfo/json/JWK.java#L1486-L1488
-    // Should be possible to create these from NISTObjectIdentifiers.id_ml_dsa_44.getEncoded() once we figure out the start/end of the byte arrays
     private static final Map<String, byte[]> PREFIXES = Map.of(
-            "ML-DSA-44", HexFormat.of().parseHex("30820532300B06096086480165030403110382052100"),
-            "ML-DSA-65", HexFormat.of().parseHex("308207B2300B0609608648016503040312038207A100"),
-            "ML-DSA-87", HexFormat.of().parseHex("30820A32300B060960864801650304031303820A2100")
+            "ML-DSA-44", new byte[] { 48, -126, 5, 50, 48, 11, 6, 9, 96, -122, 72, 1, 101, 3, 4, 3, 17, 3, -126, 5, 33, 0, },
+            "ML-DSA-65", new byte[] { 48, -126, 7, -78, 48, 11, 6, 9, 96, -122, 72, 1, 101, 3, 4, 3, 18, 3, -126, 7, -95, 0, },
+            "ML-DSA-87", new byte[] { 48, -126, 10, 50, 48, 11, 6, 9, 96, -122, 72, 1, 101, 3, 4, 3, 19, 3, -126, 10, 33, 0, }
     );
 
     public static void main(String[] args) throws Exception {
