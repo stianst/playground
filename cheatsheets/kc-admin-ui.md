@@ -2,7 +2,8 @@
 
 Playwright installation on Fedora (complains about missing deps, but doesn't matter):
 ```
-sudo npx playwright install
+sudo pip install playwright==1.8.0a1
+sudo python -m playwright install
 ```
 
 # Development
