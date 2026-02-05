@@ -94,7 +94,7 @@ public class DummyUserModel implements UserModel {
 
     @Override
     public String getFirstName() {
-        return null;
+        return "John";
     }
 
     @Override
@@ -104,7 +104,7 @@ public class DummyUserModel implements UserModel {
 
     @Override
     public String getLastName() {
-        return null;
+        return "Doe";
     }
 
     @Override
@@ -114,7 +114,7 @@ public class DummyUserModel implements UserModel {
 
     @Override
     public String getEmail() {
-        return null;
+        return "john.doe@example.com";
     }
 
     @Override
