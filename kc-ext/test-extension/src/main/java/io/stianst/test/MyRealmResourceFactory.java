@@ -9,6 +9,7 @@ import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.services.resource.RealmResourceProvider;
 import org.keycloak.services.resource.RealmResourceProviderFactory;
 
+@Path("/")
 public class MyRealmResourceFactory implements RealmResourceProviderFactory, RealmResourceProvider {
     @Override
     public RealmResourceProvider create(KeycloakSession session) {
@@ -41,10 +42,10 @@ public class MyRealmResourceFactory implements RealmResourceProviderFactory, Rea
     }
 
     @GET
-    @Path("")
-    @Produces("text/plaiun")
+    @Path("/")
+    @Produces("text/plain")
     public String hello() {
-        return "Hello world";
+        return "hello";
     }
 
 }
