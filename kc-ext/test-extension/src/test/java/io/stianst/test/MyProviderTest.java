@@ -32,9 +32,9 @@ public class MyProviderTest {
 
     @Test
     public void myTest() throws IOException {
-        URL myresource = KeycloakUriBuilder.fromUri(myrealm.getBaseUrl()).path("myresource").build().toURL();
+        URL url = KeycloakUriBuilder.fromUri(myrealm.getBaseUrl()).path("myresource").build().toURL();
 
-        String response = simpleHttp.doGet(myresource.toString()).header("Accept", "text/plain").asString();
+        String response = simpleHttp.doGet(url.toString()).header("Accept", "text/plain").asString();
 
         Assertions.assertEquals("hello", response);
     }
@@ -43,7 +43,7 @@ public class MyProviderTest {
 
         @Override
         public KeycloakServerConfigBuilder configure(KeycloakServerConfigBuilder config) {
-            return config.dependency("playground.stianst.github.io", "myextension", true);
+            return config.dependencyCurrentProject();
         }
     }
 
