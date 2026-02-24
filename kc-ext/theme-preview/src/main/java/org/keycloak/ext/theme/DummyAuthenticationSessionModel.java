@@ -166,7 +166,7 @@ public class DummyAuthenticationSessionModel implements AuthenticationSessionMod
 
     @Override
     public String getAction() {
-        return null;
+        return Action.LOGGED_OUT.name();
     }
 
     @Override
