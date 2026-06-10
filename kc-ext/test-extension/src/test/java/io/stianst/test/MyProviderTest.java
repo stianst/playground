@@ -1,6 +1,5 @@
 package io.stianst.test;
 
-import jakarta.ws.rs.core.UriBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.keycloak.common.util.KeycloakUriBuilder;
@@ -16,7 +15,6 @@ import org.keycloak.testframework.server.KeycloakUrls;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 @KeycloakIntegrationTest(config = MyProviderTest.MyServerConfig.class)
 public class MyProviderTest {
