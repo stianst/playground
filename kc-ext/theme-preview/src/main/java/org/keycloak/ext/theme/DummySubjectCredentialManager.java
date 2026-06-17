@@ -3,10 +3,12 @@ package org.keycloak.ext.theme;
 import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialModel;
 import org.keycloak.models.SubjectCredentialManager;
+import org.keycloak.models.credential.OTPCredentialModel;
 import org.keycloak.models.credential.RecoveryAuthnCodesCredentialModel;
 import org.keycloak.models.utils.RecoveryAuthnCodesUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class DummySubjectCredentialManager implements SubjectCredentialManager {
@@ -48,10 +50,15 @@ public class DummySubjectCredentialManager implements SubjectCredentialManager {
     @Override
     public Stream<CredentialModel> getStoredCredentialsByTypeStream(String s) {
         List<String> generatedRecoveryAuthnCodes = RecoveryAuthnCodesUtils.generateRawCodes();
-        CredentialModel recoveryAuthnCodesCred = RecoveryAuthnCodesCredentialModel.createFromValues(
-                generatedRecoveryAuthnCodes,
-                System.currentTimeMillis(),
-                null);
+        CredentialModel recoveryAuthnCodesCred = null;
+        if (Objects.equals(s, "otp")) {
+            recoveryAuthnCodesCred = OTPCredentialModel.createTOTP(generatedRecoveryAuthnCodes.get(0), 8, 30, "HmacSHA1");
+        } else {
+            recoveryAuthnCodesCred = RecoveryAuthnCodesCredentialModel.createFromValues(
+                    generatedRecoveryAuthnCodes,
+                    System.currentTimeMillis(),
+                    null);
+        }
 
         return Stream.of(recoveryAuthnCodesCred);
     }
