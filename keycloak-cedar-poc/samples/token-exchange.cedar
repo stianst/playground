@@ -15,5 +15,5 @@ forbid(
     action == Action::"token-exchange",
     resource
 ) when {
-    context.aud.contains("aud2")
+    context.audience.contains("aud2")
 };

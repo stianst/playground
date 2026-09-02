@@ -35,7 +35,7 @@ public class CedarTokenExchangeRequestTest {
     @Test
     void testForbiddenAud() {
         boolean permitted = CedarTokenExchangeRequest.create(CEDAR, "https://myissuer", "myclient").withAudience(List.of("aud2")).evalute();
-        Assertions.assertTrue(permitted);
+        Assertions.assertFalse(permitted);
     }
 
 }
