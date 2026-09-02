@@ -1,5 +1,6 @@
 package com.example.keycloak.clientpolicy.executor;
 
+import com.example.keycloak.cedar.CedarProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.protocol.oidc.TokenExchangeContext;
 import org.keycloak.representations.idm.ClientPolicyExecutorConfigurationRepresentation;
@@ -13,11 +14,9 @@ import org.keycloak.urls.UrlType;
 public class CedarClientPolicyExecutor implements ClientPolicyExecutorProvider<ClientPolicyExecutorConfigurationRepresentation> {
 
     private final KeycloakSession session;
-    private final Cedar cedar;
 
-    public CedarClientPolicyExecutor(KeycloakSession session, Cedar cedar) {
+    public CedarClientPolicyExecutor(KeycloakSession session) {
         this.session = session;
-        this.cedar = cedar;
     }
 
     @Override
@@ -28,18 +27,20 @@ public class CedarClientPolicyExecutor implements ClientPolicyExecutorProvider<C
     @Override
     public void executeOnEvent(ClientPolicyContext context) throws ClientPolicyException {
         if (context instanceof TokenExchangeRequestContext tokenExchangeRequestContext) {
+            CedarProvider cedar = session.getProvider(CedarProvider.class);
+
             TokenExchangeContext tokenExchangeContext = tokenExchangeRequestContext.getTokenExchangeContext();
 
             String issuer = Urls.realmIssuer(session.getContext().getUri(UrlType.FRONTEND).getBaseUri(), session.getContext().getRealm().getName());
             String clientId = tokenExchangeContext.getClient().getClientId();
             TokenExchangeContext.Params params = tokenExchangeContext.getParams();
 
-            CedarTokenExchangeRequest exchangeRequest = CedarTokenExchangeRequest.create(cedar, issuer, clientId)
-                    .withAudience(params.getAudience())
-                    .withActorToken(params.getActorToken(), params.getActorToken())
-                    .withRequestedTokenType(params.getRequestedTokenType())
-                    .withSubjectToken(params.getSubjectToken(), params.getSubjectTokenType())
-                    .withScope(params.getScope());
+            CedarTokenExchangeRequest exchangeRequest = cedar.request(CedarTokenExchangeRequest.class).issuer(issuer).client(clientId)
+                    .audience(params.getAudience())
+                    .actorToken(params.getActorToken(), params.getActorToken())
+                    .requestedTokenType(params.getRequestedTokenType())
+                    .subjectToken(params.getSubjectToken(), params.getSubjectTokenType())
+                    .scope(params.getScope());
 
             boolean permitted = exchangeRequest.evalute();
             if (!permitted) {

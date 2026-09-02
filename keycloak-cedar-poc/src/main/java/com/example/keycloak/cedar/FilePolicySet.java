@@ -1,27 +1,18 @@
-package com.example.keycloak.clientpolicy.executor;
+package com.example.keycloak.cedar;
 
-import com.cedarpolicy.AuthorizationEngine;
-import com.cedarpolicy.BasicAuthorizationEngine;
-import com.cedarpolicy.model.exception.InternalException;
 import com.cedarpolicy.model.policy.PolicySet;
 
 import java.io.File;
-import java.io.IOException;
 
-public class Cedar {
+public class FilePolicySet {
 
-    private final AuthorizationEngine engine = new BasicAuthorizationEngine();
     private final File policyFile;
-
-    private PolicySet policySet;
     private long lastModified = -1;
 
-    public Cedar(File policyFile) throws IOException, InternalException {
-        this.policyFile = policyFile;
-    }
+    private PolicySet policySet;
 
-    public AuthorizationEngine getEngine() {
-        return engine;
+    public FilePolicySet(File policyFile) {
+        this.policyFile = policyFile;
     }
 
     public PolicySet getPolicySet() {
@@ -39,6 +30,7 @@ public class Cedar {
                 throw new RuntimeException(e);
             }
         }
+
         return policySet;
     }
 

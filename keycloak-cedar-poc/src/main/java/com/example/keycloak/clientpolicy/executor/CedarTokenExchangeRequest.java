@@ -1,122 +1,42 @@
 package com.example.keycloak.clientpolicy.executor;
 
-import com.cedarpolicy.AuthorizationEngine;
-import com.cedarpolicy.model.AuthorizationRequest;
-import com.cedarpolicy.model.AuthorizationResponse;
-import com.cedarpolicy.model.entity.Entity;
-import com.cedarpolicy.model.exception.AuthException;
-import com.cedarpolicy.model.policy.PolicySet;
-import com.cedarpolicy.value.*;
-import org.jboss.logging.Logger;
+import com.example.keycloak.cedar.CedarRequest;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
-public class CedarTokenExchangeRequest {
+public class CedarTokenExchangeRequest extends CedarRequest<CedarTokenExchangeRequest> {
 
-    private static final Logger LOG = Logger.getLogger(CedarTokenExchangeRequest.class);
-
-    private final Cedar cedar;
-    private final Entity principal;
-    private final Entity action = createEntity("Action", "token-exchange");
-    private final Entity resource;
-    private final Map<String, Value> context = new HashMap<>();
-
-    private CedarTokenExchangeRequest(Cedar cedar, String issuer, String clientId) {
-        this.cedar = cedar;
-        principal = createEntity("Client", clientId);
-        resource = createEntity("Issuer", issuer);
+    public CedarTokenExchangeRequest() {
+        action("token-exchange");
     }
 
-    public static CedarTokenExchangeRequest create(Cedar cedar, String issuer, String clientId) {
-        return new CedarTokenExchangeRequest(cedar, issuer, clientId);
+    public CedarTokenExchangeRequest client(String clientId) {
+        return principal("Client", clientId);
     }
 
-    public boolean evalute() {
-        AuthorizationEngine engine = cedar.getEngine();
-        PolicySet policySet = cedar.getPolicySet();
-
-        if (policySet == null) {
-            LOG.warn("No cedar policy available");
-            return true;
-        }
-
-        AuthorizationRequest request = new AuthorizationRequest(principal, action, resource, context);
-        AuthorizationResponse authorized = null;
-        try {
-            authorized = engine.isAuthorized(request, policySet, Collections.emptySet());
-        } catch (AuthException e) {
-            LOG.warn("Failed to evaluate request", e);
-            return false;
-        }
-        if (authorized.success.isPresent()) {
-            if (authorized.success.get().isAllowed()) {
-                LOG.infov("Permitted");
-                return true;
-            } else {
-                LOG.infov("Not allowed");
-                return false;
-            }
-        } else {
-            LOG.infov("Failed");
-            return false;
-        }
+    public CedarTokenExchangeRequest issuer(String issuer) {
+        return resource("Issuer", issuer);
     }
 
-    public CedarTokenExchangeRequest withAudience(List<String> audience) {
-        if (audience != null && !audience.isEmpty()) {
-            context.put("audience", toValue(audience));
-        }
-        return this;
+    public CedarTokenExchangeRequest audience(List<String> audience) {
+        return context("audience", audience);
     }
 
-    public CedarTokenExchangeRequest withScope(String scope) {
-        if (scope != null) {
-            context.put("scope", toValue(Arrays.asList(scope.split(" "))));
-        }
-        return this;
+    public CedarTokenExchangeRequest scope(String scope) {
+        return context("scope", Arrays.asList(scope.split(" ")));
     }
 
-    public CedarTokenExchangeRequest withRequestedTokenType(String requestedTokenType) {
-        if (requestedTokenType != null) {
-            context.put("requestedTokenType", toValue(requestedTokenType));
-        }
-        return this;
+    public CedarTokenExchangeRequest requestedTokenType(String requestedTokenType) {
+        return context("requestedTokenType", requestedTokenType);
     }
 
-    public CedarTokenExchangeRequest withSubjectToken(String subjectToken, String subjectTokenType) {
-        context.put("subjectToken", toValue(subjectToken != null));
-        if (subjectTokenType != null) {
-            context.put("subjectTokenType", toValue(subjectTokenType));
-        }
-        return this;
+    public CedarTokenExchangeRequest subjectToken(String subjectToken, String subjectTokenType) {
+        return context("subjectToken", subjectToken != null).context("subjectTokenType", subjectTokenType);
     }
 
-    public CedarTokenExchangeRequest withActorToken(String actorToken, String actorTokenType) {
-        context.put("actorToken", toValue(actorToken != null));
-        if (actorTokenType != null) {
-            context.put("actorTokenType", toValue(actorTokenType));
-        }
-        return this;
-    }
-
-    private Entity createEntity(String typeName, String uuid) {
-        EntityTypeName entityTypeName = EntityTypeName.parse(typeName).orElseThrow();
-        EntityUID entityUID = new EntityUID(entityTypeName, uuid);
-        return new Entity(entityUID);
-    }
-
-    private static Value toValue(List<String> list) {
-        CedarList value = new CedarList();
-        list.forEach(v -> value.add(toValue(v)));
-        return value;
-    }
-
-    private static Value toValue(String value) {
-        return new PrimString(value);
-    }
-
-    private static Value toValue(boolean value) {
-        return new PrimBool(value);
+    public CedarTokenExchangeRequest actorToken(String actorToken, String actorTokenType) {
+        return context("actorToken", actorToken != null).context("actorTokenType", actorTokenType);
     }
 
 }
