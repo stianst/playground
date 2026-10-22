@@ -3,6 +3,7 @@ package org.keycloak.ext.theme;
 import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialModel;
 import org.keycloak.models.SubjectCredentialManager;
+import org.keycloak.models.credential.OTPCredentialModel;
 import org.keycloak.models.credential.RecoveryAuthnCodesCredentialModel;
 import org.keycloak.models.utils.RecoveryAuthnCodesUtils;
 
@@ -46,14 +47,21 @@ public class DummySubjectCredentialManager implements SubjectCredentialManager {
     }
 
     @Override
-    public Stream<CredentialModel> getStoredCredentialsByTypeStream(String s) {
-        List<String> generatedRecoveryAuthnCodes = RecoveryAuthnCodesUtils.generateRawCodes();
-        CredentialModel recoveryAuthnCodesCred = RecoveryAuthnCodesCredentialModel.createFromValues(
-                generatedRecoveryAuthnCodes,
-                System.currentTimeMillis(),
-                null);
-
-        return Stream.of(recoveryAuthnCodesCred);
+    public Stream<CredentialModel> getStoredCredentialsByTypeStream(String type) {
+        if (RecoveryAuthnCodesCredentialModel.TYPE.equals(type)) {
+            List<String> generatedRecoveryAuthnCodes = RecoveryAuthnCodesUtils.generateRawCodes();
+            CredentialModel recoveryAuthnCodesCred = RecoveryAuthnCodesCredentialModel.createFromValues(
+                    generatedRecoveryAuthnCodes,
+                    System.currentTimeMillis(),
+                    null);
+            return Stream.of(recoveryAuthnCodesCred);
+        } else if (OTPCredentialModel.TYPE.equals(type)) {
+            OTPCredentialModel otpCred = OTPCredentialModel.createTOTP("dummy-secret", 6, 30, "HmacSHA1");
+            otpCred.setId("dummy-otp-id");
+            otpCred.setUserLabel("Authenticator App");
+            return Stream.of(otpCred);
+        }
+        return Stream.empty();
     }
 
     @Override

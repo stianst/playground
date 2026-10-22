@@ -2,7 +2,10 @@ package org.keycloak.ext.theme;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.Response;
+
+import java.net.URI;
 import org.keycloak.forms.login.LoginFormsProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
@@ -21,10 +24,17 @@ public class ThemePreviewProvider implements RealmResourceProvider {
             new Page("login-username", "Login - username", LoginFormsProvider::createLoginUsername),
             new Page("login-otp", "Login - OTP", LoginFormsProvider::createLoginTotp),
             new Page("login-recovery-codes", "Login - recovery codes", LoginFormsProvider::createLoginRecoveryAuthnCode),
-            new Page("login-config-recover-codes", "Action - recovery codes", l -> l.createResponse(UserModel.RequiredAction.CONFIGURE_RECOVERY_AUTHN_CODES)),
+            new Page("login-config-recover-codes", "Action - recovery codes", l -> {
+                l.setAttribute("recoveryAuthnCodesConfigBean", new RecoveryCodesBean());
+                return l.createResponse(UserModel.RequiredAction.CONFIGURE_RECOVERY_AUTHN_CODES);
+            }),
             new Page("login-config-totp", "Action - OTP", l -> l.createResponse(UserModel.RequiredAction.CONFIGURE_TOTP)),
             new Page("login-update-password", "Action - Update password", l -> l.createResponse(UserModel.RequiredAction.UPDATE_PASSWORD)),
-            new Page("login-register", "Action - Register", LoginFormsProvider::createRegistration)
+            new Page("login-register", "Action - Register", l -> {
+                l.setFormData(new MultivaluedHashMap<>());
+                l.setAttribute("email", "john.doe@example.com");
+                return l.createRegistration();
+            })
     );
 
     private KeycloakSession session;
@@ -67,8 +77,14 @@ public class ThemePreviewProvider implements RealmResourceProvider {
 
         LoginFormsProvider loginForms = session.getProvider(LoginFormsProvider.class);
 
-        loginForms.setActionUri(session.getContext().getUri().getRequestUri());
-        loginForms.setAuthenticationSession(new DummyAuthenticationSessionModel());
+        URI actionUri = session.getContext().getUri().getBaseUriBuilder()
+                .path("realms")
+                .path(session.getContext().getRealm().getName())
+                .path("theme-preview")
+                .path(page)
+                .build();
+        loginForms.setActionUri(actionUri);
+        loginForms.setAuthenticationSession(new DummyAuthenticationSessionModel(proxy));
         loginForms.setUser(new DummyUserModel());
 
         Optional<Page> pageHandler = pages.stream().filter(p -> p.template.equals(page)).findFirst();

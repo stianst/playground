@@ -13,6 +13,13 @@ import java.util.Set;
 public class DummyAuthenticationSessionModel implements AuthenticationSessionModel {
 
     private Map<String, String> authNotes = new HashMap<>();
+    private final RealmModel realm;
+    private final ClientModel client;
+
+    public DummyAuthenticationSessionModel(RealmModel realm) {
+        this.realm = realm;
+        this.client = DummyClientModel.create(realm);
+    }
 
     @Override
     public String getTabId() {
@@ -156,12 +163,12 @@ public class DummyAuthenticationSessionModel implements AuthenticationSessionMod
 
     @Override
     public RealmModel getRealm() {
-        return null;
+        return realm;
     }
 
     @Override
     public ClientModel getClient() {
-        return null;
+        return client;
     }
 
     @Override
@@ -176,7 +183,7 @@ public class DummyAuthenticationSessionModel implements AuthenticationSessionMod
 
     @Override
     public String getProtocol() {
-        return null;
+        return "openid-connect";
     }
 
     @Override
